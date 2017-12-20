@@ -1,0 +1,12 @@
+.header{
+    background-color: #1abc9c;
+    height:100px;
+    width:100%;
+    /*margin-bottom属性设置元素的下边距。*/
+    margin-bottom:0;
+
+}
+.input{
+    float:right;
+    color: #7a7dff;/*没有用*/
+}
