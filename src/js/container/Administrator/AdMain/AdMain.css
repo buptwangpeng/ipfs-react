@@ -1,0 +1,37 @@
+/*侧栏*/
+.Ad_menu{
+    background-color: #dcdcdc;
+    width:20%;
+    height:100%;
+    /*position: fixed;*/
+    float:left;
+    overflow: auto;
+    /*overflow属性指定如果内容溢出一个元素的框，会发生什么。
+    visible	默认值。内容不会被修剪，会呈现在元素框之外。
+    hidden	内容会被修剪，并且其余内容是不可见的。
+    scroll	内容会被修剪，但是浏览器会显示滚动条以便查看其余的内容。
+    auto	如果内容被修剪，则浏览器会显示滚动条以便查看其余的内容。
+    inherit	规定应该从父元素继承 overflow 属性的值。*/
+}
+.a {
+    /*display:block - 显示块元素的链接，让整体变为可点击链接区域（不只是文本），它允许我们指定宽度*/
+    display: block;
+    color: #000000;/*更改字体颜色*//*目前的问题是：链接的颜色改不了*/
+    padding: 8px 16px;
+    text-decoration: none;
+}
+/* 鼠标移动到选项上修改背景颜色 */
+.a:hover {
+    background-color: #636363;/*背景颜色变黑*/
+    color: white;/*当背景变色时，字体变白*/
+}
+/*内容*/
+.content{
+    background-color: #eeeeee;
+    height:700px;
+    width:700px;
+    position:absolute;
+    top:125px;
+    right:200px;
+
+}

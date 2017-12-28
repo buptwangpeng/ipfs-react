@@ -1,0 +1,322 @@
+*{
+    padding: 0px;
+    margin: 0px;
+}
+
+
+body{
+    background-color: #f0f0f0;
+}
+/* Header */
+.Header{
+    height: 100px;
+    background-color: #00cd00;
+}
+
+.Header h1{
+    margin-top: 0px;
+    font-size: 80px;
+    color: white;
+}
+
+.Header Button{
+    position: absolute;
+    right: 280px;
+    top: 30px;
+}
+
+.form-control{
+    position: absolute;
+    right: 350px;
+    top: 30px;
+    width: 200px;
+}
+
+.quit{
+   position: absolute;
+   right: 50px;
+   top: 36px;
+   font-size: 18px; 
+   color: white;
+}
+
+.user{
+    position: absolute;
+    right: 140px;
+    top: 36px;
+    font-size: 18px;
+    color: white;
+}
+
+/* Footer*/
+
+.Footer{
+    height: 50px;
+    width: 100%;
+    background-color: #d4d4d4;
+    position: fixed;
+    bottom: 0px;
+}
+
+.Footer span{
+    position: relative;
+    left:50%;
+}
+
+/* app */
+
+#wel{
+    display: inline-block;
+    position: absolute;
+    left: 200px;
+    top: 150px;
+    font-size: 20px;
+    color: #00cd00;
+}
+
+#timetable{
+    position: absolute;
+    top: 150px;
+    right: 140px;
+    font-size: 15px;
+    color: #00cd00;
+}
+
+#newclass{
+    position: absolute;
+    top:150px;
+    right:50px;
+    font-size: 15px;
+    color: #00cd00;
+}
+
+#one{
+    position: absolute;
+    top:300px;
+    left:500px;
+    font-size: 20px;
+}
+
+#two{
+    position: absolute;
+    top: 300px;
+    left: 900px;
+    font-size: 20px;
+}
+
+#three{
+    position: absolute;
+    top: 500px;
+    left: 500px;
+    font-size: 20px;
+}
+
+#four{
+    position: absolute;
+    top: 500px;
+    left: 900px;
+    font-size: 20px;
+}
+
+
+/* link */
+.Header a{
+    text-decoration: none;
+    color: white;
+}
+
+a{
+    color: #00cd00;
+}
+
+a:hover{
+    text-decoration: none;
+}
+
+/* apply */
+.headerun{
+    width: 150px;
+    background-color: #00cd00;
+    height:50px;
+    
+}
+
+.headeropen{
+    position: absolute;
+    top:110px;
+    left: 170px;
+    font-size: 25px;
+}
+
+#applylink{
+    position: absolute;
+    top: 200px;
+    left: 300px;
+    width: 120px;
+    height: 50px;
+    background-color: #90ee90;
+    border-radius: 15px 0px 0px 15px;
+}
+
+#applywrite{
+    position: absolute;
+    top:210px;
+    left: 312px;
+    font-size: 18px;
+    color: white;
+}
+
+#newclasslink{
+    position: absolute;
+    top: 200px;
+    left: 420px;
+    width: 120px;
+    height: 50px;
+    border-style: solid;
+    border-width: 1px;
+    border-color:#90ee90;
+    border-radius: 0px 15px 15px 0px;
+}
+
+#newclasswrite{
+    position: absolute;
+    top: 210px;
+    left: 435px;
+    font-size: 18px;
+}
+
+.apply Table{
+      position: absolute;
+      top: 300px;
+
+
+
+}
+
+/* newclass */
+#applylink2{
+    position: absolute;
+    top: 200px;
+    left: 300px;
+    width: 120px;
+    height: 50px;
+    border-style: solid;
+    border-width: 1px;
+    border-color:#90ee90;
+    border-radius: 15px 0px 0px 15px;
+}
+
+#applywrite2{
+    position: absolute;
+    top:210px;
+    left: 312px;
+    font-size: 18px;
+}
+
+#newclasslink2{
+    position: absolute;
+    top: 200px;
+    left: 420px;
+    width: 120px;
+    height: 50px;
+    background-color: #90ee90;
+    border-radius: 0px 15px 15px 0px;
+}
+
+#newclasswrite2{
+    position: absolute;
+    top: 210px;
+    left: 435px;
+    font-size: 18px;
+    color: white;
+}
+
+input{
+                border: 1px solid #ccc; 
+                padding: 7px 0px;
+                border-radius: 3px; 
+                padding-left:5px; 
+            }
+
+#applysubmit{
+    position: relative;
+    top:150px;
+    left: 700px;
+    font-size: 20px;
+}
+
+
+.applyform{
+    position: relative;
+    top: 100px;
+    left:600px;
+}
+
+.applyform input{
+    margin-top:20px;
+    margin-left: 20px;
+}
+
+div.applyform {
+    width: 300px;
+}
+
+/* classone */
+.classone li{
+   list-style: none;
+}
+
+.classone table{
+    width: 600px;
+    align-items: center;
+}
+.classone h3{
+    color: #00cd00;
+}
+#manageLink{
+    position: absolute;
+    top:110px;
+    right: 20px;
+    font-size: 15px;
+}
+
+
+.information,.data,.studentList{
+    position: relative;
+    left: 30%;
+    border: 1px solid white ;
+    width: 600px;
+    padding:5px;
+    margin-bottom: 100px; 
+    background-color: white;
+
+}
+
+/* achimanage */
+
+.AchiManage table{
+    width: 900px;
+    align-items: center;
+    position: relative;
+    left: 25%;
+    font-size: 20px;
+
+}
+.AchiManage td{
+    padding-top: 5px;
+    padding-bottom: 5px;
+}
+
+
+.AchiManage h2{
+    position: relative;
+    left: 25%;
+    color: #00cd00;
+}
+
+.save{
+    position: relative;
+    left: 50%;
+    margin-top: 80px;
+    margin-bottom: 50px;
+}

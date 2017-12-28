@@ -1,0 +1,28 @@
+.flexCenter{
+    display: flex;
+    /*justify-content: center;*/
+    align-items: center;
+}
+.body-item{
+    width: 100%;
+    height: 50%;
+}
+.icon-container{
+    color:#fff;
+    background: #20b18a;
+    height: 80px;
+    width: 80px;
+    align-items: center;
+    justify-content: center;
+    display: flex;
+}
+.sub-title{
+    margin-left: 30px;
+}
+.sub-title>p:first-child{
+    font-size: 25px;
+    color:#20b18a;
+}
+.sub-title>p:last-child{
+    color:#808080;
+}

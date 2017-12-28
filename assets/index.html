@@ -1,0 +1,37 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta http-equiv="Content-Type"  content="text/html; charset=UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no">
+    <title></title>
+    <script>
+		let currentClientWidth, fontValue, originWidth;
+		//originWidth为设计稿原型的屏幕宽度，这里以Iphone6为原型设计稿
+		originWidth = 375;
+		__resize();
+		//注册resize事件
+		window.addEventListener('resize', __resize, false);
+		function __resize() {
+			currentClientWidth = document.documentElement.clientWidth;
+			//设置屏幕的最大最小时的默认宽度
+			if (currentClientWidth > 640) currentClientWidth = 640;
+			if (currentClientWidth < 320) currentClientWidth = 320;
+			fontValue = ((62.5 * currentClientWidth) / originWidth).toFixed(2);
+			document.documentElement.style.fontSize = fontValue + '%';
+		}
+    </script>
+    <style>
+        #navigator,html,body{
+            font-family: '微软雅黑';
+            min-height: 100%;
+            background:#f5f4f9;
+        }
+    </style>
+</head>
+<body>
+<div id="navigator"></div>
+<script src="../../../../../common.9fb90533655d58874cce.js"></script>
+<script src="../../../../../bundle.9fb90533655d58874cce.js"></script>
+</body>
+</html>
