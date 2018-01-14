@@ -1,0 +1,53 @@
+
+.headeropen{
+    position: absolute;
+    top:110px;
+    left: 170px;
+    font-size: 25px;
+}
+
+#applylink{
+    position: absolute;
+    top: 160px;
+    left: 300px;
+    width: 120px;
+    height: 50px;
+    background-color:#20b18a;
+    border-radius: 15px 0px 0px 15px;
+}
+
+#applywrite{
+    position: absolute;
+    top:170px;
+    left: 312px;
+    font-size: 18px;
+    color: white;
+}
+
+#newclasslink{
+    position: absolute;
+    top: 160px;
+    left: 420px;
+    width: 120px;
+    height: 50px;
+    border-style: solid;
+    border-width: 1px;
+    border-color:#20b18a;
+    border-radius: 0px 15px 15px 0px;
+}
+
+#newclasswrite{
+    position: absolute;
+    top: 170px;
+    left: 435px;
+    font-size: 18px;
+}
+
+.applytable{
+    position: relative;
+    top:100px;
+}
+.apply nav{
+    position: relative;
+    top: 100px;
+}

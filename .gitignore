@@ -1,2 +1,16 @@
 .idea
 node_modules
+.DS_Store
+.idea/LSM1.iml
+.idea/dictionaries/
+.idea/encodings.xml
+.idea/inspectionProfiles/
+.idea/modules.xml
+.idea/workspace.xml
+
+deploy.py
+deploy_dev.py
+
+node_modules/
+
+webpack.production.config.js

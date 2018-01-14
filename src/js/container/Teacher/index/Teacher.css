@@ -1,0 +1,39 @@
+#logo{
+    margin-left: 60px;
+    font-size: 60px;
+    color: #fff;
+}
+
+.top{
+    height:100px;
+    background:#20b18a;
+    display:flex;
+    align-items: center;
+}
+#welcome{
+    font-size: 25px;
+    color: #808080;
+}
+
+#timetable{
+    float: right;
+    font-size: 15px;
+    color: #00cd00;
+    margin-left: 30px;
+}
+
+#newclass{
+    float: right;
+    font-size: 15px;
+    color: #00cd00;
+}
+
+
+.header-nav{
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    flex-direction: row;
+    color:#fff;
+    font-size:20px;
+}

@@ -1,0 +1,49 @@
+.header-nav{
+    display: flex;
+    /*justify-content属性定义了项目在主轴上的对齐方式*/
+    justify-content: center;
+    align-items: center;
+    flex-direction: row;
+    color:#fff;
+    font-size:20px;
+}
+.header-background{
+    /*Flex是Flexible Box的缩写，意为”弹性布局”，用来为盒状模型提供最大的灵活性*/
+    display:flex;
+    height:100px;
+    background:#20b18a;
+    align-items:center;
+/*align-items 属性定义flex子项在flex容器的当前行的侧轴（纵轴）方向上的对齐方式。center 居中*/
+}
+.width12{
+    width: 12.5%;
+}
+.width25{
+    width: 25%;
+}
+
+.header-sub{
+    width: 100%;
+    margin-left:-15px;
+}
+.header-sub-left{
+    display: flex;
+    align-items: center;
+    justify-content: flex-start;
+}
+.header-sub-right{
+    height: 60px;
+    display: flex;
+    align-items: center;
+    justify-content: flex-end;
+}
+.header-sub-title{
+    margin-left: 30px;
+    font-size: 25px;
+    color:#808080;
+}
+.color-block{
+    background:#20b18a;
+    width: 60px;
+    height: 60px;
+}

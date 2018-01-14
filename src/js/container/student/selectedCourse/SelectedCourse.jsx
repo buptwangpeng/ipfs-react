@@ -44,10 +44,10 @@ export default class SelectedCourse extends React.Component{
 					flexWrap:'wrap'
 				}}>
 					{
-						data.map((course)=>{
+						data.map((course,index)=>{
 							return(
 								<ListItem
-									handleClick={()=>jumpPage('student/courseDetail')}
+									handleClick={()=>jumpPage('student/courseDetail?courseid='+index)}
 									key={course.id}
 									title={course.title}
 									teacher={course.teacher}

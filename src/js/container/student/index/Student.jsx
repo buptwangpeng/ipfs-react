@@ -37,10 +37,10 @@ class Index extends React.Component{
 						    <p style={{marginLeft:60,fontSize:60,color:'#fff'}}>LOGO</p>
 					    </div>
 				    </div>
-					<div className="student-main row">
+					<div className="flexCenter row">
 						<div
 							style={{height:window.innerHeight-140,padding:40}}
-							className="col-xs-12 col-lg-8 col-lg-offset-3">
+							className="col-xs-12 col-md-8">
 							<div style={{fontSize:28,color:'#808080',height:'15%'}}>
 								{"欢迎你，"+this.state.name}
 							</div>

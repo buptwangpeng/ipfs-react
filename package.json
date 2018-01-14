@@ -74,7 +74,8 @@
   },
   "scripts": {
     "dev": "webpack-dev-server --inline --progress --hot --devtool ./dev --history-api-fallback",
-    "deploy": "NODE_ENV=production webpack --progress -p --config webpack.production.config.js"
+    "deploy": "NODE_ENV=production webpack --progress -p --config webpack.production.config.js",
+    "start": "webpack"
   },
   "author": "henry",
   "license": "ISC",

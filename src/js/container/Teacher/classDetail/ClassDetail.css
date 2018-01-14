@@ -1,0 +1,54 @@
+.classdetail li{
+   list-style: none;
+}
+
+.classdetail table{
+    width: 600px;
+    align-items: center;
+}
+.classdetail h3{
+    color: #00cd00;
+}
+#managelink{
+    float: right;
+    font-size: 15px;
+}
+
+.information,.data,.studentList{
+    position: relative;
+    left: 30%;
+    border: 1px solid white ;
+    width: 600px;
+    padding:5px;
+    margin-bottom: 100px; 
+    background-color: white;
+
+}
+.headeropen{
+    position: absolute;
+    top:110px;
+    left: 170px;
+    font-size: 25px;
+}
+.classdetail nav{
+    position: relative;
+    bottom: 60px;
+    right: 30%;
+}
+
+.pagination > .active > a, 
+.pagination > .active > span, 
+.pagination > .active > a:hover, 
+.pagination > .active > span:hover, 
+.pagination > .active > a:focus, 
+.pagination > .active > span:focus{
+    z-index: 0;
+}
+
+
+.data tr{
+border-bottom-style: solid;
+border-bottom-width: 1px;
+border-bottom-color: #20b18a;
+height:35px;
+}

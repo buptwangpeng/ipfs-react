@@ -9,27 +9,31 @@ import ReactDOM             from 'react-dom';
 import React                from 'react';
 import LogIn  from './container/Login/Login.jsx';
 //管理员
-import AdMain  from './container/Administrator/AdMain/AdMain.js'
-import AdHome  from './container/Administrator/AdHome/AdHome'
-import AdStudentInfoAdd from './container/Administrator/AdStudentInfoAdd/AdStudentInfoAdd.js'
-import AdStudentInfoModify from './container/Administrator/AdStudentInfoModify/AdStudentInfoModify'
-import AdStudentInfoScore from './container/Administrator/AdStudentInfoScore/AdStudentInfoScore'
-import AdTeacherInfoAdd from './container/Administrator/AdTeacherInfoAdd/AdTeacherInfoAdd'
-import AdTeacherInfoModify from './container/Administrator/AdTeacherInfoModify/AdTeacherInfoModify'
-import AdTeacherInfoCourseApply from './container/Administrator/AdTeacherInfoCourseApply/AdTeacherInfoCourseApply'
-import AdCourseInfoAdd  from './container/Administrator/AdCourseInfoAdd/AdCourseInfoAdd'
-import AdCourseInfoModify from './container/Administrator/AdCourseInfoModify/AdCourseInfoModify'
-import AdAdministratorInfoAdd from './container/Administrator/AdAdministratorInfoAdd/AdAdministratorInfoAdd'
-import AdAdministratorInfoModify from './container/Administrator/AdAdministratorInfoModify/AdAdministratorInfoModify'
+import Home  from './container/Administrator/Home/Home'
+// 必须首字母大写，不然就会有warning，无法渲染出页面
+import PersonalInfo from './container/Administrator/PersonalInfo/PersonalInfo'
+import StudentInfoAdd from './container/Administrator/StudentInfoAdd/StudentInfoAdd'
+import StudentInfoModify from './container/Administrator/StudentInfoModify/StudentInfoModify'
+import StudentInfoScore from './container/Administrator/StudentInfoScore/StudentInfoScore'
+import TeacherInfoAdd from './container/Administrator/TeacherInfoAdd/TeacherInfoAdd'
+import TeacherInfoModify from './container/Administrator/TeacherInfoModify/TeacherInfoModify'
+import TeacherInfoCourseApply from './container/Administrator/TeacherInfoCourseApply/TeacherInfoCourseApply'
+import CourseInfoAdd  from './container/Administrator/CourseInfoAdd/CourseInfoAdd'
+import CourseInfoModify from './container/Administrator/CourseInfoModify/CourseInfoModify'
+import AdministratorInfoAdd from './container/Administrator/AdministratorInfoAdd/AdministratorInfoAdd'
+import AdministratorInfoModify from './container/Administrator/AdministratorInfoModify/AdministratorInfoModify'
 
 
 //老师
-import './container/Teacher/style/1.css';
-import Teacher from './container/Teacher/modules/Teacher.jsx';
-import Apply from './container/Teacher/modules/apply.js';
-import Newclass from './container/Teacher/modules/newclass.js';
-import ClassOne from './container/Teacher/modules/classone.js';
-import AchiManage from './container/Teacher/modules/achimanage.js';
+import Teacher from './container/Teacher/index/Teacher.jsx';
+import Apply from './container/Teacher/apply/Apply.jsx';
+import Newclass from './container/Teacher/newClass/newclass.jsx';
+import ClassDetail from './container/Teacher/classDetail/ClassDetail.jsx';
+import AchiManage from './container/Teacher/achiManage/achimanage.jsx';
+import TimeTable from './container/Teacher/timeTable/TimeTable.jsx';
+import PersonalCen from './container/Teacher/personalCen/PersonalCen.jsx';
+import ClassList from './container/Teacher/classlist/ClassList.jsx';
+import GradeList from './container/Teacher/gradelist/gradeList.jsx';
 
 //学生
 import Student from './container/student/index/Student.jsx';
@@ -43,43 +47,51 @@ import '../css/main.css';
 import '../css/bootstrap.css'
 ReactDOM.render(
         <Router history={browserHistory}>
-	        {/*管理员*/}
 	        <Route path="/" component={LogIn}/>
-	        <Route path="/admin" >
-		        <IndexRoute component={AdMain}/>
-		        <Route path="student">
-			        <IndexRoute component={AdStudentInfoAdd}/>
-			        <Route path="add" component={AdStudentInfoAdd}/>
-			        <Route path="modify" component={AdStudentInfoModify}/>
-			        <Route path="export" component={AdStudentInfoScore}/>
-		        </Route>
-		        <Route path="teacher">
-			        <Route path="add" component={AdTeacherInfoAdd}/>
-			        <Route path="modify" component={ AdTeacherInfoModify}/>
-			        <Route path="courseapply" component={AdTeacherInfoCourseApply}/>
-		        </Route>
-		        <Route path="course">
-			        <IndexRedirect to="/admin/course/add"/>
-			        <Route path="add" component={AdCourseInfoAdd }/>
-			        <Route path="modify" component={AdCourseInfoModify}/>
-		        </Route>
-		        <Route path="administrator">
-			        <Route path="add" component={AdAdministratorInfoAdd}/>
-			        <Route path="modify" component={AdAdministratorInfoModify}/>
-		        </Route>
-
-	        </Route>
+            {/*管理员*/}
+			<Route path="/admin">
+				<IndexRoute component={Home}/>
+				<Route path="student">
+					<IndexRoute component={StudentInfoAdd}/>
+					<Route path="add" component={StudentInfoAdd}/>
+					<Route path="modify" component={StudentInfoModify}/>
+					<Route path="export" component={StudentInfoScore}/>
+				</Route>
+				<Route path="teacher">
+					<IndexRoute component={TeacherInfoAdd}/>
+					<Route path="add" component={TeacherInfoAdd}/>
+					<Route path="modify" component={TeacherInfoModify}/>
+					<Route path="apply" component={TeacherInfoCourseApply}/>
+				</Route>
+				<Route path="course">
+					<IndexRedirect to="/admin/course/add"/>
+					<Route path="add" component={CourseInfoAdd }/>
+					<Route path="modify" component={CourseInfoModify}/>
+				</Route>
+				<Route path="administrator">
+					<IndexRoute component={AdministratorInfoAdd}/>
+					<Route path="add" component={AdministratorInfoAdd}/>
+					<Route path="modify" component={AdministratorInfoModify}/>
+				</Route>
+				<Route path="personalInfo">
+					<IndexRoute component={PersonalInfo}/>
+				</Route>
+			</Route>
 
 	        {/*教师*/}
-	        <Route path="/teacher">
-		        <IndexRoute component={Teacher}/>
-		        <Route path="apply" component={Apply}/>
-		        <Route path="newclass"  component={Newclass}/>
-		        <Route path="classone">
-			        <IndexRoute component={ClassOne}/>
-			        <Route path="manage"  component={AchiManage}/>
-		        </Route>
-	        </Route>
+			<Route path="/teacher">
+				<IndexRoute component={Teacher}/>
+				<Route path="apply" component={Apply}/>
+				<Route path="newclass"  component={Newclass}/>
+				<Route path="timetable" component={TimeTable}/>
+				<Route path="personalcen" component={PersonalCen}/>
+				<Route path="classlist" component={ClassList}/>
+				<Route path="gradelist" component={GradeList}/>
+				<Route path="classdetail">
+					<IndexRoute component={ClassDetail}/>
+					<Route path="manage"  component={AchiManage}/>
+				</Route>
+			</Route>
 	        {/*学生路由*/}
 	        <Route path="/student" >
 		        <IndexRoute component={Student}/>

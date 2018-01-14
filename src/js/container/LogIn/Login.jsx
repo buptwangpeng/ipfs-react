@@ -82,7 +82,7 @@ export default class LogIn extends Component{
 
                 <div className="Log3">
                     <ul >
-                        <li className="a"><NavLink to="/administrator">管理员</NavLink></li>
+                        <li className="a"><NavLink to="/admin">管理员</NavLink></li>
                         <li className="a"><NavLink to="/teacher">教师</NavLink></li>
                         <li className="a"><NavLink to="/student">学生</NavLink></li>
                     </ul>

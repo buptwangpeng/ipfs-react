@@ -1,0 +1,44 @@
+.course-detail-abstract{
+    background:#fff;
+    width:100%;
+    padding:15px 20px;
+    font-size: 16px;
+    color: #808080;
+}
+.course-detail-progress,.course-detail-progress1{
+    width         : 12px;
+    height        : 12px;
+    border-radius : 6px;
+    background    : #20b18a;
+    display       : flex;
+    justify-content: flex-start;
+    align-items: center;
+}
+
+.dot{
+    width         : 8px;
+    height        : 8px;
+    border-radius : 4px;
+    background    : #20b18a;
+}
+
+.course-detail-progress:after{
+    content: "";
+    width: 2px;
+    height: 150px;
+    background: #20b18a;
+    margin-left: 5px;
+    margin-top: 150px;
+}
+.timeline{
+    display: flex;
+    width: 100%;
+    justify-content: flex-start;
+    height: 150px;
+}
+.course-detail-progress-title{
+    margin-left: 10px;
+    color:#20b18a;
+    font-size: 22px;
+    margin-top: -10px;
+}
