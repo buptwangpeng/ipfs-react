@@ -9,9 +9,9 @@ import {ButtonToolbar} from 'react-bootstrap'
 import {ButtonGroup} from 'react-bootstrap'
 import {Table} from 'react-bootstrap'
 import {Modal} from 'react-bootstrap'
-import Header from '../AdHeader/Header'
-import Footer from '../AdFooter/Footer'
-import NavSide from '../../../components/NavSide/NavSide'
+import Header from '../../../components/AdHeader/Header'
+import Footer from '../../../components/AdFooter/Footer'
+import NavSide from '../../../components/AdNavSide/NavSide'
 
 
 export default class AdStudentInfoScore extends Component {
@@ -93,14 +93,14 @@ export default class AdStudentInfoScore extends Component {
 
                 <Header/>
                 <div className="row">
-                    <div className="col-md-4 col-lg-4">
-                        <div style={{background: '#dcdcdc', width: '50%', height: '100%', margin: '0', padding: '0'}}>
+                    <div className="col-xs-4 col-md-2 col-lg-2">
+                        <div style={{background: '#dcdcdc', width: '100%', height: window.innerHeight-100, margin: '0', padding: '0'}}>
                             {/*内联样式style={{}}和className=''不能写在一个div中*/}
                             <NavSide/>
                         </div>
                     </div>
 
-                    <div className="col-md-8 col-lg-8">
+                    <div className="col-xs-8 col-md-10 col-lg-10">
                         <div>
                             <h3>学生成绩查询与导出</h3>
                             <div className="margin-top_20px">

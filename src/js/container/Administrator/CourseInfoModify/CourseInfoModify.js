@@ -5,9 +5,9 @@ import {ControlLabel} from 'react-bootstrap'
 import {FormControl} from 'react-bootstrap'
 import {Button} from 'react-bootstrap'
 import {Form} from 'react-bootstrap'
-import Header from '../AdHeader/Header'
-import Footer from '../AdFooter/Footer'
-import NavSide from '../../../components/NavSide/NavSide'
+import Header from '../../../components/AdHeader/Header'
+import Footer from '../../../components/AdFooter/Footer'
+import NavSide from '../../../components/AdNavSide/NavSide'
 
 export default class AdCourseInfoModify extends Component {
     constructor() {
@@ -111,14 +111,14 @@ export default class AdCourseInfoModify extends Component {
             <div style={{background: '#ffffff', height: window.innerHeight}}>
                 <Header/>
                 <div className="row">
-                    <div className="col-md-4 col-lg-4">
-                        <div style={{background: '#dcdcdc', width: '50%', height: '100%', margin: '0', padding: '0'}}>
+                    <div className="col-md-2 col-lg-2">
+                        <div style={{background: '#dcdcdc', width: '100%', height:window.innerHeight-100, margin: '0', padding: '0'}}>
                             {/*内联样式style={{}}和className=''不能写在一个div中*/}
                             {/*width:'50%'是指在col-lg-4中占一半*/}
                             <NavSide/>
                         </div>
                     </div>
-                    <div className="col-md-8 col-lg-8">
+                    <div className="col-md-10 col-lg-10">
 
                         <h3>课程信息查询与修改</h3>
                         <div className="margin-top_20px">

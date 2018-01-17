@@ -1,11 +1,28 @@
 /**
- * Created by henry on 16/5/21.
+ * Created by wp on 18/1/16.
  * 所有的工具类都在这里管理
  * URL
  * Security
  *
  */
+import CryptoJS from "crypto-js";
+//queryString 将json数据进行了排序
+export let queryString = function (obj){
+    let string = '';
+    for (let key in obj){
+        string += '&'+encodeURIComponent(key)+'='+encodeURIComponent(obj[key]);
+    }
+    return string.substring(1,string.length);
+}
 
+export  let Security  = {
+    signature:function(data,skey){
+        return CryptoJS.HmacSHA256(data,skey).toString();
+    },
+    MD5:function(msg){
+        return CryptoJS.MD5(msg).toString();
+    }
+}
 
 var Util={
     /**

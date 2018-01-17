@@ -2,9 +2,9 @@ import React, {Component} from 'react'
 import { Button } from 'react-bootstrap'
 import { Jumbotron } from 'react-bootstrap'
 import './Home.css'
-import Header from '../AdHeader/Header'
-import Footer from '../AdFooter/Footer'
-import NavSide from '../../../components/NavSide/NavSide'
+import Header from '../../../components/AdHeader/Header'
+import Footer from '../../../components/AdFooter/Footer'
+import NavSide from '../../../components/AdNavSide/NavSide'
 
 export default class AdHome extends Component{
 

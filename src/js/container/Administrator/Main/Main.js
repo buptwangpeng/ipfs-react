@@ -1,10 +1,10 @@
 import React, {Component} from 'react'
 import { ListGroup } from 'react-bootstrap'
 import { ListGroupItem } from 'react-bootstrap'
-import NavLink from '../../../components/NavLink/NavLink'
+import NavLink from '../../../components/AdNavLink/NavLink'
 import './Main.css'
-import Header from '../AdHeader/Header'
-import Footer from '../AdFooter/Footer'
+import Header from '../../../components/AdHeader/Header'
+import Footer from '../../../components/AdFooter/Footer'
 
 export default class AdMain extends Component{
     constructor(){

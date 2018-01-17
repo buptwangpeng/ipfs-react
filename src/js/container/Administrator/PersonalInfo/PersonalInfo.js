@@ -1,7 +1,7 @@
 import React, {Component} from 'react'
 import './PersonalInfo.css'
-import Header from '../AdHeader/Header'
-import Footer from '../AdFooter/Footer'
+import Header from '../../../components/AdHeader/Header'
+import Footer from '../../../components/AdFooter/Footer'
 
 export default class PersonalInfo extends Component {
     constructor() {

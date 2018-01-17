@@ -6,9 +6,9 @@ import {FormControl} from 'react-bootstrap'
 import {Button} from 'react-bootstrap'
 import {Form} from 'react-bootstrap'
 import {ButtonToolbar} from 'react-bootstrap'
-import Header from '../AdHeader/Header'
-import Footer from '../AdFooter/Footer'
-import NavSide from '../../../components/NavSide/NavSide'
+import Header from '../../../components/AdHeader/Header'
+import Footer from '../../../components/AdFooter/Footer'
+import NavSide from '../../../components/AdNavSide/NavSide'
 
 
 export default class AdStudentInfoModify extends Component {
@@ -86,19 +86,20 @@ export default class AdStudentInfoModify extends Component {
             <div style={{background: '#ffffff', height: window.innerHeight}}>
                 <Header/>
                 <div className="row ">
-                    <div className="col-md-4 col-lg-4">
-                        <div style={{background: '#dcdcdc', width: '50%', height: '100%', margin: '0', padding: '0'}}>
+                    <div className="col-md-2 col-lg-2">
+                        <div style={{background: '#dcdcdc', width: '100%', height:window.innerHeight-100, margin: '0', padding: '0'}}>
                             {/*内联样式style={{}}和className=''不能写在一个div中*/}
                             <NavSide/>
                         </div>
                     </div>
-                    <div className="col-md-8 col-lg-8">
-
-                        <div>
+                    <div className="col-md-10 col-lg-10  ">
+                        <div className="row ">
+                            <div className="">
+                        <div className="">
                             <h3>学生信息查询与修改</h3>
                         </div>
 
-                        <div className="row">
+
                             <div className="col-md-12 col-lg-12 st_mod_1">
                                 <Form inline>
                                     <FormGroup bsSize="large" controlId="formBasicText"
@@ -169,6 +170,7 @@ export default class AdStudentInfoModify extends Component {
                                 <Button bsStyle="success" bsSize="large" className=" width_50 margin-top_50px"
                                         onClick={() => this.button2_change()} >提交</Button>
                             </div>
+                        </div>
                         </div>
                     </div>
                 </div>

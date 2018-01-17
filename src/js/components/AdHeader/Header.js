@@ -6,7 +6,7 @@ import { Row } from 'react-bootstrap'
 import { Col} from 'react-bootstrap'
 import { Image} from 'react-bootstrap'
 import './Header.css'
-import jumpPage from '../../../core/jumpPage.js'
+import jumpPage from '../../core/jumpPage.js'
 
 
 export default class Header  extends Component{

@@ -5,9 +5,9 @@ import {ControlLabel} from 'react-bootstrap'
 import {FormControl} from 'react-bootstrap'
 import {Button} from 'react-bootstrap'
 import {Form} from 'react-bootstrap'
-import Header from '../AdHeader/Header'
-import Footer from '../AdFooter/Footer'
-import NavSide from '../../../components/NavSide/NavSide'
+import Header from '../../../components/AdHeader/Header'
+import Footer from '../../../components/AdFooter/Footer'
+import NavSide from '../../../components/AdNavSide/NavSide'
 
 export default class AdAdministratorInfoModify extends Component {
     constructor() {
@@ -15,6 +15,7 @@ export default class AdAdministratorInfoModify extends Component {
         this.state = {
             administrator_id: '',
             administrator_name: '',
+            administrator_tel: '',
             administrator_address: '',
             administrator_password_log: '',
             administrator_password_unlock: '',
@@ -31,6 +32,13 @@ export default class AdAdministratorInfoModify extends Component {
     administrator_name_change(event) {
         this.setState({
             administrator_name: event.target.value
+        });
+
+    }
+
+    administrator_tel_change(event) {
+        this.setState({
+            administrator_tel: event.target.value
         });
 
     }
@@ -85,14 +93,14 @@ export default class AdAdministratorInfoModify extends Component {
                 {/*innerheight	返回窗口的文档显示区的高度*/}
                 <Header/>
                 <div className="row">
-                    <div className="col-md-4 col-lg-4">
-                        <div style={{background: '#dcdcdc', width: '50%', height: '100%', margin: '0', padding: '0'}}>
+                    <div className="col-md-2 col-lg-2">
+                        <div style={{background: '#dcdcdc', width: '100%', height:window.innerHeight-100, margin: '0', padding: '0'}}>
                             {/*内联样式style={{}}和className=''不能写在一个div中*/}
                             {/*width:'50%'是指在col-lg-4中占一半*/}
                             <NavSide/>
                         </div>
                     </div>
-                    <div className="col-md-8 col-lg-8 ">
+                    <div className="col-md-10 col-lg-10 ">
 
                         <h3>管理员信息查询与修改</h3>
                         <div className="ad_mod_1">
@@ -115,7 +123,7 @@ export default class AdAdministratorInfoModify extends Component {
                         <div className="margin-top_50px">
                             <Form inline>
                                 <FormGroup bsSize="large">
-                                    <ControlLabel><h4>教师编号&#12288;</h4></ControlLabel>
+                                    <ControlLabel><h4>管理员编号</h4></ControlLabel>
                                     <FormControl type="text"
                                                  value={this.state.administrator_id}
                                                  onChange={this.administrator_id_change.bind(this)}
@@ -129,6 +137,15 @@ export default class AdAdministratorInfoModify extends Component {
                                     <FormControl type="text"
                                                  value={this.state.administrator_name}
                                                  onChange={this.administrator_name_change.bind(this)}
+                                    />
+                                </FormGroup>
+                            </Form>
+                            <Form inline>
+                                <FormGroup bsSize="large">
+                                    <ControlLabel><h4>联系方式&#12288;</h4></ControlLabel>
+                                    <FormControl type="text"
+                                                 value={this.state.administrator_tel}
+                                                 onChange={this.administrator_tel_change.bind(this)}
                                     />
                                 </FormGroup>
                             </Form>

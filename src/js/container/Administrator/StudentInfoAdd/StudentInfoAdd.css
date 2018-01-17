@@ -1,17 +1,22 @@
-.width_50{
-    width: 50%;
+.ad_flexCenter{
+    display: flex;
+    justify-content: center;
+    /*align-items: center;*/
+}
+.width_100{
+    width: 100%;
 }
 .margin-top_20px{
     margin-top:20px;
 }
 
-/*输入学生信息块（学号，姓名等）*/
-.s_i_a_1{
-    position:absolute;
-    top:100px;
-    left:0px;
+/*!*输入学生信息块（学号，姓名等）*!*/
+/*.s_i_a_1{*/
+    /*position:absolute;*/
+    /*top:100px;*/
+    /*left:0px;*/
 
-}
+/*}*/
 /*!*提交按钮*!*/
 /*.s_i_a_button2{*/
     /*position:absolute;*/
