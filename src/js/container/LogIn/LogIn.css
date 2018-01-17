@@ -10,6 +10,8 @@ ul{
   }
 /*链接块*/
 .Log3{
+position:fixed;
+    top:80%;
     width: 10%;
 }
 .a {
@@ -29,27 +31,31 @@ ul{
 
 /*背景图片*/
 .Log0{
-    /*background-image:url('../images/2.jpg');*/
-    /*background-size:100% 100%;*/
-    /*background-repeat:no-repeat;*/
-    /*background-position:center;*/
+    background-image:url('../../../image/1.jpg');
+    background-size:100% 100%;
+    background-repeat:no-repeat;
+    background-position:center;
     /*height:1000px;*/
     /*width:1200px;*/
 
 }
-/*标题（登录界面四个字）*/
-.Log1{color: #ffcb1c;
-    position:fixed;
-    top:200px;
-    right:600px;
-
-
+.margin-top_200{
+    margin-top:200px;
 }
-/*信息输入栏块*/
-.Log2{
-    position:fixed;
-    top:400px;
-    right:550px;
-
+.margin-top_5px{
+    margin-top:5px;
+}
+.margin-top_20px{
+    margin-top:20px;
 }
 
+.login-icon-container{
+
+    background: #20b18a;
+
+}
+.login_flexCenter{
+    display: flex;
+    justify-content: center;
+    /*align-items: center;*/
+}

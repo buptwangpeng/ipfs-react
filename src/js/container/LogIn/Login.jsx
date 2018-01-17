@@ -1,5 +1,6 @@
 import React, {Component} from 'react'
 import NavLink from '../../components/AdNavLink/NavLink'
+import LoginHeader from './LoginHeader/LoginHeader'
 import User from '../../core/user.js'
 import jumpPage from '../../core/jumpPage.js'
 import './LogIn.css'
@@ -9,10 +10,6 @@ import {FormControl} from 'react-bootstrap'
 import {Button} from 'react-bootstrap'
 import {Form} from 'react-bootstrap'
 import {Col} from 'react-bootstrap'
-import {Checkbox} from 'react-bootstrap'
-import {Link} from 'react-router'
-import {ListGroup} from 'react-bootstrap'
-import {ListGroupItem} from 'react-bootstrap'
 
 export default class LogIn extends Component {
     constructor() {
@@ -81,72 +78,86 @@ export default class LogIn extends Component {
         let param = {account: self.state.user, password: self.state.password};
         user.login(url, param).then((data) => {
             console.log(data);
-            if (data.type == "student") {
-                jumpPage('/student')
-            } else {
-                if (data.type == "teacher") {
-                    jumpPage('/teacher')
+            user.login(url, param).then((data) => {
+                console.log(data);
+                if (data.type == "student") {
+                    jumpPage('/student')
                 } else {
-                    jumpPage('/admin')
+                    if (data.type == "teacher") {
+                        jumpPage('/teacher')
+                    } else {
+                        jumpPage('/admin')
+                    }
                 }
-            }
-            //还可以用switch语句
-            // data.map((item)=>{
-            //     if(item.type=="student"){
-            //         jumpPage('/student')
-            //     }
-            //     if(item.type=="teacher"){
-            //         jumpPage('/teacher')
-            //     }else{
-            //         jumpPage('/administrator')
-            //     }
-            // });
+
+                //还可以用switch语句
+                // data.map((item)=>{
+                //     if(item.type=="student"){
+                //         jumpPage('/student')
+                //     }
+                //     if(item.type=="teacher"){
+                //         jumpPage('/teacher')
+                //     }else{
+                //         jumpPage('/administrator')
+                //     }
+            });
 
         })
     };
 
     render() {
         return (
-            <div className="Log0">
-                <h1 className="Log1">登录界面</h1>
-                <div className="Log2">
-                    <Form horizontal>
-                        <FormGroup>
-                            <Col componentClass={ControlLabel} sm={2}>
-                                账号
-                            </Col>
-                            <Col sm={10}>
-                                <FormControl type="text" placeholder="账号" value={this.state.user}
-                                             onChange={this.logAccount.bind(this)}/>
-                            </Col>
-                        </FormGroup>
+            <div style={{height: window.innerHeight}}
+                 className="Log0">
+                <LoginHeader/>
+                <div className="row login_flexCenter">
+                    <div
+                        style={{height: window.innerHeight - 100, padding: 40}}
+                        className=" col-xs-6 col-md-6">
 
-                        <FormGroup>
-                            <Col componentClass={ControlLabel} sm={2}>
-                                密码
-                            </Col>
-                            <Col sm={10}>
-                                <FormControl type="password" placeholder="密码" value={this.state.password}
-                                             onChange={this.logPassword.bind(this)}/>
-                            </Col>
-                        </FormGroup>
 
-                        {/*<FormGroup>*/}
-                        {/*<Col smOffset={2} sm={10}>*/}
-                        {/*<input type="radio" name="sex" value="Ad"/> 管理员*/}
-                        {/*<input type="radio" name="sex" value="Te"/> 教师*/}
-                        {/*<input type="radio" name="sex" value="St"/> 学生*/}
-                        {/*</Col>*/}
-                        {/*</FormGroup>*/}
+                        <div className="margin-top_200">
+                            <div className="col-xs-12 col-md-12">
+                                <icon className=" login-icon-container col-xs-2 col-md-2 iconfont"
+                                      style={{fontSize: '40px'}}>&#xe628;</icon>
+                                <div className="col-xs-8 col-md-8 margin-top_5px">
+                                    <div
+                                        style={{}}
+                                        className="input-group input-group-lg">
+                                        <input type="text"
+                                               className="form-control"
+                                               placeholder="账号"
+                                               aria-describedby="basic-addon1"
+                                               onChange={this.logAccount.bind(this)}
+                                        />
+                                    </div>
+                                </div>
+                            </div>
+                            <div className="col-xs-12 col-md-12 margin-top_20px">
 
-                        <FormGroup>
-                            <Col smOffset={2} sm={10}>
-                                <Button onClick={() => this.logIn2()}>
-                                    登录
-                                </Button>
-                            </Col>
-                        </FormGroup>
-                    </Form>
+                                <icon className="login-icon-container col-xs-2 col-md-2 iconfont"
+                                      style={{fontSize: '40px'}}>&#xe63b;</icon>
+                                <div className="col-xs-8 col-md-8 margin-top_5px">
+                                    <div
+                                        style={{}}
+                                        className="input-group input-group-lg">
+                                        <input type="password"
+                                               className="form-control"
+                                               placeholder="密码"
+                                               aria-describedby="basic-addon1"
+                                               onChange={this.logPassword.bind(this)}
+                                        />
+                                    </div>
+                                </div>
+                            </div>
+
+                            <div
+                                // style={{width: '100%'}}
+                                className="col-xs-3 col-md-3 col-md-offset-3 margin-top_20px ">
+                                <button style={{backgroundColor: '#20b18a'}} type="button" className="btn  btn-lg" onClick={() => this.logIn2()}>登录</button>
+                            </div>
+                        </div>
+                    </div>
                 </div>
 
                 <div className="Log3">
@@ -161,5 +172,5 @@ export default class LogIn extends Component {
         )
     }
 }
-//checked属性是一个布尔属性。checked 属性规定在页面加载时应该被预先选定的 <input> 元素。
-// checked 属性适用于 <input type="checkbox"> 和 <input type="radio">。
+//checked属性是一个布尔属性。checked 属性规定在页面加载时应该被预先选定的元素。
+    // checked 属性适用于 <input type="checkbox"> 和 <input type="radio">。

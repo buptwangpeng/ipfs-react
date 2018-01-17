@@ -50,7 +50,7 @@ export default class Teacher extends React.Component {
                     <div
                         onClick={()=>{
                             if(confirm("确定退出登录?")){
-                                jumpPage('teacher')
+                                jumpPage('/')
                             }
                         }}
                         className="header-nav width25">

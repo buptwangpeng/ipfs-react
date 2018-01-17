@@ -7,7 +7,9 @@ import {
     browserHistory}    from 'react-router';
 import ReactDOM             from 'react-dom';
 import React                from 'react';
+//登录界面
 import LogIn  from './container/Login/Login.jsx';
+import AboutUs  from './container/LogIn/AboutUs/AboutUs';
 //管理员
 import Home  from './container/Administrator/Home/Home'
 // 必须首字母大写，不然就会有warning，无法渲染出页面
@@ -47,7 +49,10 @@ import '../css/main.css';
 import '../css/bootstrap.css'
 ReactDOM.render(
         <Router history={browserHistory}>
-	        <Route path="/" component={LogIn}/>
+	        <Route path="/" >
+				<IndexRoute component={LogIn}/>
+				<Route path="us" component={AboutUs}/>
+			</Route>
             {/*管理员*/}
 			<Route path="/admin">
 				<IndexRoute component={Home}/>

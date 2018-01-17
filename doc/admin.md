@@ -29,10 +29,12 @@ request jsondata:
     'student':{
         'student_id':'',//学号
         'student_name': '',
+        'student_gender':'',//male/female
         'student_class': '',
         'student_grade': '',
+        'student_major':'',
+        'student_school':'',
         'student_password': '',//学生登录本系统的登录密码
-        'student_tel': '',
     }
 }
 response:

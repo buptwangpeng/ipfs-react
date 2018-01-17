@@ -1,3 +1,11 @@
+.header-background{
+    /*Flex是Flexible Box的缩写，意为”弹性布局”，用来为盒状模型提供最大的灵活性*/
+    display:flex;
+    height:100px;
+    background:#20b18a;
+    align-items:center;
+    /*align-items 属性定义flex子项在flex容器的当前行的侧轴（纵轴）方向上的对齐方式。center 居中*/
+}
 .header-nav{
     /*navigation 航行 导航*/
     display: flex;
@@ -9,15 +17,6 @@
     color:#fff;
     font-size:20px;
 }
-.header-background{
-    /*Flex是Flexible Box的缩写，意为”弹性布局”，用来为盒状模型提供最大的灵活性*/
-    display:flex;
-    height:100px;
-    background:#20b18a;
-    align-items:center;
-    /*align-items 属性定义flex子项在flex容器的当前行的侧轴（纵轴）方向上的对齐方式。center 居中*/
-}
 .width_25{
     width: 25%;
 }
-

@@ -1,32 +1,36 @@
 import React, {Component} from 'react'
-import './Header.css'
-import jumpPage from '../../core/jumpPage.js'
+import './UsHeader.css'
+import jumpPage from '../../../core/jumpPage.js'
 
 
-export default class Header  extends Component{
+export default class UsHeader extends Component{
     constructor(){
         super();
         this.state={
-            admin_name:'王鹏',
+            version:'1.0',
         }
     }
 
 
     render() {
         return (
-             <div style={{width:'100%',padding:'0'}}>
-                 <div className="row header-background">
+            <div style={{width:'100%',padding:'0'}}>
+                <div className="row header-background">
                     <div
-                        onClick={()=>{jumpPage('admin')}}
+                        // onClick={()=>{jumpPage('admin')}}
                         className="col-xs-6  col-md-5">
                         <p style={{marginLeft:60,fontSize:60,color:'#fff'}}>LOGO</p>
                     </div>
                     <div className="col-xs-12 col-md-7  header-nav">
-                        {/*为什么是col-md-6,而不是col-lg-6*/}
                         <div
-                            onClick={()=>{jumpPage('admin/personalInfo')}}
+                            onClick={()=>{jumpPage('/us')}}
                             className="header-nav width_25">
-                            个人中心
+                            about us
+                        </div>
+                        <div
+                            className="header-nav width_25">
+                            V{this.state.version}
+                            {/*不显示*/}
                         </div>
                         <div
                             onClick={()=>{
@@ -37,14 +41,10 @@ export default class Header  extends Component{
                             className="header-nav width_25">
                             退出
                         </div>
-                        <div
-                            className="header-nav width_25">
-                            当前管理员：{this.state.admin_name}
-                        </div>
                     </div>
-                 </div>
+                </div>
 
-             </div>
+            </div>
 
         )
     }

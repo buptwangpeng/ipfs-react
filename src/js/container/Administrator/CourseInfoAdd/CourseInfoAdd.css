@@ -3,28 +3,13 @@
     flex-direction: row;
 
 }
+.margin-top_20px{
+    margin-top:20px;
+}
+.width_50{
+    width: 50%;
+}
+.margin-top_50px{
+    margin-top:50px;
+}
 
-/*!*批量添加按钮*!*/
-/*.c_i_a_button1{*/
-    /*!*height:100px;*!*/
-    /*!*width:100px;*!*/
-    /*position:absolute;*/
-    /*top:20px;*/
-    /*right:400px;*/
-
-/*}*/
-/*!*输入学生信息块（学号，姓名等）*!*/
-/*.c_i_a_1{*/
-    /*!*height:100px;*!*/
-    /*!*width:100px;*!*/
-    /*position:absolute;*/
-    /*top:100px;*/
-    /*left:0px;*/
-
-/*}*/
-/*!*提交按钮*!*/
-/*.c_i_a_button2{*/
-    /*position:absolute;*/
-    /*top:450px;*/
-    /*left:0%;*/
-/*}*/

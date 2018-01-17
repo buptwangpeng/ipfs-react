@@ -1,17 +1,10 @@
-
-/*!*学生学号输入栏*!*/
-/*.s_i_s_1{*/
-    /*position:absolute;*/
-    /*top:75px;*/
-    /*left:50px;*/
-/*}*/
-/*!*三个按钮*!*/
-/*.s_i_s_button{*/
-    /*position:absolute;*/
-    /*top:0px;*/
-/*}*/
-
-/*成绩栏*/
+.margin-top_20px{
+    margin-top:20px;
+}
+.margin-top_50px{
+    margin-top:50px;
+}
+/*成绩单*/
 .s_i_s_t {
     /*position: absolute;*/
     /*top: 300px;*/

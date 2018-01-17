@@ -9,7 +9,7 @@ import Header from '../../../components/AdHeader/Header'
 import Footer from '../../../components/AdFooter/Footer'
 import NavSide from '../../../components/AdNavSide/NavSide'
 
-export default class AdAdministratorInfoAdd extends Component {
+export default class AdministratorInfoAdd extends Component {
     constructor() {
         super();
         this.state = {
