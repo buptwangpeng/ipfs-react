@@ -1,39 +1,98 @@
 import React, {Component} from 'react'
-import { ListGroup } from 'react-bootstrap'
-import { ListGroupItem } from 'react-bootstrap'
+import {ListGroup} from 'react-bootstrap'
+import {ListGroupItem} from 'react-bootstrap'
 import NavLink from '../AdNavLink/NavLink'
 import './NavSide.css'
-export default class NavSide extends Component{
+import jumpPage from '../../core/jumpPage.js'
+
+export default class NavSide extends Component {
 
     render() {
         return (
             <div>
-                    <div >
-                        <h2 style={{margin:'0',}}>学生信息</h2>
+                <div style={{background: '#dcdcdc', width: '100%', height: window.innerHeight-100, margin: '0', padding: '0'}}>
 
-                        <ul className="nav nav-pills nav-stacked">
-                            <li ><a href="http://localhost:8080/admin/student/add">添加</a></li>
-                            <li ><a href="http://localhost:8080/admin/student/modify">信息查询与更改</a></li>
-                            <li ><a href="http://localhost:8080/admin/student/export">成绩查询与导出</a></li>
-                        </ul>
-
-                        <h2>教师信息</h2>
-                        <ul className="nav nav-pills nav-stacked">
-                            <li ><a href="http://localhost:8080/admin/teacher/add">添加</a></li>
-                            <li ><a href="http://localhost:8080/admin/teacher/modify">信息查询与更改</a></li>
-                            <li ><a href="http://localhost:8080/admin/teacher/apply">开课申请</a></li>
-                        </ul>
-                        <h2>课程信息</h2>
-                        <ul className="nav nav-pills nav-stacked">
-                            <li ><a href="http://localhost:8080/admin/course/add">添加</a></li>
-                            <li ><a href="http://localhost:8080/admin/course/modify">信息查询与更改</a></li>
-                        </ul>
-                        <h2>管理员信息</h2>
-                        <ListGroup>
-                            <ListGroupItem className="a" ><NavLink to="/admin/administrator/add">添加(需超管权限)</NavLink></ListGroupItem>
-                            <ListGroupItem className="a" ><NavLink to="/admin/administrator/modify">信息查询与更改</NavLink></ListGroupItem>
-                        </ListGroup>
+                    <h2 style={{margin:'0',}} className="NavSide_h2">学生信息</h2>
+                    <div
+                        onClick={() => {
+                            jumpPage('admin/student/add')
+                        }}
+                        className="NavSide-nav ">
+                        添加
                     </div>
+                    <div
+                        onClick={() => {
+                            jumpPage('admin/student/modify')
+                        }}
+                        className="NavSide-nav ">
+                        信息查询与更改
+                    </div>
+                    <div
+                        onClick={() => {
+                            jumpPage('admin/student/export')
+                        }}
+                        className="NavSide-nav ">
+                        成绩查询与导出
+                    </div>
+
+
+                    <h2 className="NavSide_h2">教师信息</h2>
+                    <div
+                        onClick={() => {
+                            jumpPage('admin/teacher/add')
+                        }}
+                        className="NavSide-nav ">
+                        添加
+                    </div>
+                    <div
+                        onClick={() => {
+                            jumpPage('admin/teacher/modify')
+                        }}
+                        className="NavSide-nav ">
+                        信息查询与更改
+                    </div>
+                    <div
+                        onClick={() => {
+                            jumpPage('admin/teacher/apply')
+                        }}
+                        className="NavSide-nav ">
+                        开课申请
+                    </div>
+
+
+                    <h2 className="NavSide_h2">课程信息</h2>
+                    <div
+                        onClick={() => {
+                            jumpPage('admin/course/add')
+                        }}
+                        className="NavSide-nav ">
+                        添加
+                    </div>
+                    <div
+                        onClick={() => {
+                            jumpPage('admin/course/modify')
+                        }}
+                        className="NavSide-nav ">
+                        信息查询与更改
+                    </div>
+
+
+                    <h2 className="NavSide_h2">管理员信息</h2>
+                    <div
+                        onClick={() => {
+                            jumpPage('admin/administrator/add')
+                        }}
+                        className="NavSide-nav ">
+                        添加
+                    </div>
+                    <div
+                        onClick={() => {
+                            jumpPage('admin/administrator/modify')
+                        }}
+                        className="NavSide-nav ">
+                        信息查询与更改
+                    </div>
+                </div>
 
             </div>
 

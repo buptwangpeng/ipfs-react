@@ -108,21 +108,18 @@ export default class LogIn extends Component {
     render() {
         return (
             <div style={{height: window.innerHeight}}
-                 className="Log0">
+                 className="">
                 <LoginHeader/>
-                <div className="row login_flexCenter">
-                    <div
-                        style={{height: window.innerHeight - 100, padding: 40}}
-                        className=" col-xs-6 col-md-6">
-
-
-                        <div className="margin-top_200">
+                <div
+                    style={{height: window.innerHeight - 100, padding: 40}}
+                    className="Log0 row login_flexCenter">
+                    <div className=" col-xs-6 col-md-6">
+                        <div className=" margin-top_200">
                             <div className="col-xs-12 col-md-12">
                                 <icon className=" login-icon-container col-xs-2 col-md-2 iconfont"
                                       style={{fontSize: '40px'}}>&#xe628;</icon>
                                 <div className="col-xs-8 col-md-8 margin-top_5px">
-                                    <div
-                                        style={{}}
+                                    <div style={{}}
                                         className="input-group input-group-lg">
                                         <input type="text"
                                                className="form-control"

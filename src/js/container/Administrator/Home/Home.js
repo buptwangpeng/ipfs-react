@@ -18,7 +18,7 @@ export default class AdHome extends Component{
 
                     <div className="row">
                         <div className="col-md-2 ">
-                            <div style={{background: '#dcdcdc', width: '100%', height:window.innerHeight-100, margin: '0', padding: '0'}}>
+                            <div >
                                 {/*内联样式style={{}}和className=''不能写在一个div中*/}
                                 <NavSide/>
                             </div>

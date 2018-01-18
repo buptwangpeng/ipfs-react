@@ -1,4 +1,6 @@
-- 登录界面
+# 管理员界面相关接口
+
+- 登录
 ```
 url:/user/login
 
@@ -11,20 +13,22 @@ request jsondata:
 }
 response:
 {
-     'meta':{'code':200,'message':ok}
+     'meta':{'code':'200','message':'ok'}
      'data':{
          'uid':'',//用户uid,后台用户的唯一标识，其他接口请求的时候需要带上供后台校验
          'name':'',
          'type':''// student/teacher/administrator
      }
 }
+//当用户名或密码错误时返回 'meta':{'code':'400','message':'Account or password is error'}
 ```
 
-- 管理员界面添加学生
+- 添加学生
 ```
 url:/admin/student/info/add
 request jsondata:
 {
+    'timestamp':'',
     'uid':'1111'
     'student':{
         'student_id':'',//学号
@@ -32,110 +36,135 @@ request jsondata:
         'student_gender':'',//male/female
         'student_class': '',
         'student_grade': '',
-        'student_major':'',
+        'student_major':'',//专业
         'student_school':'',
-        'student_password': '',//学生登录本系统的登录密码
+        'student_password_log': '',//学生登录本系统的登录密码
     }
 }
 response:
 {
-     'meta':{'code':200,'message':ok}
+     'meta':{'code':'200','message':'ok'}
 }
+//若添加学号已存在于数据库，则返回 'meta':{'code':'400','message':'The student already exists'}
 ```
 
-- 管理员界面学生信息查看修改
+- 学生信息查看
 ```
-url:/admin/student/info/query   //查看
+url:/admin/student/info/query
 request jsondata:
 {
-    'uid':'1111'
+    'timestamp':'',
+    'uid':'',
     'student':{
         'student_id':'',//学号
     }
 }
 response:
 {
-     'meta':{'code':200,'message':ok}
+     'meta':{'code':'200','message':'ok'}
      'data':{
+         'uid':'',
          'student_id':'',//学号
          'student_name': '',
+         'student_gender':'',//male/female
+         'student_class': '',
+         'student_grade': '',
+         'student_major':'',//专业
+         'student_school':'',
          'student_address': '',//学生在区块链上的账户地址
          'student_password_log': '',//学生登录本系统的登录密码
          'student_password_unlock': '',//学生的区块链账户地址的解锁密码
      }
 }
-
-url:/admin/student/info/modify    //修改
+//若学号不存在，则返回'meta':{'code':'400','message':'The student ID does not exist'}
+```
+- 学生信息修改
+```
+url:/admin/student/info/modify
 request jsondata:
 {
-    'uid':'1111'
+    'timestamp':'',
+    'uid':'',
     'student':{
-        'student_id':'',//学号
-        'student_name':'',
-        'student_address':'',//学生在区块链上的账户地址
-        'student_password_log':'',//学生登录本系统的登录密码
-        'student_password_unlock':'',//学生的区块链账户地址的解锁密码
+       'student_id':'',//学号
+       'student_name': '',
+       'student_gender':'',//male/female
+       'student_class': '',
+       'student_grade': '',
+       'student_major':'',//专业
+       'student_school':'',
+       'student_address': '',//学生在区块链上的账户地址
+       'student_password_log': '',//学生登录本系统的登录密码
+       'student_password_unlock': '',//学生的区块链账户地址的解锁密码
     }
 }
 response:
 {
-     'meta':{'code':200,'message':ok}
+     'meta':{'code':'200','message':'ok'}
+      'student_address': '',//学生在区块链上的账户地址
+
 
 }
 ```
 
-- 管理员界面学生成绩查询
+- 学生成绩查询
 ```
-url:/admin/student/grade/query
+url:/admin/student/mark/query
 request jsondata:
 {
-    'uid':'1111'
+    'timestamp':'',
+    'uid':'',
     'student':{
         'student_id':'',//学号
     }
 }
 response:
 {
-     'meta':{'code':200,'message':ok}
+     'meta':{'code':'200','message':'ok'}
      'data':{
+         {
          'course_name':'',
          'course_credit':'',//课程学分
          'course_property':'',// 必修/选修
          'course_semester':'',//开课学期
          'course_mark':'',
+         }
      }
 
 }
 ```
 
-- 管理员界面添加教师
+- 添加教师
 ```
 url:/admin/teacher/info/add
 request jsondata:
 {
-    'uid':'1111'
+    'timestamp':'',
+    'uid':'',
     'teacher':{
         'teacher_id':'',//教师编号
         'teacher_name':'',
         'teacher_tel':'',//电话
-        'teacher_password':'',//教师登录本系统的登录密码
+        'teacher_password_log':'',//教师登录本系统的登录密码
     }
 }
 response:
 {
      'meta':{'code':200,'message':ok}
      'data':{
-         'teacher_address':''//教师在区块链上的账户地址
+          'teacher_address':''//教师在区块链上的账户地址
      }
 }
+//若教师ID已存在数据库中，则返回'meta':{'code':'400','message':'The teacher already exists'}
 ```
 
-- 管理员界面教师信息查看修改
+- 教师信息查看
 ```
-url:/admin/teacher/info/query   //查看
+url:/admin/teacher/info/query
 request jsondata:
 {
-    'uid':'1111'
+    'timestamp':'',
+    'uid':'',
     'teacher':{
         'teacher_id':'',//教师编号
     }
@@ -152,11 +181,16 @@ response:
          'teacher_password_unlock':'',//教师的区块链账户地址的解锁密码
      }
 }
+//若教师ID不存在，则返回'meta':{'code':'400','message':'The teacher ID does not exist'}
+```
 
-url:/admin/teacher/info/modify    //修改
+- 教师信息修改
+```
+url:/admin/teacher/info/modify
 request jsondata:
 {
-    'uid':'1111'
+   'timestamp':'',
+    'uid':'',
     'teacher':{
         'teacher_id':'',//教师编号
         'teacher_name':'',
@@ -173,12 +207,14 @@ response:
 }
 ```
 
-- 管理员界面教师开课申请
+- 获取教师开课申请数据
 ```
-url:/admin/teacher/course/apply/query   //获取开课申请数据
+url:/admin/teacher/course/apply/query
 request jsondata:
 {
-    'uid':'1111'
+    'timestamp':'',
+    'uid':''
+
 }
 response:
 {
@@ -196,11 +232,15 @@ response:
         'status':''//status: 1可选，2已同意，3已拒绝
      }
 }
+```
 
-url:/admin/teacher/course/apply/approve    //审批开课申请
+- 审批开课申请
+```
+url:/admin/teacher/course/apply/approve
 request jsondata:
 {
-    'uid':'1111'
+    'timestamp':'',
+    'uid':'',
     'course_approve':{
         'course_id':'',//课程编号
         'status':'',//status: 2同意，3拒绝
@@ -212,12 +252,13 @@ response:
 }
 ```
 
-- 管理员界面添加课程
+- 添加课程
 ```
 url:/admin/course/info/add
 request jsondata:
 {
-    'uid':'1111'
+    'timestamp':'',
+    'uid':'',
     'course':{
         'teacher_name':'',
         'course_id':'',//课程编号
@@ -234,14 +275,16 @@ response:
 {
      'meta':{'code':200,'message':ok}
 }
+//若课程ID已存在于数据库，则返回 'meta':{'code':'400','message':'The course already exists'}
 ```
 
-- 管理员界面课程信息查看修改
+- 课程信息查看
 ```
-url:/admin/course/info/query   //查看
+url:/admin/course/info/query
 request jsondata:
 {
-    'uid':'1111'
+    'timestamp':'',
+    'uid':'',
     'course':{
         'course_id':'',//教师编号
     }
@@ -260,11 +303,15 @@ response:
          'course_property':'',// 必修/选修
      }
 }
+//若课程ID不存在，则返回 'meta':{'code':'400','message':'The course does not exist'}
+```
 
-url:/admin/course/info/modify    //修改
+- 课程信息修改
+url:/admin/course/info/modify
 request jsondata:
 {
-    'uid':'1111'
+    'timestamp':'',
+    'uid':'',
     'course':{
        'course_id':'',//课程编号
        'course_name':'',//课程名称
@@ -282,17 +329,18 @@ response:
 }
 ```
 
-- 管理员界面添加管理员
+- 添加管理员
 ```
 url:/admin/administrator/info/add
 request jsondata:
 {
-    'uid':'1111'
+    'timestamp':'',
+    'uid':'',
     'administrator':{
         'administrator_id':'',//管理员编号
         'administrator_name':'',
         'administrator_tel':'',//电话
-        'administrator_password':'',//管理员登录本系统的登录密码
+        'administrator_password_log':'',//管理员登录本系统的登录密码
     }
 }
 response:
@@ -302,14 +350,16 @@ response:
          'administrator_address':''//管理员在区块链上的账户地址
      }
 }
+//若管理员ID已存在于数据库，则返回 'meta':{'code':'400','message':'The admin already exists'}
 ```
 
-- 管理员界面管理员信息查看修改
+- 管理员信息查看
 ```
-url:/admin/administrator/info/query   //查看
+url:/admin/administrator/info/query
 request jsondata:
 {
-    'uid':'1111'
+   'timestamp':'',
+    'uid':''
     'administrator':{
         'administrator_id':'',//管理员编号
     }
@@ -326,11 +376,16 @@ response:
          'administrator_password_unlock':'',//管理员的区块链账户地址的解锁密码
      }
 }
+//若管理员ID不存在，则返回 'meta':{'code':'400','message':'The admin does not exist'}
+```
 
-url:/admin/administrator/info/modify    //修改
+- 管理员信息修改
+```
+url:/admin/administrator/info/modify
 request jsondata:
 {
-    'uid':'1111'
+    'timestamp':'',
+    'uid':'',
     'administrator':{
         'administrator_id':'',//管理员编号
         'administrator_name':'',

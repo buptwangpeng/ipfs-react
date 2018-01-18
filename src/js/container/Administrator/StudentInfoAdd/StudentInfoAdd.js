@@ -18,10 +18,12 @@ export default class AdStudentInfoAdd extends Component {
         this.state = {
             student_id: '',
             student_name: '',
+            student_gender:'',//male/female
             student_class: '',
             student_grade: '',
+            student_major:'',//专业
+            student_school:'',
             student_password: '',
-            student_tel: '',
             //弹出框
             showModal: false,
         }
@@ -49,6 +51,13 @@ export default class AdStudentInfoAdd extends Component {
 
     }
 
+    student_gender_change(event) {
+        this.setState({
+            student_gender: event.target.value
+        });
+
+    }
+
     student_class_change(event) {
         this.setState({
             student_class: event.target.value
@@ -63,6 +72,13 @@ export default class AdStudentInfoAdd extends Component {
 
     }
 
+    student_school_change(event) {
+        this.setState({
+            student_school: event.target.value
+        });
+
+    }
+
     student_password_change(event) {
         this.setState({
             student_password: event.target.value
@@ -70,9 +86,9 @@ export default class AdStudentInfoAdd extends Component {
 
     }
 
-    student_tel_change(event) {
+    student_major_change(event) {
         this.setState({
-            student_tel: event.target.value
+            student_major: event.target.value
         });
 
     }
@@ -94,7 +110,7 @@ export default class AdStudentInfoAdd extends Component {
                 <Header/>
                 <div className="row ">
                     <div className="col-xs-3 col-md-2 col-lg-2">
-                        <div style={{background: '#dcdcdc', width: '100%', height: window.innerHeight-100, margin: '0', padding: '0'}}>
+                        <div >
                             {/*内联样式style={{}}和className=''不能写在一个div中*/}
                             {/*width:'50%'是指在col-lg-4中占一半*/}
                             <NavSide/>
@@ -137,6 +153,12 @@ export default class AdStudentInfoAdd extends Component {
                                     onChange={this.student_name_change.bind(this)}
                                 />
                                 <AdInput
+                                    title="性&#12288;&#12288;别&#12288;"
+                                    placeholder="请输入性别"
+                                    value={this.state.student_gender}
+                                    onChange={this.student_gender_change.bind(this)}
+                                />
+                                <AdInput
                                     title="班&#12288;&#12288;级&#12288;"
                                     placeholder="请输入班级"
                                     value={this.state.student_class}
@@ -149,18 +171,23 @@ export default class AdStudentInfoAdd extends Component {
                                     onChange={this.student_grade_change.bind(this)}
                                 />
                                 <AdInput
+                                    title="专&#12288;&#12288;业&#12288;"
+                                    placeholder="请输入专业"
+                                    value={this.state.student_major}
+                                    onChange={this.student_major_change.bind(this)}
+                                />
+                                <AdInput
+                                    title="学&#12288;&#12288;校&#12288;"
+                                    placeholder="请输入学校"
+                                    value={this.state.student_school}
+                                    onChange={this.student_school_change.bind(this)}
+                                />
+                                <AdInput
                                     title="登录密码&#12288;"
                                     placeholder="请输入登录密码"
                                     value={this.state.student_password}
                                     onChange={this.student_password_change.bind(this)}
                                 />
-                                <AdInput
-                                    title="联系方式&#12288;"
-                                    placeholder="请输入联系方式"
-                                    value={this.state.student_tel}
-                                    onChange={this.student_tel_change.bind(this)}
-                                />
-
                                 <Button bsStyle="success" bsSize="large" className="width_100 margin-top_50px"
                                         onClick={() => this.button2_change()}>提交</Button>
                             </div>
