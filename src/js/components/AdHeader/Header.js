@@ -7,7 +7,7 @@ export default class Header  extends Component{
     constructor(){
         super();
         this.state={
-            admin_name:'王鹏',
+            admin_name:localStorage.name,
         }
     }
 

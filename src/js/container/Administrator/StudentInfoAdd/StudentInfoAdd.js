@@ -1,15 +1,16 @@
 import React, {Component} from 'react'
 import './StudentInfoAdd.css'
+import {Button} from 'react-bootstrap'
+import {Modal} from 'react-bootstrap'
+import {Form} from 'react-bootstrap'
 import {FormGroup} from 'react-bootstrap'
 import {ControlLabel} from 'react-bootstrap'
 import {FormControl} from 'react-bootstrap'
-import {Button} from 'react-bootstrap'
-import {Form} from 'react-bootstrap'
-import {Modal} from 'react-bootstrap'
 import Header from '../../../components/AdHeader/Header'
 import Footer from '../../../components/AdFooter/Footer'
 import NavSide from '../../../components/AdNavSide/NavSide'
 import AdInput from '../../../components/AdInput/AdInput'
+import Admin from '../../../core/admin.js'
 
 
 export default class AdStudentInfoAdd extends Component {
@@ -18,12 +19,13 @@ export default class AdStudentInfoAdd extends Component {
         this.state = {
             student_id: '',
             student_name: '',
-            student_gender:'',//male/female
+            student_gender: '',//male/female
             student_class: '',
             student_grade: '',
-            student_major:'',//专业
-            student_school:'',
-            student_password: '',
+            student_major: '',//专业
+            student_school: '',
+            student_password_log: '',//学生登录本系统的登录密码
+            tip:'',//是否添加成功
             //弹出框
             showModal: false,
         }
@@ -79,9 +81,9 @@ export default class AdStudentInfoAdd extends Component {
 
     }
 
-    student_password_change(event) {
+    student_password_log_change(event) {
         this.setState({
-            student_password: event.target.value
+            student_password_log: event.target.value
         });
 
     }
@@ -93,14 +95,39 @@ export default class AdStudentInfoAdd extends Component {
 
     }
 
-    //批量添加按钮
-    button1_change() {
-
-    }
 
     //单个添加按钮
-    button2_change() {
+    button1_change() {
+        // let self = this;
+        let admin = new Admin();
+        let url = 'http://localhost:3004/list';//接口的地址
 
+        let param = {
+            student: {
+                student_id:this.state.student_id,//学号
+                student_name:this.state.student_name,
+                student_gender:this.state.student_gender,//male/female
+                student_class:this.state.student_class,
+                student_grade:this.state.student_grade,
+                student_major:this.state.student_major,//专业
+                student_school:this.state.student_school,
+                student_password_log:this.state.student_password_log,//登录本系统的登录密码
+            }
+        };
+        admin.addStudent(url, param).then((response) => {
+            console.log(response);
+            //必须试试response中的this的域还是不是本组件
+            if(response.meta.message=="ok"){
+                this.setState({
+                     tip:"该学生信息添加成功"
+                })
+            }else{
+                this.setState({
+                    tip:"该学生信息添加失败"
+                })
+            }
+
+        });
     }
 
     render() {
@@ -110,7 +137,7 @@ export default class AdStudentInfoAdd extends Component {
                 <Header/>
                 <div className="row ">
                     <div className="col-xs-3 col-md-2 col-lg-2">
-                        <div >
+                        <div>
                             {/*内联样式style={{}}和className=''不能写在一个div中*/}
                             {/*width:'50%'是指在col-lg-4中占一半*/}
                             <NavSide/>
@@ -185,11 +212,14 @@ export default class AdStudentInfoAdd extends Component {
                                 <AdInput
                                     title="登录密码&#12288;"
                                     placeholder="请输入登录密码"
-                                    value={this.state.student_password}
-                                    onChange={this.student_password_change.bind(this)}
+                                    value={this.state.student_password_log}
+                                    onChange={this.student_password_log_change.bind(this)}
                                 />
                                 <Button bsStyle="success" bsSize="large" className="width_100 margin-top_50px"
-                                        onClick={() => this.button2_change()}>提交</Button>
+                                        onClick={() => this.button1_change()}>提交</Button>
+                                <label><h4>{this.state.tip}</h4></label>
+                                {/*位置需要改*/}
+
                             </div>
                         </div>
                     </div>

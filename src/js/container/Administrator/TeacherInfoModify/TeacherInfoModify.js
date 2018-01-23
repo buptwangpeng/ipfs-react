@@ -1,13 +1,11 @@
 import React, {Component} from 'react'
 import './TeacherInfoModify.css'
-import {FormGroup} from 'react-bootstrap'
-import {ControlLabel} from 'react-bootstrap'
-import {FormControl} from 'react-bootstrap'
 import {Button} from 'react-bootstrap'
-import {Form} from 'react-bootstrap'
 import Header from '../../../components/AdHeader/Header'
 import Footer from '../../../components/AdFooter/Footer'
 import NavSide from '../../../components/AdNavSide/NavSide'
+import AdInput from '../../../components/AdInput/AdInput'
+import Admin from '../../../core/admin.js'
 
 export default class AdTeacherInfoModify extends Component {
     constructor() {
@@ -71,20 +69,51 @@ export default class AdTeacherInfoModify extends Component {
         else if (length > 0) return 'error';
     }
 
+//查询
     button1_change() {
-        if (this.state.teacher_id === '2013110121') {
+        let admin = new Admin();
+        let url = 'http://localhost:3004/list';//接口的地址
+
+        let param = {
+            teacher: {
+                teacher_id:this.state.teacher_id,
+            }
+        };
+
+        admin.queryTeacher(url, param).then((response) => {
+            console.log(response);
             this.setState({
-                teacher_name: '王五',
-                teacher_address: '0x9ff58d30bd2c4b51c46e37217c5344e4bf81562e',
-                teacher_password_log: '123456',
-                teacher_password_unlock: '456789',
-            });
-        }
+                teacher_id:response.data.teacher_id,
+                teacher_name:response.data.teacher_name,
+                teacher_tel:response.data.teacher_tel,
+                teacher_address:response.data.teacher_address,
+                teacher_password_log:response.data.teacher_password_log,
+                teacher_password_unlock:response.data.teacher_password_unlock,
+            })
+
+
+        });
     }
 
-    //单个添加按钮
+    // 修改提交
     button2_change() {
+        let admin = new Admin();
+        let url = 'http://localhost:3004/list';//接口的地址
 
+        let param = {
+            teacher: {
+                teacher_id:this.state.teacher_id,
+                teacher_name:this.state.teacher_name,
+                teacher_tel:this.state.teacher_tel,
+                teacher_address:this.state.teacher_address,
+                teacher_password_log:this.state.teacher_password_log,
+                teacher_password_unlock:this.state.teacher_password_unlock,
+            }
+        };
+
+        admin.modifyTeacher(url, param).then((response) => {
+            console.log(response);
+        });
     }
 
     render() {
@@ -101,78 +130,56 @@ export default class AdTeacherInfoModify extends Component {
                     <div className="col-xs-8 col-md-10 col-lg-10 ">
                         <h3>教师信息查询与修改</h3>
                         <div className="te_mod_1">
-                            <Form inline>
-                                <FormGroup bsSize="large" controlId="formBasicText"
-                                           validationState={this.getValidationState()}>
-                                    <ControlLabel><h4>教师编号&#12288;</h4></ControlLabel>
-                                    <FormControl type="text"
-                                                 placeholder="请输入学号"
-                                                 value={this.state.teacher_id}
-                                                 onChange={this.teacher_id_change.bind(this)}
-                                    />
-                                </FormGroup>
-                            </Form>
+                            <AdInput
+                                title="教师编号&#12288;"
+                                placeholder="请输入教师编号"
+                                value={this.state.teacher_id}
+                                onChange={this.teacher_id_change.bind(this)}
+                            />
+
                             <Button bsStyle="success" bsSize="large" className="margin-left_10px"
                                     onClick={() => this.button1_change()}>查询</Button>
                         </div>
 
                         {/* &#12288; 中文全角空格 （一个中文宽度）  */}
                         <div className="margin-top_50px">
-                            <Form inline>
-                                <FormGroup bsSize="large">
-                                    <ControlLabel><h4>教师编号&#12288;</h4></ControlLabel>
-                                    <FormControl type="text"
-                                                 value={this.state.teacher_id}
-                                                 onChange={this.teacher_id_change.bind(this)}
-                                    />
+                            <AdInput
+                                title="教师编号&#12288;"
+                                placeholder="请输入教师编号"
+                                value={this.state.teacher_id}
+                                onChange={this.teacher_id_change.bind(this)}
+                            />
+                            <AdInput
+                                title="姓&#12288;&#12288;名&#12288;"
+                                placeholder="请输入教师姓名"
+                                value={this.state.teacher_name}
+                                onChange={this.teacher_name_change.bind(this)}
+                            />
+                            <AdInput
+                                title="联系方式&#12288;"
+                                placeholder="请输入手机号码"
+                                value={this.state.teacher_tel}
+                                onChange={this.teacher_tel_change.bind(this)}
+                            />
+                            <AdInput
+                                title="地&#12288;&#12288;址&#12288;"
+                                placeholder="请输入地址"
+                                value={this.state.teacher_address}
+                                onChange={this.teacher_address_change.bind(this)}
+                            />
+                            <AdInput
+                                title="登录密码&#12288;"
+                                placeholder="请输入登录密码"
+                                value={this.state.teacher_password_log}
+                                onChange={this.teacher_password_log_change.bind(this)}
+                            />
+                            <AdInput
+                                title="解锁密码&#12288;"
+                                placeholder="请输入解锁密码"
+                                value={this.state.teacher_password_unlock}
+                                onChange={this.teacher_password_unlock_change.bind(this)}
+                            />
 
-                                </FormGroup>
-                            </Form>
-                            <Form inline>
-                                <FormGroup bsSize="large">
-                                    <ControlLabel><h4>姓&#12288;&#12288;名&#12288;</h4></ControlLabel>
-                                    <FormControl type="text"
-                                                 value={this.state.teacher_name}
-                                                 onChange={this.teacher_name_change.bind(this)}
-                                    />
-                                </FormGroup>
-                            </Form>
-                            <Form inline>
-                                <FormGroup bsSize="large">
-                                    <ControlLabel><h4>联系方式&#12288;</h4></ControlLabel>
-                                    <FormControl type="text"
-                                                 value={this.state.teacher_tel}
-                                                 onChange={this.teacher_tel_change.bind(this)}
-                                    />
-                                </FormGroup>
-                            </Form>
-                            <Form inline>
-                                <FormGroup bsSize="large">
-                                    <ControlLabel><h4>地&#12288;&#12288;址&#12288;</h4></ControlLabel>
-                                    <FormControl type="text"
-                                                 value={this.state.teacher_address}
-                                                 onChange={this.teacher_address_change.bind(this)}
-                                    />
-                                </FormGroup>
-                            </Form>
-                            <Form inline>
-                                <FormGroup bsSize="large">
-                                    <ControlLabel><h4>登录密码&#12288;</h4></ControlLabel>
-                                    <FormControl type="text"
-                                                 value={this.state.teacher_password_log}
-                                                 onChange={this.teacher_password_log_change.bind(this)}
-                                    />
-                                </FormGroup>
-                            </Form>
-                            <Form inline>
-                                <FormGroup bsSize="large">
-                                    <ControlLabel><h4>解锁密码&#12288;</h4></ControlLabel>
-                                    <FormControl type="text"
-                                                 value={this.state.teacher_password_unlock}
-                                                 onChange={this.teacher_password_unlock_change.bind(this)}
-                                    />
-                                </FormGroup>
-                            </Form>
                             <Button bsStyle="success" bsSize="large" className="width_50 margin-top_50px"
                                     onClick={() => this.button2_change()} >提交</Button>
                         </div>

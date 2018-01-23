@@ -1,3 +1,7 @@
+#  code==200   正常前后端交互，成功接受数据
+   code==400&&message=='NotAuthorized'  非法用户。未授权
+   code==500  服务器错误
+
 # 管理员界面相关接口
 
 - 登录
@@ -18,6 +22,12 @@ response:
          'uid':'',//用户uid,后台用户的唯一标识，其他接口请求的时候需要带上供后台校验
          'name':'',
          'type':''// student/teacher/administrator
+         'token':''//后台验证
+         'address_exist':''//  0/1   0代表用户没有地址，此时需要弹窗或跳转到创建账户地址界面；1代表用户有地址，直接跳转到相应界面即可
+         'block_chain':{
+             'address':'',
+             'password_unlock':''
+         }
      }
 }
 //当用户名或密码错误时返回 'meta':{'code':'400','message':'Account or password is error'}
@@ -29,7 +39,8 @@ url:/admin/student/info/add
 request jsondata:
 {
     'timestamp':'',
-    'uid':'1111'
+    'uid':'',
+    'token':''
     'student':{
         'student_id':'',//学号
         'student_name': '',
@@ -55,6 +66,7 @@ request jsondata:
 {
     'timestamp':'',
     'uid':'',
+    'token':''
     'student':{
         'student_id':'',//学号
     }
@@ -85,6 +97,7 @@ request jsondata:
 {
     'timestamp':'',
     'uid':'',
+    'token':''
     'student':{
        'student_id':'',//学号
        'student_name': '',
@@ -101,7 +114,6 @@ request jsondata:
 response:
 {
      'meta':{'code':'200','message':'ok'}
-      'student_address': '',//学生在区块链上的账户地址
 
 
 }
@@ -109,11 +121,13 @@ response:
 
 - 学生成绩查询
 ```
+在区块链上进行查询，接口都是web3接口
 url:/admin/student/mark/query
 request jsondata:
 {
     'timestamp':'',
     'uid':'',
+    'token':''
     'student':{
         'student_id':'',//学号
     }
@@ -141,19 +155,18 @@ request jsondata:
 {
     'timestamp':'',
     'uid':'',
+    'token':''
     'teacher':{
         'teacher_id':'',//教师编号
         'teacher_name':'',
         'teacher_tel':'',//电话
         'teacher_password_log':'',//教师登录本系统的登录密码
+
     }
 }
 response:
 {
      'meta':{'code':200,'message':ok}
-     'data':{
-          'teacher_address':''//教师在区块链上的账户地址
-     }
 }
 //若教师ID已存在数据库中，则返回'meta':{'code':'400','message':'The teacher already exists'}
 ```
@@ -165,6 +178,7 @@ request jsondata:
 {
     'timestamp':'',
     'uid':'',
+    'token':''
     'teacher':{
         'teacher_id':'',//教师编号
     }
@@ -191,6 +205,7 @@ request jsondata:
 {
    'timestamp':'',
     'uid':'',
+    'token':''
     'teacher':{
         'teacher_id':'',//教师编号
         'teacher_name':'',
@@ -214,23 +229,29 @@ request jsondata:
 {
     'timestamp':'',
     'uid':''
+    'token':''
+    'page':''//        这个还有用吗，            还没有和后台讨论
+    'number':''//     讨论下这个是不是可以不要了   还没有与后台讨论
 
 }
 response:
 {
      'meta':{'code':200,'message':ok}
      'data':{
+       {'new':'' //  0/1  是否为新课
         'course_name':'',
         'academy':'',//学院
         'course_property':'',// 必修/选修
         'course_id':'',//课程编号
+        'teacher_id':''
         'teacher_name':'',
         'time':'',//上课时间
         'grade':'',//面向年级
         'mark_element':'',//成绩组成 如：100%期末
         'credit':'',//课程学分
-        'status':''//status: 1可选，2已同意，3已拒绝
+        'status':''//status: 1可选，2已同意，3已拒绝}
      }
+     ...
 }
 ```
 
@@ -241,8 +262,11 @@ request jsondata:
 {
     'timestamp':'',
     'uid':'',
+    'token':''
     'course_approve':{
+        'new':''  //  0/1  是否为新课
         'course_id':'',//课程编号
+         'teacher_id':''
         'status':'',//status: 2同意，3拒绝
     }
 }
@@ -259,8 +283,8 @@ request jsondata:
 {
     'timestamp':'',
     'uid':'',
+    'token':''
     'course':{
-        'teacher_name':'',
         'course_id':'',//课程编号
         'course_name':'',//课程名称
         'academy':'',//面向院系
@@ -285,14 +309,17 @@ request jsondata:
 {
     'timestamp':'',
     'uid':'',
+    'token':''
     'course':{
-        'course_id':'',//教师编号
+        'course_id':'',//课程编号
     }
 }
 response:
 {
      'meta':{'code':200,'message':ok}
      'data':{
+         'teacher_name':'',
+         'teacher_id':'',
          'course_id':'',//课程编号
          'course_name':'',//课程名称
          'academy':'',//面向院系
@@ -312,7 +339,12 @@ request jsondata:
 {
     'timestamp':'',
     'uid':'',
+    'token':''
     'course':{
+       'teacher_id_change':{
+                  'former':'',
+                  'now':''
+                }
        'course_id':'',//课程编号
        'course_name':'',//课程名称
        'academy':'',//面向院系
@@ -321,6 +353,7 @@ request jsondata:
        'credit':'',//学分
        'mark_element':'',//成绩组成 如：100%期末
        'course_property':'',// 必修/选修
+
     }
 }
 response:
@@ -336,19 +369,19 @@ request jsondata:
 {
     'timestamp':'',
     'uid':'',
+    'token':''
     'administrator':{
         'administrator_id':'',//管理员编号
         'administrator_name':'',
         'administrator_tel':'',//电话
         'administrator_password_log':'',//管理员登录本系统的登录密码
+
     }
 }
 response:
 {
      'meta':{'code':200,'message':ok}
-     'data':{
-         'administrator_address':''//管理员在区块链上的账户地址
-     }
+
 }
 //若管理员ID已存在于数据库，则返回 'meta':{'code':'400','message':'The admin already exists'}
 ```
@@ -360,6 +393,7 @@ request jsondata:
 {
    'timestamp':'',
     'uid':''
+    'token':''
     'administrator':{
         'administrator_id':'',//管理员编号
     }
@@ -371,9 +405,8 @@ response:
          'administrator_id':'',//管理员编号
          'administrator_name':'',
          'administrator_tel':'',//电话
-         'administrator_address':'',//管理员在区块链上的账户地址
          'administrator_password_log':'',//管理员登录本系统的登录密码
-         'administrator_password_unlock':'',//管理员的区块链账户地址的解锁密码
+
      }
 }
 //若管理员ID不存在，则返回 'meta':{'code':'400','message':'The admin does not exist'}
@@ -386,13 +419,12 @@ request jsondata:
 {
     'timestamp':'',
     'uid':'',
+    'token':''
     'administrator':{
         'administrator_id':'',//管理员编号
         'administrator_name':'',
         'administrator_tel':'',//电话
-        'administrator_address':'',//管理员在区块链上的账户地址
         'administrator_password_log':'',//管理员登录本系统的登录密码
-        'administrator_password_unlock':'',//管理员的区块链账户地址的解锁密码
     }
 }
 response:

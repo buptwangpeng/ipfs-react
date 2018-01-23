@@ -8,6 +8,8 @@ import {Form} from 'react-bootstrap'
 import Header from '../../../components/AdHeader/Header'
 import Footer from '../../../components/AdFooter/Footer'
 import NavSide from '../../../components/AdNavSide/NavSide'
+import AdInput from '../../../components/AdInput/AdInput'
+import Admin from '../../../core/admin.js'
 
 export default class AdministratorInfoAdd extends Component {
     constructor() {
@@ -16,8 +18,8 @@ export default class AdministratorInfoAdd extends Component {
             administrator_id: '',
             administrator_name: '',
             administrator_tel: '',
-            administrator_password: '',
-            administrator_address: '',
+            administrator_password_log: '',//管理员登录本系统的登录密码
+            tip:''
         }
     }
 
@@ -42,22 +44,44 @@ export default class AdministratorInfoAdd extends Component {
 
     }
 
-    administrator_password_change(event) {
+    administrator_password_log_change(event) {
         this.setState({
-            administrator_password: event.target.value
+            administrator_password_log: event.target.value
         });
 
     }
-
+//添加
     button1_change() {
+        let admin = new Admin();
+        let url = 'http://localhost:3004/list';//接口的地址
 
+        let param = {
+            administrator: {
+                administrator_id:this.state.administrator_id,
+                administrator_name:this.state.administrator_name,
+                administrator_tel:this.state.administrator_tel,
+                administrator_password_log:this.state.administrator_password_log,//管理员登录本系统的登录密码
+
+            }
+        };
+
+        admin.addAdministrator(url, param).then((response) => {
+            console.log(response);
+            //必须试试response中的this的域还是不是本组件
+            if(response.meta.message=="ok"){
+                this.setState({
+                    tip:"该管理员信息添加成功"
+                })
+            }else{
+                this.setState({
+                    tip:"该管理员信息添加失败"
+                })
+            }
+
+        });
     }
 
-    /* button2_change(){
-        this.setState({
-            teacher_address:'12'
-        });
-    }*/
+
     render() {
         return (
             <div style={{background: '#ffffff', height: window.innerHeight}}>
@@ -74,53 +98,37 @@ export default class AdministratorInfoAdd extends Component {
                         <h3>添加管理员</h3>
                         {/* &#12288; 中文全角空格 （一个中文宽度）  */}
                         <div className="margin-top_20px">
-                            <Form inline>
-                                <FormGroup bsSize="large">
-                                    <ControlLabel><h4>管理员编号</h4></ControlLabel>
-                                    <FormControl type="text"
-                                                 placeholder="请输入管理员编号"
-                                                 value={this.state.administrator_id}
-                                                 onChange={this.administrator_id_change.bind(this)}
-                                    />
+                            <AdInput
+                                title="管理员编号"
+                                placeholder="请输入管理员编号"
+                                value={this.state.administrator_id}
+                                onChange={this.administrator_id_change.bind(this)}
+                            />
+                            <AdInput
+                                title="姓&#12288;&#12288;名&#12288;"
+                                placeholder="请输入姓名"
+                                value={this.state.administrator_name}
+                                onChange={this.administrator_name_change.bind(this)}
+                            />
+                            <AdInput
+                                title="联系方式&#12288;"
+                                placeholder="请输入手机号码"
+                                value={this.state.administrator_tel}
+                                onChange={this.administrator_tel_change.bind(this)}
+                            />
+                            <AdInput
+                                title="登录密码&#12288;"
+                                placeholder="请输入登录密码"
+                                value={this.state.administrator_password_log}
+                                onChange={this.administrator_password_log_change.bind(this)}
+                            />
 
-                                </FormGroup>
-                            </Form>
-                            <Form inline>
-                                <FormGroup bsSize="large">
-                                    <ControlLabel><h4>姓&#12288;&#12288;名&#12288;</h4></ControlLabel>
-                                    <FormControl type="text"
-                                                 placeholder="请输入姓名"
-                                                 value={this.state.administrator_name}
-                                                 onChange={this.administrator_name_change.bind(this)}
-                                    />
-                                </FormGroup>
-                            </Form>
-                            <Form inline>
-                                <FormGroup bsSize="large">
-                                    <ControlLabel><h4>联系方式&#12288;</h4></ControlLabel>
-                                    <FormControl type="text"
-                                                 placeholder="请输入手机号码"
-                                                 value={this.state.administrator_tel}
-                                                 onChange={this.administrator_tel_change.bind(this)}
-                                    />
-                                </FormGroup>
-                            </Form>
-                            <Form inline>
-                                <FormGroup bsSize="large">
-                                    <ControlLabel><h4>登录密码&#12288;</h4></ControlLabel>
-                                    <FormControl type="text"
-                                                 placeholder="请输入登录密码"
-                                                 value={this.state.administrator_password}
-                                                 onChange={this.administrator_password_change.bind(this)}
-                                    />
-                                </FormGroup>
-                            </Form>
                             <Button bsStyle="success" bsSize="large" className="width_50 margin-top_50px"
                                     onClick={() => this.button1_change()} >添加</Button>
                             {/*<Button  bsStyle="success"  bsSize="large" className="t_i_a_button2" onClick={()=>this.button2_change()} block>修改</Button>*/}
                             <Form inline>
                                 <FormGroup bsSize="large" className="">
-                                    <ControlLabel><h4>管理员地址:&#12288;{this.state.administrator_address}</h4>
+                                    <ControlLabel><h4>{this.state.tip}</h4>
                                     </ControlLabel>
 
                                 </FormGroup>

@@ -1,8 +1,7 @@
 /**
  * Create by HuangYinYu on 17/4/22.
  */
-// 请求数据必须参数：timestamp,jsondata,sig_kv,signature,isgzip
-// 这里的signature是对timestamp和jsondata连接后的字符串
+
 
 import {queryString} from '../util/util'
 import 'whatwg-fetch';
@@ -27,7 +26,18 @@ export default class Fetch{
                 if (response.status >= 400) {
                     throw new Error('Bad response from server');
                 }else {
-                    return response.json(); //promise
+                    return response.json().then((data)=>{
+                        if(data.meta.code==200){
+                            return new Promise(function(resolve,reject){
+                                resolve(data)
+                            })
+                        } else if(data.meta.code==400&&data.meta.message=='NotAuthorized'){
+                            // alert("请先登录");
+                            window.location.href=location.hostname+"/login"
+                        }else if(data.meta.code==500){
+                            alert("服务器错误，正在处理中")
+                        }
+                    }); //promise
                 }
             },(error) => {
                 throw new Error(`fetch error: ${error}`);

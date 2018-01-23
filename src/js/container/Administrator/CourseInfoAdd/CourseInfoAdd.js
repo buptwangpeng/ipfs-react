@@ -2,19 +2,19 @@ import React, {Component} from 'react'
 import './CourseInfoAdd.css'
 import {FormGroup} from 'react-bootstrap'
 import {ControlLabel} from 'react-bootstrap'
-import {FormControl} from 'react-bootstrap'
 import {Button} from 'react-bootstrap'
 import {Form} from 'react-bootstrap'
 import {Modal} from 'react-bootstrap'
 import Header from '../../../components/AdHeader/Header'
 import Footer from '../../../components/AdFooter/Footer'
 import NavSide from '../../../components/AdNavSide/NavSide'
+import AdInput from '../../../components/AdInput/AdInput'
+import Admin from '../../../core/admin.js'
 
 export default class AdCourseInfoAdd extends Component {
     constructor() {
         super();
         this.state = {
-            teacher_name: '',//申请教师
             course_id: '',//课程号
             course_name: '',//课程名称
             academy: '',//面向院系
@@ -23,6 +23,7 @@ export default class AdCourseInfoAdd extends Component {
             credit: '',//学分
             mark_element: '',//成绩组成
             course_property: '',//课程属性
+            tip:'',//是否添加成功
             //弹出框
             showModal: false,
         }
@@ -64,12 +65,6 @@ export default class AdCourseInfoAdd extends Component {
 
     }
 
-    teacher_name_change(event) {
-        this.setState({
-            teacher_name: event.target.value
-        });
-
-    }
 
     course_time_change(event) {
         this.setState({
@@ -99,14 +94,38 @@ export default class AdCourseInfoAdd extends Component {
 
     }
 
-    //批量添加按钮
+    //添加
     button1_change() {
+        let admin = new Admin();
+        let url = 'http://localhost:3004/list';//接口的地址
 
-    }
+        let param = {
+            course: {
+                course_id:this.state.course_id,//课程号
+                course_name:this.state.course_name,//课程名称
+                academy:this.state.academy,//面向院系
+                grade:this.state.grade,//面向年级
+                course_time:this.state.course_time,//开课时间
+                credit:this.state.credit,//学分
+                mark_element:this.state.mark_element,//成绩组成
+                course_property:this.state.course_property,//课程属性
+            }
+        };
 
-    //单个添加按钮
-    button2_change() {
+        admin.addCourse(url, param).then((response) => {
+            console.log(response);
+            //必须试试response中的this的域还是不是本组件
+            if(response.meta.message=="ok"){
+                this.setState({
+                    tip:"该课程信息添加成功"
+                })
+            }else{
+                this.setState({
+                    tip:"该课程信息添加失败"
+                })
+            }
 
+        });
     }
 
     render() {
@@ -145,99 +164,63 @@ export default class AdCourseInfoAdd extends Component {
                         </Modal>
                         {/* &#12288; 中文全角空格 （一个中文宽度）  */}
                         <div className="margin-top_20px">
+                            <AdInput
+                                title="课程编号&#12288;"
+                                placeholder="请输入课程编号"
+                                value={this.state.course_id}
+                                onChange={this.course_id_change.bind(this)}
+                            />
+                            <AdInput
+                                title="课程名称&#12288;"
+                                placeholder="请输入课程名称"
+                                value={this.state.course_name}
+                                onChange={this.course_name_change.bind(this)}
+                            />
+                            <AdInput
+                                title="面向院系&#12288;"
+                                placeholder="请输入面向院系"
+                                value={this.state.academy}
+                                onChange={this.academy_change.bind(this)}
+                            />
+                            <AdInput
+                                title="面向年级&#12288;"
+                                placeholder="请输入面向年级"
+                                value={this.state.grade}
+                                onChange={this.grade_change.bind(this)}
+                            />
+                            <AdInput
+                                title="开课时间&#12288;"
+                                placeholder="请输入开课时间"
+                                value={this.state.course_time}
+                                onChange={this.course_time_change.bind(this)}
+                            />
+                            <AdInput
+                                title="学&#12288;&#12288;分&#12288;"
+                                placeholder="请输入学分"
+                                value={this.state.credit}
+                                onChange={this.credit_change.bind(this)}
+                            />
+                            <AdInput
+                                title="成绩组成&#12288;"
+                                placeholder="请输入成绩组成"
+                                value={this.state.mark_element}
+                                onChange={this.mark_element_change.bind(this)}
+                            />
+                            <AdInput
+                                title="课程属性&#12288;"
+                                placeholder="请输入课程属性"
+                                value={this.state.course_property}
+                                onChange={this.course_property_change.bind(this)}
+                            />
+
+                            <Button bsStyle="success" bsSize="large" className="width_50 margin-top_50px"
+                                    onClick={() => this.button1_change()} >提交</Button>
                             <Form inline>
-                                <FormGroup bsSize="large">
-                                    <ControlLabel><h4>课程编号&#12288;</h4></ControlLabel>
-                                    <FormControl type="text"
-                                                 placeholder="请输入课程编号"
-                                                 value={this.state.course_id}
-                                                 onChange={this.course_id_change.bind(this)}
-                                    />
+                                <FormGroup bsSize="large" className="">
+                                    <ControlLabel ><h4>{this.state.tip}</h4></ControlLabel>
 
                                 </FormGroup>
                             </Form>
-                            <Form inline>
-                                <FormGroup bsSize="large">
-                                    <ControlLabel><h4>课程名称&#12288;</h4></ControlLabel>
-                                    <FormControl type="text"
-                                                 placeholder="请输入课程名称"
-                                                 value={this.state.course_name}
-                                                 onChange={this.course_name_change.bind(this)}
-                                    />
-                                </FormGroup>
-                            </Form>
-                            <Form inline>
-                                <FormGroup bsSize="large">
-                                    <ControlLabel><h4>面向院系&#12288;</h4></ControlLabel>
-                                    <FormControl type="text"
-                                                 placeholder="请输入面向院系"
-                                                 value={this.state.academy}
-                                                 onChange={this.academy_change.bind(this)}
-                                    />
-                                </FormGroup>
-                            </Form>
-                            <Form inline>
-                                <FormGroup bsSize="large">
-                                    <ControlLabel><h4>面向年级&#12288;</h4></ControlLabel>
-                                    <FormControl type="text"
-                                                 placeholder="请输入面向年级"
-                                                 value={this.state.grade}
-                                                 onChange={this.grade_change.bind(this)}
-                                    />
-                                </FormGroup>
-                            </Form>
-                            <Form inline>
-                                <FormGroup bsSize="large">
-                                    <ControlLabel><h4>任课教师&#12288;</h4></ControlLabel>
-                                    <FormControl type="text"
-                                                 placeholder="请输入任课教师"
-                                                 value={this.state.teacher_name}
-                                                 onChange={this.teacher_name_change.bind(this)}
-                                    />
-                                </FormGroup>
-                            </Form>
-                            <Form inline>
-                                <FormGroup bsSize="large">
-                                    <ControlLabel><h4>开课时间&#12288;</h4></ControlLabel>
-                                    <FormControl type="text"
-                                                 placeholder="请输入开课时间"
-                                                 value={this.state.course_time}
-                                                 onChange={this.course_time_change.bind(this)}
-                                    />
-                                </FormGroup>
-                            </Form>
-                            <Form inline>
-                                <FormGroup bsSize="large">
-                                    <ControlLabel><h4>学&#12288;&#12288;分&#12288;</h4></ControlLabel>
-                                    <FormControl type="text"
-                                                 placeholder="请输入学分"
-                                                 value={this.state.credit}
-                                                 onChange={this.credit_change.bind(this)}
-                                    />
-                                </FormGroup>
-                            </Form>
-                            <Form inline>
-                                <FormGroup bsSize="large">
-                                    <ControlLabel><h4>成绩组成&#12288;</h4></ControlLabel>
-                                    <FormControl type="text"
-                                                 placeholder="请输入成绩组成"
-                                                 value={this.state.mark_element}
-                                                 onChange={this.mark_element_change.bind(this)}
-                                    />
-                                </FormGroup>
-                            </Form>
-                            <Form inline>
-                                <FormGroup bsSize="large">
-                                    <ControlLabel><h4>课程属性&#12288;</h4></ControlLabel>
-                                    <FormControl type="text"
-                                                 placeholder="请输入课程属性"
-                                                 value={this.state.course_property}
-                                                 onChange={this.course_property_change.bind(this)}
-                                    />
-                                </FormGroup>
-                            </Form>
-                            <Button bsStyle="success" bsSize="large" className="width_50 margin-top_50px"
-                                    onClick={() => this.button2_change()} >提交</Button>
                         </div>
 
                     </div>

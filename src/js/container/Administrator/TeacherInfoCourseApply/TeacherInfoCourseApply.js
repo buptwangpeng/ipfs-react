@@ -1,18 +1,17 @@
+/*
+* create by wp 2018/1/22
+* 教师开课申请页面
+* 后台每页给前端发6条数据（一条数据就是一条开课申请）
+* */
+
 import React, {Component} from 'react'
 import './TeacherInfoCourseApply.css'
 import ListItem from './ListItem/ListItem.js'
-import {FormGroup} from 'react-bootstrap'
-import {ControlLabel} from 'react-bootstrap'
-import {FormControl} from 'react-bootstrap'
-import {Button} from 'react-bootstrap'
-import {Form} from 'react-bootstrap'
-import {ButtonToolbar} from 'react-bootstrap'
-import {ButtonGroup} from 'react-bootstrap'
-import {Table} from 'react-bootstrap'
-import {Modal} from 'react-bootstrap'
 import Header from "../../../components/AdHeader/Header"
 import Footer from '../../../components/AdFooter/Footer'
 import NavSide from '../../../components/AdNavSide/NavSide'
+import Admin from '../../../core/admin.js'
+
 //status: 1可选，2已同意，3已拒绝
 let course1 = [
     {
@@ -144,44 +143,53 @@ export default class AdTeacherInfoCourseApply extends Component {
     constructor() {
         super();
         this.state = {
-            courses: courses[0],
+            courses: courses[0],//赋了初值
             courseIndex: 0
 
         }
     }
-
-    close_1() {
-        this.setState({showModal_1: false});
+    componentWillMount (){
+        this.query(1);
+        // let admin = new Admin();
+        // let url = 'http://localhost:3004/list';//接口的地址
+        //
+        // let param = {
+        //        page:'1',
+        //
+        // };
+        //
+        // admin.queryTeacherApply(url, param).then((response) => {
+        //     console.log(response);
+        //     this.setState({
+        //        courses:response.data,
+        //     })
+        //
+        // });
     }
+query(a){
+    let admin = new Admin();
+    let url = 'http://localhost:3004/list';//接口的地址
 
-    open_1() {
-        this.setState({showModal_1: true});
-    }
+    let param = {
+        page:'a',
 
-    close_2() {
-        this.setState({showModal_2: false});
-    }
+    };
 
-    open_2() {
-        this.setState({showModal_2: true});
-    }
+    admin.queryTeacherApply(url, param).then((response) => {
+        console.log(response);
+        this.setState({
+            courses:response.data,
+        })
 
-    button1_change() {
-
-    }
-
-    button2_change() {
-
-    }
-
+    });
+}
     render() {
         return (
             <div style={{background: '#ffffff', height: window.innerHeight}}>
                 <Header/>
                 <div className="row">
                     <div className="col-xs-4 col-md-2 col-lg-2">
-                        <div >
-                            {/*内联样式style={{}}和className=''不能写在一个div中*/}
+                        <div>
                             <NavSide/>
                         </div>
                     </div>
@@ -209,6 +217,7 @@ export default class AdTeacherInfoCourseApply extends Component {
                                 return (
                                     <ListItem
                                         key={course.course_id}
+                                        // 不清楚key有什么用，ListItem的props里也没有key
                                         handleClick1={() => {
                                             alert('同意申请');
                                             let tempCourses = this.state.courses;
@@ -240,10 +249,10 @@ export default class AdTeacherInfoCourseApply extends Component {
                                 <li onClick={() => {
                                     this.setState({
                                         courseIndex: this.state.courseIndex - 1 >= 0 ? this.state.courseIndex - 1 : 0
-                                    }, () => {
-                                        this.setState({
-                                            courses: courses[this.state.courseIndex]
-                                        })
+                                    }, () => {this.query(this.state.courseIndex)
+                                        // this.setState({
+                                        //     courses: courses[this.state.courseIndex]
+                                        // })
                                     })
 
                                 }}>
@@ -259,9 +268,9 @@ export default class AdTeacherInfoCourseApply extends Component {
                                                 className={this.state.courseIndex == index ? "active" : ''}
                                                 onClick={() => {
                                                     this.setState({
-                                                        courses: courses[index],
+                                                        // courses: courses[index],
                                                         courseIndex: index
-                                                    })
+                                                    },()=>{this.query(index)})
                                                 }}><a>{course}</a></li>
                                         )
                                     })
@@ -271,9 +280,10 @@ export default class AdTeacherInfoCourseApply extends Component {
                                     this.setState({
                                         courseIndex: this.state.courseIndex + 1 <= 2 ? this.state.courseIndex + 1 : 2
                                     }, () => {
-                                        this.setState({
-                                            courses: courses[this.state.courseIndex]
-                                        })
+                                        this.query(this.state.courseIndex)
+                                        // this.setState({
+                                        //     courses: courses[this.state.courseIndex]
+                                        // })
                                     })
                                 }}>
                                     <a aria-label="Next">

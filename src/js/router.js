@@ -53,6 +53,7 @@ ReactDOM.render(
 				<IndexRoute component={LogIn}/>
 				<Route path="us" component={AboutUs}/>
 			</Route>
+			<Route path="login" component={LogIn}/>
             {/*管理员*/}
 			<Route path="/admin">
 				<IndexRoute component={Home}/>

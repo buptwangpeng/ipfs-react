@@ -1,14 +1,11 @@
 import React, {Component} from 'react'
 import './StudentInfoModify.css'
-import {FormGroup} from 'react-bootstrap'
-import {ControlLabel} from 'react-bootstrap'
-import {FormControl} from 'react-bootstrap'
 import {Button} from 'react-bootstrap'
-import {Form} from 'react-bootstrap'
-import {ButtonToolbar} from 'react-bootstrap'
 import Header from '../../../components/AdHeader/Header'
 import Footer from '../../../components/AdFooter/Footer'
 import NavSide from '../../../components/AdNavSide/NavSide'
+import AdInput from '../../../components/AdInput/AdInput'
+import Admin from '../../../core/admin.js'
 
 
 export default class AdStudentInfoModify extends Component {
@@ -17,9 +14,15 @@ export default class AdStudentInfoModify extends Component {
         this.state = {
             student_id: '',
             student_name: '',
-            student_address: '',
-            student_password_log: '',
-            student_password_unlock: '',
+            student_gender:'',//male/female
+            student_class: '',
+            student_grade: '',
+            student_major:'',//专业
+            student_school:'',
+            student_address: '',//学生在区块链上的账户地址
+            student_password_log: '',//学生登录本系统的登录密码
+            student_password_unlock: '',//学生的区块链账户地址的解锁密码
+            tip:'',
         }
     }
 
@@ -33,6 +36,41 @@ export default class AdStudentInfoModify extends Component {
     student_name_change(event) {
         this.setState({
             student_name: event.target.value
+        });
+
+    }
+
+    student_gender_change(event) {
+        this.setState({
+            student_gender: event.target.value
+        });
+
+    }
+
+    student_class_change(event) {
+        this.setState({
+            student_class: event.target.value
+        });
+
+    }
+
+    student_grade_change(event) {
+        this.setState({
+            student_grade: event.target.value
+        });
+
+    }
+
+    student_major_change(event) {
+        this.setState({
+            student_major: event.target.value
+        });
+
+    }
+
+    student_school_change(event) {
+        this.setState({
+            student_school: event.target.value
         });
 
     }
@@ -65,20 +103,67 @@ export default class AdStudentInfoModify extends Component {
         else if (length > 0) return 'error';
     }
 
+//查询
     button1_change() {
-        if (this.state.student_id === "2017140013") {
+
+        let admin = new Admin();
+        let url = 'http://localhost:3004/list';//接口的地址
+
+        let param = {
+            student: {
+                student_id:this.state.student_id,//学号
+            }
+        };
+        admin.queryStudent(url, param).then((response) => {
+            console.log(response);
             this.setState({
-                student_name: '王鹏',
-                student_address: '0xedb34309886a90b3fdd288434195eaa32ca3d401',
-                student_password_log: '123456',
-                student_password_unlock: '456789',
-            });
-        }
+                student_name:response.data.student_name,
+                student_gender:response.data.student_gender,
+                student_class:response.data.student_class,
+                student_grade:response.data.student_grade,
+                student_major:response.data.student_major,
+                student_school:response.data.student_school,
+                student_address:response.data.student_address,
+                student_password_log:response.data.student_password_log,
+                student_password_unlock:response.data.student_password_unlock,
+            })
+
+
+        });
     }
 
-    //单个添加按钮
+    //修改提交
     button2_change() {
+        let admin = new Admin();
+        let url = 'http://localhost:3004/list';//接口的地址
 
+        let param = {
+            student: {
+                student_id:this.state.student_id,
+                student_name:this.state.student_name,
+                student_gender:this.state.student_gender,
+                student_class:this.state.student_class,
+                student_grade:this.state.student_grade,
+                student_major:this.state.student_major,
+                student_school:this.state.student_school,
+                student_address:this.state.student_address,
+                student_password_log:this.state.student_password_log,
+                student_password_unlock:this.state.student_password_unlock,
+            }
+        };
+        admin.modifyStudent(url, param).then((response) => {
+            console.log(response);
+            if(response.meta.message=="ok"){
+                this.setState({
+                    tip:"该学生信息修改成功"
+                })
+            }else{
+                this.setState({
+                    tip:"该学生信息修改失败"
+                })
+            }
+
+        });
     }
 
     render() {
@@ -101,17 +186,12 @@ export default class AdStudentInfoModify extends Component {
 
 
                             <div className="col-md-12 col-lg-12 st_mod_1">
-                                <Form inline>
-                                    <FormGroup bsSize="large" controlId="formBasicText"
-                                               validationState={this.getValidationState()}>
-                                        <ControlLabel><h4>学生学号&#12288;</h4></ControlLabel>
-                                        <FormControl type="text"
-                                                     placeholder="请输入学号"
-                                                     value={this.state.student_id}
-                                                     onChange={this.student_id_change.bind(this)}
-                                        />
-                                    </FormGroup>
-                                </Form>
+                                <AdInput
+                                    title="学&#12288;&#12288;号&#12288;"
+                                    placeholder="请输入学号"
+                                    value={this.state.student_id}
+                                    onChange={this.student_id_change.bind(this)}
+                                />
                                 <div className="margin-left_10px">
                                     <Button bsStyle="success" bsSize="large"
                                             onClick={() => this.button1_change()}>查询</Button>
@@ -120,59 +200,77 @@ export default class AdStudentInfoModify extends Component {
 
 
                             {/* &#12288; 中文全角空格 （一个中文宽度）  */}
-                            <div className="col-md-12 col-lg-12 margin-top_50px">
-                                <Form inline>
-                                    <FormGroup bsSize="large">
-                                        <ControlLabel><h4>学&#12288;&#12288;号&#12288;</h4></ControlLabel>
-                                        <FormControl type="text"
-                                                     value={this.state.student_id}
-                                                     onChange={this.student_id_change.bind(this)}
-                                        />
+                            <div className="col-md-12 col-lg-12 margin-top_30px">
+                                <AdInput
+                                    title="学&#12288;&#12288;号&#12288;"
+                                    placeholder="请输入学号"
+                                    value={this.state.student_id}
+                                    onChange={this.student_id_change.bind(this)}
+                                />
+                                <AdInput
+                                    title="姓&#12288;&#12288;名&#12288;"
+                                    placeholder="请输入姓名"
+                                    value={this.state.student_name}
+                                    onChange={this.student_name_change.bind(this)}
+                                />
+                                <AdInput
+                                    title="性&#12288;&#12288;别&#12288;"
+                                    placeholder="请输入性别"
+                                    value={this.state.student_gender}
+                                    onChange={this.student_gender_change.bind(this)}
+                                />
+                                <AdInput
+                                    title="班&#12288;&#12288;级&#12288;"
+                                    placeholder="请输入班级"
+                                    value={this.state.student_class}
+                                    onChange={this.student_class_change.bind(this)}
+                                />
+                                <AdInput
+                                    title="年&#12288;&#12288;级&#12288;"
+                                    placeholder="请输入年级"
+                                    value={this.state.student_grade}
+                                    onChange={this.student_grade_change.bind(this)}
+                                />
+                                <AdInput
+                                    title="专&#12288;&#12288;业&#12288;"
+                                    placeholder="请输入专业"
+                                    value={this.state.student_major}
+                                    onChange={this.student_major_change.bind(this)}
+                                />
+                                <AdInput
+                                    title="学&#12288;&#12288;校&#12288;"
+                                    placeholder="请输入学校"
+                                    value={this.state.student_school}
+                                    onChange={this.student_school_change.bind(this)}
+                                />
+                                <AdInput
+                                    title="地&#12288;&#12288;址&#12288;"
+                                    placeholder="请输入地址"
+                                    value={this.state.student_address}
+                                    onChange={this.student_address_change.bind(this)}
+                                />
+                                <AdInput
+                                    title="登录密码&#12288;"
+                                    placeholder="请输入登录密码"
+                                    value={this.state.student_password_log}
+                                    onChange={this.student_password_log_change.bind(this)}
+                                />
+                                <AdInput
+                                    title="解锁密码&#12288;"
+                                    placeholder="请输入解锁密码"
+                                    value={this.state.student_password_unlock}
+                                    onChange={this.student_password_unlock_change.bind(this)}
+                                />
 
-                                    </FormGroup>
-                                </Form>
-                                <Form inline>
-                                    <FormGroup bsSize="large">
-                                        <ControlLabel><h4>姓&#12288;&#12288;名&#12288;</h4></ControlLabel>
-                                        <FormControl type="text"
-                                                     value={this.state.student_name}
-                                                     onChange={this.student_name_change.bind(this)}
-                                        />
-                                    </FormGroup>
-                                </Form>
-                                <Form inline>
-                                    <FormGroup bsSize="large">
-                                        <ControlLabel><h4>地&#12288;&#12288;址&#12288;</h4></ControlLabel>
-                                        <FormControl type="text"
-                                                     value={this.state.student_address}
-                                                     onChange={this.student_address_change.bind(this)}
-                                        />
-                                    </FormGroup>
-                                </Form>
-                                <Form inline>
-                                    <FormGroup bsSize="large">
-                                        <ControlLabel><h4>登录密码&#12288;</h4></ControlLabel>
-                                        <FormControl type="text"
-                                                     value={this.state.student_password_log}
-                                                     onChange={this.student_password_log_change.bind(this)}
-                                        />
-                                    </FormGroup>
-                                </Form>
-                                <Form inline>
-                                    <FormGroup bsSize="large">
-                                        <ControlLabel><h4>解锁密码&#12288;</h4></ControlLabel>
-                                        <FormControl type="text"
-                                                     value={this.state.student_password_unlock}
-                                                     onChange={this.student_password_unlock_change.bind(this)}
-                                        />
-                                    </FormGroup>
-                                </Form>
-                                <Button bsStyle="success" bsSize="large" className=" width_50 margin-top_50px"
+                                <Button bsStyle="success" bsSize="large" className=" width_50 margin-top_30px"
                                         onClick={() => this.button2_change()} >提交</Button>
+                                <label><h4>{this.state.tip}</h4></label>
+                                {/*位置需要改*/}
                             </div>
                         </div>
                         </div>
                     </div>
+
                 </div>
                 <Footer/>
             </div>
