@@ -34,10 +34,10 @@ const ListItem = ({props,teacher_name,course_id,course_name,academy,grade,time,c
                  style={{width:"80%"}} >
                 {status?
                     <button
-                        disabled={status!=1?'disabled':''}
+                        disabled={status!="1"?'disabled':''}
                         onClick={handleClick1}
-                        style={{background:status==1?"#20b18a":'#aeaeae',color:'#fff',width:"80%",border:'none'}}>
-                        {status==1 ?'同意':(status==2?'已同意':'已拒绝')}
+                        style={{background:status=="1"?"#20b18a":'#aeaeae',color:'#fff',width:"80%",border:'none'}}>
+                        {status=="1"?'同意':(status=="2"?'已同意':'已拒绝')}
                     </button>
                     :
                     ""

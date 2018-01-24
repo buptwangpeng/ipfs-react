@@ -76,6 +76,7 @@ export default class AdAdministratorInfoModify extends Component {
 
 //查询
     button1_change() {
+        let self=this;
         let admin = new Admin();
         let url = 'http://localhost:3004/list';//接口的地址
 
@@ -88,7 +89,7 @@ export default class AdAdministratorInfoModify extends Component {
         admin.queryAdministrator(url, param).then((response) => {
             console.log(response);
             //必须试试response中的this的域还是不是本组件
-            this.setState({
+            self.setState({
                 administrator_id:response.data.administrator_id,
                 administrator_name:response.data.administrator_name,
                 administrator_tel:response.data.administrator_tel,
@@ -102,6 +103,7 @@ export default class AdAdministratorInfoModify extends Component {
 
     //修改
     button2_change() {
+        let self=this;
         let admin = new Admin();
         let url = 'http://localhost:3004/list';//接口的地址
 
@@ -121,11 +123,11 @@ export default class AdAdministratorInfoModify extends Component {
             console.log(response);
             //必须试试response中的this的域还是不是本组件
             if(response.meta.message=="ok"){
-                this.setState({
+                self.setState({
                     tip:"该管理员信息修改成功"
                 })
             }else{
-                this.setState({
+                self.setState({
                     tip:"该管理员信息修改失败"
                 })
             }

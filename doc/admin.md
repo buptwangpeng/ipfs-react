@@ -230,26 +230,32 @@ request jsondata:
     'timestamp':'',
     'uid':''
     'token':''
-    'page':''//        这个还有用吗，            还没有和后台讨论
-    'number':''//     讨论下这个是不是可以不要了   还没有与后台讨论
+    'page':''//  要取前端界面第几页的数据
+    'number':'6'//  每页有几条数据
 
 }
 response:
 {
      'meta':{'code':200,'message':ok}
      'data':{
-       {'new':'' //  0/1  是否为新课
-        'course_name':'',
-        'academy':'',//学院
-        'course_property':'',// 必修/选修
-        'course_id':'',//课程编号
-        'teacher_id':''
-        'teacher_name':'',
-        'time':'',//上课时间
-        'grade':'',//面向年级
-        'mark_element':'',//成绩组成 如：100%期末
-        'credit':'',//课程学分
-        'status':''//status: 1可选，2已同意，3已拒绝}
+          "pages":"",
+           "content":{
+                  "0":{
+                        'new':'' //  0/1  是否为新课
+                        'course_name':'',
+                        'academy':'',//学院
+                        'course_property':'',// 必修/选修
+                        'course_id':'',//课程编号
+                        'teacher_id':''
+                        'teacher_name':'',
+                        'time':'',//上课时间
+                        'grade':'',//面向年级
+                        'mark_element':'',//成绩组成 如：100%期末
+                        'credit':'',//课程学分
+                        'status':''//status: "1"可选，"2"已同意，"3’已拒绝}
+                  }
+                  ...
+           }
      }
      ...
 }
@@ -264,11 +270,11 @@ request jsondata:
     'uid':'',
     'token':''
     'course_approve':{
-        'new':''  //  0/1  是否为新课
-        'course_id':'',//课程编号
-         'teacher_id':''
-        'status':'',//status: 2同意，3拒绝
-    }
+             'new':''  //  0/1  是否为新课
+             'course_id':'',//课程编号
+             'teacher_id':''
+             'status':'',//status: 2同意，3拒绝
+         }
 }
 response:
 {

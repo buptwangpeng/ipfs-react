@@ -96,6 +96,7 @@ export default class AdCourseInfoAdd extends Component {
 
     //添加
     button1_change() {
+        let self=this;
         let admin = new Admin();
         let url = 'http://localhost:3004/list';//接口的地址
 
@@ -116,11 +117,11 @@ export default class AdCourseInfoAdd extends Component {
             console.log(response);
             //必须试试response中的this的域还是不是本组件
             if(response.meta.message=="ok"){
-                this.setState({
+                self.setState({
                     tip:"该课程信息添加成功"
                 })
             }else{
-                this.setState({
+                self.setState({
                     tip:"该课程信息添加失败"
                 })
             }

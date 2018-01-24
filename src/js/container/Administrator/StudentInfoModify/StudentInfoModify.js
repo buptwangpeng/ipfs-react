@@ -105,7 +105,7 @@ export default class AdStudentInfoModify extends Component {
 
 //查询
     button1_change() {
-
+        let self=this;
         let admin = new Admin();
         let url = 'http://localhost:3004/list';//接口的地址
 
@@ -116,7 +116,7 @@ export default class AdStudentInfoModify extends Component {
         };
         admin.queryStudent(url, param).then((response) => {
             console.log(response);
-            this.setState({
+            self.setState({
                 student_name:response.data.student_name,
                 student_gender:response.data.student_gender,
                 student_class:response.data.student_class,
@@ -134,6 +134,7 @@ export default class AdStudentInfoModify extends Component {
 
     //修改提交
     button2_change() {
+        let self=this;
         let admin = new Admin();
         let url = 'http://localhost:3004/list';//接口的地址
 
@@ -154,11 +155,11 @@ export default class AdStudentInfoModify extends Component {
         admin.modifyStudent(url, param).then((response) => {
             console.log(response);
             if(response.meta.message=="ok"){
-                this.setState({
+                self.setState({
                     tip:"该学生信息修改成功"
                 })
             }else{
-                this.setState({
+                self.setState({
                     tip:"该学生信息修改失败"
                 })
             }

@@ -109,6 +109,7 @@ export default class AdCourseInfoModify extends Component {
 
     //查询
     button1_change() {
+        let self=this;
         let admin = new Admin();
         let url = 'http://localhost:3004/list';//接口的地址
 
@@ -121,7 +122,7 @@ export default class AdCourseInfoModify extends Component {
         admin.queryCourse(url, param).then((response) => {
             console.log(response);
             length=getJsonLength(response.data.teacher_name);
-           this.setState({
+            self.setState({
                former_teacher_names:response.data.teacher_name,//申请教师
                former_teacher_ids:response.data.teacher_id,
                course_id:response.data.course_id,//课程号
@@ -139,6 +140,7 @@ export default class AdCourseInfoModify extends Component {
 
     //修改提交
     button2_change() {
+        let self=this;
         let admin = new Admin();
         let url = 'http://localhost:3004/list';//接口的地址
 
@@ -173,11 +175,11 @@ this.setState({
             console.log(response);
             //必须试试response中的this的域还是不是本组件
             if(response.meta.message=="ok"){
-                this.setState({
+                self.setState({
                     tip:"该课程信息修改成功"
                 })
             }else{
-                this.setState({
+                self.setState({
                     tip:"该课程信息修改失败"
                 })
             }

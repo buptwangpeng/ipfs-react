@@ -4,6 +4,7 @@ import Header from '../../../components/AdHeader/Header'
 import Footer from '../../../components/AdFooter/Footer'
 import getJsonLength from '../../../core/getJsonLength.js'
 
+
 let a= {
     first:"k",
     "1": "wang",
@@ -30,9 +31,13 @@ export default class PersonalInfo extends Component {
         console.log(d[3]);
 
     }
-test2(){
+test2() {
+    [1, 2, 3].map((number, index) => {
+        console.log ([number,index]);
 
+    })
 }
+
     render(){
         return(
             <div style={{background: '#ffffff', height: window.innerHeight}}>

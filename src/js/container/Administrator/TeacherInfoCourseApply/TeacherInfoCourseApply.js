@@ -87,102 +87,132 @@ let course1 = [
         status: 2
     },
 ];
-let course2 = [
-    {
-        course_name: "通原",
-        academy: "信通院",
-        course_property: "必修",
-        course_id: "123451",
-        teacher_name: "陈萍",
-        time: "星期三 8:00~10:00",
-        grade: "大三",
-        mark_element: "100%期末",
-        credit: "5学分",
-        status: 1
-    },
-    {
-        course_name: "通原",
-        academy: "信通院",
-        course_property: "必修",
-        course_id: "125451",
-        teacher_name: "陈萍",
-        time: "星期三 8:00~10:00",
-        grade: "大三",
-        mark_element: "100%期末",
-        credit: "5学分",
-        status: 3
-    },
-    {
-        course_name: "通原",
-        academy: "信通院",
-        course_property: "必修",
-        course_id: "120451",
-        teacher_name: "陈萍",
-        time: "星期三 8:00~10:00",
-        grade: "大三",
-        mark_element: "100%期末",
-        credit: "5学分",
-        status: 2
-    },
-    {
-        course_name: "通原",
-        academy: "信通院",
-        course_property: "必修",
-        course_id: "129451",
-        teacher_name: "陈萍",
-        time: "星期三 8:00~10:00",
-        grade: "大三",
-        mark_element: "100%期末",
-        credit: "5学分",
-        status: 1
-    },
-];
-let courses = [course1, course2];
+
+
+//审批开课申请的全局变量
+let ApproveNewCourse;
+let ApproveCourseId;
+let ApproveTeacherId;
+let ApproveStatus;
 
 export default class AdTeacherInfoCourseApply extends Component {
     constructor() {
         super();
         this.state = {
-            courses: courses[0],//赋了初值
-            courseIndex: 0
+            courses: [],//赋了初值
+            courseIndex: 0,
+
+            pages: 3,
+            pagesArr: [] , //页码的数组
+
+            // ApproveNewCourse:'',
+            // ApproveCourseId:'',
+            // ApproveTeacherId:'',
+            // ApproveStatus:'',
+
 
         }
     }
-    componentWillMount (){
-        this.query(1);
-        // let admin = new Admin();
-        // let url = 'http://localhost:3004/list';//接口的地址
-        //
-        // let param = {
-        //        page:'1',
-        //
-        // };
-        //
-        // admin.queryTeacherApply(url, param).then((response) => {
-        //     console.log(response);
-        //     this.setState({
-        //        courses:response.data,
-        //     })
-        //
-        // });
+
+    componentWillMount() {
+        // this.query(1);
+        this.get(0);
+
     }
-query(a){
-    let admin = new Admin();
-    let url = 'http://localhost:3004/list';//接口的地址
 
-    let param = {
-        page:'a',
 
-    };
+// componentDidUpdate(){
+    //     this.get(0);
+    // }
+    //测试用例
+    get(a) {
+        let loginUrl = 'http://localhost:3005/page';
+        let self = this;//一定要加上这个，因为在promise里this的作用域变了
+        this.serverRequest = fetch(loginUrl /*+ '?user=' + self.state.user + '&password=' + self.state.password*/, {
+            //?和&都要加上
+            // "http://localhost:3004/list?user=${self.state.user}&password=${self.state.password}"
+            method: "get",
+            headers: {
+                // 'Content-Type': 'application/json'
+                'Content-Type': 'application/x-www-form-urlencoded'
+            }
+        }).then(function (response) {
+            let arr=[];
+            console.log(response);
+            response.json().then(function (response) {
+                console.log(response[a]);
+                self.setState({
+                    courses: response[a],
+                });
+                for(let i=0;i<=self.state.pages-1;i++){
+                    arr[i]=i+1;
+                }
+                console.log(arr);
+                self.setState({
+                    pagesArr:arr,
+                });
+                console.log(self.state.pagesArr);
 
-    admin.queryTeacherApply(url, param).then((response) => {
-        console.log(response);
-        this.setState({
-            courses:response.data,
+            })
+
+        }, function (e) {
+            console.log('出错：', e)
         })
+    }
 
-    });
-}
+    //
+
+    //从后台获取开课申请数据
+    query(a) {
+        let admin = new Admin();
+        let url = 'http://localhost:3004/list';//接口的地址
+        let self = this;
+        let param = {
+            page: 'a',//第a页的数据
+            number: "6",
+
+        };
+
+        admin.queryTeacherApply(url, param).then((response) => {
+            let arr=[];
+            console.log(response);
+            self.setState({
+                courses: response.data.content,
+                pages: parseInt(response.data.pages)
+            });
+            for(let i=1;i<=self.state.pages;i++){
+                arr[i]=i;
+            }
+            console.log(arr);
+            self.setState({
+               pagesArr:arr,
+            });
+        });
+    }
+
+    //审批开课申请
+    approve() {
+        let admin = new Admin();
+        let url = 'http://localhost:3005/approve';//接口的地址
+
+        let param = {
+            course_approve: {
+                new: ApproveNewCourse, //  0/1  是否为新课
+                course_id: ApproveCourseId,//课程编号
+                teacher_id: ApproveTeacherId,
+                status: ApproveStatus,//status: 2同意，3拒绝
+
+            }
+        };
+
+        admin.approveTeacherApply(url, param).then((response) => {
+            console.log(response);
+            console.log(response.meta.message);
+
+
+        });
+    }
+
     render() {
         return (
             <div style={{background: '#ffffff', height: window.innerHeight}}>
@@ -217,18 +247,47 @@ query(a){
                                 return (
                                     <ListItem
                                         key={course.course_id}
-                                        // 不清楚key有什么用，ListItem的props里也没有key
+                                        // key是react里的，相同key的项目只会在界面上显示一个，一般给key赋值id就行了
                                         handleClick1={() => {
                                             alert('同意申请');
                                             let tempCourses = this.state.courses;
-                                            tempCourses[index].status = 2;
-                                            this.setState({courses: tempCourses})
+                                            tempCourses[index].status = "2";
+                                            this.setState({courses: tempCourses,
+                                                // ApproveNewCourse: course.new,
+                                                // ApproveCourseId: course.course_id,
+                                                // ApproveTeacherId:course.teacher_id,
+                                                // ApproveStatus:tempCourses[index].status,
+                                            });
+                                             ApproveNewCourse = course.new;
+                                             ApproveCourseId = course.course_id;
+                                             ApproveTeacherId =course.teacher_id;
+                                             ApproveStatus =tempCourses[index].status;
+                                            // console.log([
+                                            //     this.state.ApproveNewCourse,
+                                            //     this.state.ApproveCourseId,
+                                            //     this.state.ApproveTeacherId,
+                                            //     this.state.ApproveStatus
+                                            // ]);
+
+                                            this.approve()
+
                                         }}
                                         handleClick2={() => {
                                             alert('拒绝申请');
                                             let tempCourses = this.state.courses;
-                                            tempCourses[index].status = 3;
-                                            this.setState({courses: tempCourses})
+                                            tempCourses[index].status = " 3";
+                                            this.setState({
+                                                courses: tempCourses,
+                                                // ApproveNewCourse : course.new,
+                                                // ApproveCourseId : course.course_id,
+                                                // ApproveTeacherId :course.teacher_id,
+                                                // ApproveStatus : tempCourses[index].status,
+                                            });
+                                            ApproveNewCourse = course.new;
+                                            ApproveCourseId = course.course_id;
+                                            ApproveTeacherId =course.teacher_id;
+                                            ApproveStatus =tempCourses[index].status;
+                                            this.approve()
                                         }}
                                         course_name={course.course_name}
                                         grade={course.grade}
@@ -249,7 +308,9 @@ query(a){
                                 <li onClick={() => {
                                     this.setState({
                                         courseIndex: this.state.courseIndex - 1 >= 0 ? this.state.courseIndex - 1 : 0
-                                    }, () => {this.query(this.state.courseIndex)
+                                    }, () => {
+                                        // this.query(this.state.courseIndex)
+                                        this.get(this.state.courseIndex)
                                         // this.setState({
                                         //     courses: courses[this.state.courseIndex]
                                         // })
@@ -261,8 +322,9 @@ query(a){
                                     </a>
                                 </li>
                                 {
-                                    [1, 2].map((course, index) => {
+                                    this.state.pagesArr.map((page, index) => {
                                         return (
+                                            // 索引是从0开始的
                                             <li
                                                 key={index}
                                                 className={this.state.courseIndex == index ? "active" : ''}
@@ -270,17 +332,22 @@ query(a){
                                                     this.setState({
                                                         // courses: courses[index],
                                                         courseIndex: index
-                                                    },()=>{this.query(index)})
-                                                }}><a>{course}</a></li>
+                                                    }, /*() => {
+                                                        this.query(index)
+                                                    }*/() => {
+                                                        this.get(index)
+                                                    })
+                                                }}><a>{page}</a></li>
                                         )
                                     })
                                 }
 
                                 <li onClick={() => {
                                     this.setState({
-                                        courseIndex: this.state.courseIndex + 1 <= 2 ? this.state.courseIndex + 1 : 2
+                                        courseIndex: this.state.courseIndex + 1 <= this.state.pages-1? this.state.courseIndex + 1 : this.state.pages-1
                                     }, () => {
-                                        this.query(this.state.courseIndex)
+                                        // this.query(this.state.courseIndex)
+                                        this.get(this.state.courseIndex);
                                         // this.setState({
                                         //     courses: courses[this.state.courseIndex]
                                         // })

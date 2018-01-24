@@ -71,6 +71,7 @@ export default class AdTeacherInfoModify extends Component {
 
 //查询
     button1_change() {
+        let self=this;
         let admin = new Admin();
         let url = 'http://localhost:3004/list';//接口的地址
 
@@ -82,7 +83,7 @@ export default class AdTeacherInfoModify extends Component {
 
         admin.queryTeacher(url, param).then((response) => {
             console.log(response);
-            this.setState({
+            self.setState({
                 teacher_id:response.data.teacher_id,
                 teacher_name:response.data.teacher_name,
                 teacher_tel:response.data.teacher_tel,
@@ -97,6 +98,7 @@ export default class AdTeacherInfoModify extends Component {
 
     // 修改提交
     button2_change() {
+        // let self=this;
         let admin = new Admin();
         let url = 'http://localhost:3004/list';//接口的地址
 
