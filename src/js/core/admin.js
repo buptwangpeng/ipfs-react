@@ -13,6 +13,7 @@ export default class user extends Fetch {
         jsondata.timestamp = new Date().getTime();
         jsondata.token= localStorage.token;
         jsondata.uid = localStorage.uid;
+        console.log(localStorage.uid);
         return jsondata;
     }
 

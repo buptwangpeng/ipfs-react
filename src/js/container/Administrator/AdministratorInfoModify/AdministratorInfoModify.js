@@ -78,7 +78,7 @@ export default class AdAdministratorInfoModify extends Component {
     button1_change() {
         let self=this;
         let admin = new Admin();
-        let url = 'http://localhost:3004/list';//接口的地址
+        let url = 'http://10.112.149.122:8082/admin/administrator/info/query/';//接口的地址
 
         let param = {
             administrator: {
@@ -105,7 +105,7 @@ export default class AdAdministratorInfoModify extends Component {
     button2_change() {
         let self=this;
         let admin = new Admin();
-        let url = 'http://localhost:3004/list';//接口的地址
+        let url = 'http://10.112.149.122:8082/admin/administrator/info/modify/';//接口的地址
 
         let param = {
             administrator: {

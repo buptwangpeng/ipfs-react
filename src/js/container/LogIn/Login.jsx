@@ -37,13 +37,18 @@ export default class LogIn extends Component {
 //登录真正用的函数
     logIn1() {
         let user = new User();
-        let url = 'http://localhost:3004/list';//接口的地址
-        let param = {account: this.state.user, password: this.state.password};
+        let url = 'http://10.112.149.122:8082/user/login/';//接口的地址
+        let param = {
+            user: {account: this.state.user, password: this.state.password}
+            };
+
         user.login(url, param).then((response) => {
+            // let uid,token,name;
             console.log(response);
-            localStorage.setItem(uid, response.data.uid);
-            localStorage.setItem(token, response.data.token);
-            localStorage.setItem(name,response.data.name);
+            localStorage.setItem("uid", response.data.uid);
+            localStorage.setItem("token", response.data.token);
+
+            localStorage.setItem("name",response.data.name);
             if (response.data.type == "student") {
                 jumpPage('/student')
             } else if (response.data.type == "teacher") {

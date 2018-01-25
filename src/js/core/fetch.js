@@ -25,6 +25,7 @@ export default class Fetch{
             (response) => {
                 if (response.status >= 400) {
                     throw new Error('Bad response from server');
+
                 }else {
                     return response.json().then((data)=>{
                         if(data.meta.code==200){
@@ -34,7 +35,7 @@ export default class Fetch{
                         } else if(data.meta.code==400&&data.meta.message=='NotAuthorized'){
                             // alert("请先登录");
                             window.location.href=location.hostname+"/login"
-                        }else if(data.meta.code==500){
+                        } else if(data.meta.code==500){
                             alert("服务器错误，正在处理中")
                         }
                     }); //promise

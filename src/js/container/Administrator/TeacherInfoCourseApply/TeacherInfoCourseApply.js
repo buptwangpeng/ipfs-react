@@ -11,89 +11,16 @@ import Header from "../../../components/AdHeader/Header"
 import Footer from '../../../components/AdFooter/Footer'
 import NavSide from '../../../components/AdNavSide/NavSide'
 import Admin from '../../../core/admin.js'
+import getJsonLength from '../../../core/getJsonLength.js'
 
-//status: 1可选，2已同意，3已拒绝
-let course1 = [
-    {
-        course_name: "通原实验",
-        academy: "信通院",
-        course_property: "必修",
-        course_id: "123451",
-        teacher_name: "陈萍",
-        time: "星期二 8:00~10:00",
-        grade: "大三",
-        mark_element: "100%期末",
-        credit: "3学分",
-        status: 1
-    },
-    {
-        course_name: "通原实验",
-        academy: "信通院",
-        course_property: "必修",
-        course_id: "123452",
-        teacher_name: "陈萍",
-        time: "星期二 8:00~10:00",
-        grade: "大三",
-        mark_element: "100%期末",
-        credit: "3学分",
-        status: 3
-    },
-    {
-        course_name: "通原实验",
-        academy: "信通院",
-        course_property: "必修",
-        course_id: "123453",
-        teacher_name: "陈萍",
-        time: "星期二 8:00~10:00",
-        grade: "大三",
-        mark_element: "100%期末",
-        credit: "3学分",
-        status: 1
-    },
-    {
-        course_name: "通原实验",
-        academy: "信通院",
-        course_property: "必修",
-        course_id: "123457",
-        teacher_name: "陈萍",
-        time: "星期二 8:00~10:00",
-        grade: "大三",
-        mark_element: "100%期末",
-        credit: "3学分",
-        status: 1
-    },
-    {
-        course_name: "通原实验",
-        academy: "信通院",
-        course_property: "必修",
-        course_id: "123441",
-        teacher_name: "陈萍",
-        time: "星期二 8:00~10:00",
-        grade: "大三",
-        mark_element: "100%期末",
-        credit: "3学分",
-        status: 1
-    },
-    {
-        course_name: "通原实验",
-        academy: "信通院",
-        course_property: "必修",
-        course_id: "123461",
-        teacher_name: "陈萍",
-        time: "星期二 8:00~10:00",
-        grade: "大三",
-        mark_element: "100%期末",
-        credit: "3学分",
-        status: 2
-    },
-];
-
+//status: "1"可选，"2"已同意，"3"已拒绝
 
 //审批开课申请的全局变量
 let ApproveNewCourse;
 let ApproveCourseId;
 let ApproveTeacherId;
 let ApproveStatus;
+let courses_arr=[];
 
 export default class AdTeacherInfoCourseApply extends Component {
     constructor() {
@@ -115,25 +42,19 @@ export default class AdTeacherInfoCourseApply extends Component {
     }
 
     componentWillMount() {
-        // this.query(1);
-        this.get(0);
+        this.query(1);
+        // this.get(0);
 
     }
 
-
-// componentDidUpdate(){
-    //     this.get(0);
-    // }
     //测试用例
     get(a) {
         let loginUrl = 'http://localhost:3005/page';
         let self = this;//一定要加上这个，因为在promise里this的作用域变了
-        this.serverRequest = fetch(loginUrl /*+ '?user=' + self.state.user + '&password=' + self.state.password*/, {
-            //?和&都要加上
-            // "http://localhost:3004/list?user=${self.state.user}&password=${self.state.password}"
+        this.serverRequest = fetch(loginUrl , {
+
             method: "get",
             headers: {
-                // 'Content-Type': 'application/json'
                 'Content-Type': 'application/x-www-form-urlencoded'
             }
         }).then(function (response) {
@@ -165,25 +86,32 @@ export default class AdTeacherInfoCourseApply extends Component {
     //从后台获取开课申请数据
     query(a) {
         let admin = new Admin();
-        let url = 'http://localhost:3004/list';//接口的地址
+        let url = 'http://10.112.149.122:8082/admin/teacher/course/apply/query/';//接口的地址
         let self = this;
         let param = {
-            page: 'a',//第a页的数据
+            page: a,//第a页的数据
             number: "6",
 
         };
 
         admin.queryTeacherApply(url, param).then((response) => {
             let arr=[];
+
             console.log(response);
             self.setState({
                 courses: response.data.content,
                 pages: parseInt(response.data.pages)
             });
+            console.log(this.state.courses);
+            let length=getJsonLength(this.state.courses);
+            for(let i=0;i<length;i++){
+                courses_arr[i]=this.state.courses[i]
+            }
+            console.log(courses_arr);
             for(let i=1;i<=self.state.pages;i++){
                 arr[i]=i;
             }
-            console.log(arr);
+            // console.log(arr);
             self.setState({
                pagesArr:arr,
             });
@@ -193,7 +121,7 @@ export default class AdTeacherInfoCourseApply extends Component {
     //审批开课申请
     approve() {
         let admin = new Admin();
-        let url = 'http://localhost:3005/approve';//接口的地址
+        let url = 'http://10.112.149.122:8082/admin/teacher/course/apply/approve/';//接口的地址
 
         let param = {
             course_approve: {
@@ -243,7 +171,7 @@ export default class AdTeacherInfoCourseApply extends Component {
                                 course_property='课程属性'
                                 // status="状态"
                             />
-                            {this.state.courses.map((course, index) => {
+                            {courses_arr.map((course, index) => {
                                 return (
                                     <ListItem
                                         key={course.course_id}
@@ -309,8 +237,8 @@ export default class AdTeacherInfoCourseApply extends Component {
                                     this.setState({
                                         courseIndex: this.state.courseIndex - 1 >= 0 ? this.state.courseIndex - 1 : 0
                                     }, () => {
-                                        // this.query(this.state.courseIndex)
-                                        this.get(this.state.courseIndex)
+                                        this.query(this.state.courseIndex)
+                                        // this.get(this.state.courseIndex)
                                         // this.setState({
                                         //     courses: courses[this.state.courseIndex]
                                         // })
@@ -332,11 +260,11 @@ export default class AdTeacherInfoCourseApply extends Component {
                                                     this.setState({
                                                         // courses: courses[index],
                                                         courseIndex: index
-                                                    }, /*() => {
+                                                    }, () => {
                                                         this.query(index)
-                                                    }*/() => {
+                                                    }/*() => {
                                                         this.get(index)
-                                                    })
+                                                    }*/)
                                                 }}><a>{page}</a></li>
                                         )
                                     })
@@ -346,8 +274,8 @@ export default class AdTeacherInfoCourseApply extends Component {
                                     this.setState({
                                         courseIndex: this.state.courseIndex + 1 <= this.state.pages-1? this.state.courseIndex + 1 : this.state.pages-1
                                     }, () => {
-                                        // this.query(this.state.courseIndex)
-                                        this.get(this.state.courseIndex);
+                                        this.query(this.state.courseIndex)
+                                        // this.get(this.state.courseIndex);
                                         // this.setState({
                                         //     courses: courses[this.state.courseIndex]
                                         // })

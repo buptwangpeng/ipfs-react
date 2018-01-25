@@ -1,4 +1,83 @@
 {
+  "mark": {
+    "1": [
+      {
+        "course_name": "计算机基础",
+        "course_property": "必修",
+        "course_id": "120451",
+        "course_semester": "2018秋季学期",
+        "course_mark": "91",
+        "course_credit": "5学分"
+
+      },
+      {
+        "course_name": "计算机基础",
+        "course_property": "必修",
+        "course_id": "120452",
+        "course_semester": "2018秋季学期",
+        "course_mark": "92",
+        "course_credit": "5学分"
+      },
+      {
+        "course_name": "计算机基础",
+        "course_property": "必修",
+        "course_id": "120453",
+        "course_semester": "2018秋季学期",
+        "course_mark": "93",
+        "course_credit": "5学分"
+      },
+      {
+        "course_name": "计算机基础",
+        "course_property": "必修",
+        "course_id": "120454",
+        "course_semester": "2018秋季学期",
+        "course_mark": "94",
+        "course_credit": "5学分"
+      },
+      {
+        "course_name": "计算机基础",
+        "course_property": "必修",
+        "course_id": "120455",
+        "course_semester": "2018秋季学期",
+        "course_mark": "95",
+        "course_credit": "5学分"
+      },
+      {
+        "course_name": "计算机基础",
+        "course_property": "必修",
+        "course_id": "120456",
+        "course_semester": "2018秋季学期",
+        "course_mark": "96",
+        "course_credit": "5学分"
+      }
+    ],
+    "2": [
+      {
+        "course_name": "计算机",
+        "course_property": "必修",
+        "course_id": "120451",
+        "course_semester": "2018秋季学期",
+        "course_mark": "96",
+        "course_credit": "5学分"
+      },
+      {
+        "course_name": "计算机",
+        "course_property": "必修",
+        "course_id": "120452",
+        "course_semester": "2018秋季学期",
+        "course_mark": "96",
+        "course_credit": "5学分"
+      },
+      {
+        "course_name": "计算机",
+        "course_property": "必修",
+        "course_id": "120453",
+        "course_semester": "2018秋季学期",
+        "course_mark": "96",
+        "course_credit": "5学分"
+      }
+    ]
+  },
   "page": {
     "0": [
       {
@@ -149,6 +228,52 @@
   },
   "approve": {
     "{\"course_approve\":{\"new\":\"1\",\"course_id\":\"120452\",\"teacher_id\":\"120451\",\"status\":\" 3\"},\"timestamp\":1516758743301}": ""
+  },
+  "course": {
+    "1": {
+      "teacher_name": [
+        {
+          "0": "王一"
+        },
+        {
+          "1": "王二"
+        },
+        {
+          "2": "王三"
+        }
+      ],
+      "teacher_id": {
+        "0": "111",
+        "1": "112",
+        "2": "113"
+      },
+      "course_id": "123",
+      "course_name": "体育",
+      "academy": "信通院",
+      "grade": "大三",
+      "course_time": "大三秋季学期",
+      "credit": "2",
+      "mark_element": "100%期末",
+      "course_property": "必修"
+    },
+    "2": {
+      "teacher_name": "王三",
+      "teacher_id": "113",
+      "course_id": "123",
+      "course_name": "羽毛球",
+      "academy": "信通院",
+      "grade": "大三",
+      "course_time": "大三秋季学期",
+      "credit": "2",
+      "mark_element": "100%期末",
+      "course_property": "必修"
+    }
+  },
+  "course_modify": {
+    "{\"course\":{\"teacher_id_change\":{\"former\":\"113\",\"now\":\"100\"},\"course_id\":\"123\",\"course_name\":\"体育\",\"academy\":\"信通院\",\"grade\":\"大三\",\"course_time\":\"大三秋季学期\",\"credit\":\"2\",\"mark_element\":\"100%期末\",\"course_property\":\"必修\"},\"timestamp\":1516783886669}": ""
+  },
+  "student_modify": {
+    "{\"administrator\":{\"administrator_id\":\"3\",\"administrator_name\":\"3\",\"administrator_tel\":\"3\",\"administrator_password_log\":\"3\",\"administrator_address\":\"3\",\"administrator_password_unlock\":\"3\"},\"timestamp\":1516795557214}": ""
   },
   "list": [
     {

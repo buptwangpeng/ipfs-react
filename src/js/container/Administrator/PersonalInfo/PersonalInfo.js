@@ -1,8 +1,11 @@
 import React, {Component} from 'react'
 import './PersonalInfo.css'
+import '../../../../css/bootstrap.css';
 import Header from '../../../components/AdHeader/Header'
 import Footer from '../../../components/AdFooter/Footer'
 import getJsonLength from '../../../core/getJsonLength.js'
+import {DropdownButton} from 'react-bootstrap'
+import {MenuItem} from 'react-bootstrap'
 
 
 let a= {
@@ -50,7 +53,17 @@ test2() {
                     <option>王自健</option>
                     <option>王鹏</option>
                 </select>
+                <div className="col-md-6">
+                <DropdownButton bsStyle={"Default".toLowerCase()} title={"点我"} key={1} id={`dropdown-basic-${1}`}>
+                    <MenuItem eventKey="1">操作</MenuItem>
+                    <MenuItem eventKey="2">另一操作</MenuItem>
+                    <MenuItem eventKey="3" active>激活条目</MenuItem>
+                    <MenuItem divider />
+                    <MenuItem eventKey="4">分组链接</MenuItem>
+                </DropdownButton>
+                </div>
             </div>
+
                 <Footer/>
             </div>
         )

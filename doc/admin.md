@@ -137,6 +137,7 @@ response:
      'meta':{'code':'200','message':'ok'}
      'data':{
          {
+         "course_id"："",         // 新加的，这个还没有和后台沟通
          'course_name':'',
          'course_credit':'',//课程学分
          'course_property':'',// 必修/选修
