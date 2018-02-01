@@ -1,32 +1,8 @@
-.AchiManage table{
-    width: 800px;
-    align-items: center;
-    font-size: 15px;
-}
-.AchiManage td{
-    padding-top: 5px;
-    padding-bottom: 5px;
-    height: 35px;
-}
-.AchiManage tr{
-border-bottom-style: solid;
-border-bottom-width: 1px;
-border-bottom-color: #20b18a;
-height:35px;
-}
 
 .AchiManage h2{
     position: relative;
     left: 20%;
     color: #00cd00;
-    width: 200px;
-}
-
-.save{
-    position: relative;
-    left: 50%;
-    margin-top: 80px;
-    margin-bottom: 50px;
     width: 200px;
 }
 
@@ -37,5 +13,10 @@ height:35px;
     width: 820px;
     padding:5px;
     background-color: white;
+}
+
+.inputitem{
+    margin-top: 10px;
+    margin-bottom: 10px;
 }
 

@@ -13,6 +13,17 @@ import NavSide from '../../../components/AdNavSide/NavSide'
 import Admin from '../../../core/admin.js'
 import getJsonLength from '../../../core/getJsonLength.js'
 
+//智能合约引入和声明部分
+import {default as Web3} from 'web3'
+import {default as contract} from 'truffle-contract'
+import study_artifacts from '../../../../../build/contracts/studyData.json'
+
+let Study = contract(study_artifacts);
+let StudyProvider = new Web3.providers.HttpProvider("http://localhost:8545");
+Study.setProvider(StudyProvider);
+let web3 = new Web3(StudyProvider);//创建web3对象，需要新创建对象，后面才能调用
+//
+
 //status: "1"可选，"2"已同意，"3"已拒绝
 
 //审批开课申请的全局变量
@@ -20,6 +31,11 @@ let ApproveNewCourse;
 let ApproveCourseId;
 let ApproveTeacherId;
 let ApproveStatus;
+let ApproveCourseName;
+let ApproveCourseProperty="";
+let ApproveTerm;
+let ApproveCredit;
+let ApproveMarkElement=[];//成绩组成
 let courses_arr=[];
 
 export default class AdTeacherInfoCourseApply extends Component {
@@ -27,10 +43,11 @@ export default class AdTeacherInfoCourseApply extends Component {
         super();
         this.state = {
             courses: [],//赋了初值
-            courseIndex: 0,
+            courseIndex: 1,
 
             pages: 3,
             pagesArr: [] , //页码的数组
+            yourAccount:''
 
             // ApproveNewCourse:'',
             // ApproveCourseId:'',
@@ -47,46 +64,72 @@ export default class AdTeacherInfoCourseApply extends Component {
 
     }
 
-    //测试用例
-    get(a) {
-        let loginUrl = 'http://localhost:3005/page';
-        let self = this;//一定要加上这个，因为在promise里this的作用域变了
-        this.serverRequest = fetch(loginUrl , {
-
-            method: "get",
-            headers: {
-                'Content-Type': 'application/x-www-form-urlencoded'
-            }
-        }).then(function (response) {
-            let arr=[];
-            console.log(response);
-            response.json().then(function (response) {
-                console.log(response[a]);
-                self.setState({
-                    courses: response[a],
-                });
-                for(let i=0;i<=self.state.pages-1;i++){
-                    arr[i]=i+1;
-                }
-                console.log(arr);
-                self.setState({
-                    pagesArr:arr,
-                });
-                console.log(self.state.pagesArr);
-
-            })
-
-        }, function (e) {
-            console.log('出错：', e)
-        })
-    }
-
+    // //测试用例
+    // get(a) {
+    //     let loginUrl = 'http://localhost:3005/page';
+    //     let self = this;//一定要加上这个，因为在promise里this的作用域变了
+    //     this.serverRequest = fetch(loginUrl , {
     //
+    //         method: "get",
+    //         headers: {
+    //             'Content-Type': 'application/x-www-form-urlencoded'
+    //         }
+    //     }).then(function (response) {
+    //         let arr=[];
+    //         console.log(response);
+    //         response.json().then(function (response) {
+    //             console.log(response[a]);
+    //             self.setState({
+    //                 courses: response[a],
+    //             });
+    //             for(let i=0;i<=self.state.pages-1;i++){
+    //                 arr[i]=i+1;
+    //             }
+    //             console.log(arr);
+    //             self.setState({
+    //                 pagesArr:arr,
+    //             });
+    //             console.log(self.state.pagesArr);
+    //
+    //         })
+    //
+    //     }, function (e) {
+    //         console.log('出错：', e)
+    //     })
+    // }
+
+    //解锁区块链账户
+    unlock(){
+        let self = this;
+        let address0 = "", unlockPassword = "";
+
+        //从后台获取区块链账户和地址
+        let admin = new Admin();
+        let url = 'http://120.79.198.95:8082/user/addressunlock_password/query/';//接口的地址
+        let param = {};
+
+        admin.queryAddressPassword(url, param).then((response) => {
+            console.log(response);
+            address0 = response.data.address;
+            unlockPassword = response.data.unlock_password;
+            this.setState({
+                yourAccount:address0
+            },()=>{
+                console.log([self.state.yourAccount, unlockPassword]);
+                //解锁账户  调用web3接口
+                let unLockRes = web3.personal.unlockAccount(address0, unlockPassword, 1000 * 60 * 60);
+                console.log(unLockRes);
+            })
+        });
+
+
+
+    }
 
     //从后台获取开课申请数据
     query(a) {
         let admin = new Admin();
-        let url = 'http://10.112.149.122:8082/admin/teacher/course/apply/query/';//接口的地址
+        let url = 'http://120.79.198.95:8082/admin/teacher/course/apply/query/';//接口的地址
         let self = this;
         let param = {
             page: a,//第a页的数据
@@ -120,8 +163,10 @@ export default class AdTeacherInfoCourseApply extends Component {
 
     //审批开课申请
     approve() {
+        let self=this;
+        this.unlock();
         let admin = new Admin();
-        let url = 'http://10.112.149.122:8082/admin/teacher/course/apply/approve/';//接口的地址
+        let url = 'http://120.79.198.95:8082/admin/teacher/course/apply/approve/';//接口的地址
 
         let param = {
             course_approve: {
@@ -132,26 +177,61 @@ export default class AdTeacherInfoCourseApply extends Component {
 
             }
         };
+        Study.deployed().then((instance)=>{
+            let a,b ;
+            if(ApproveCourseProperty=="必修"){
+                a=true;
+            }else{
+                a=false
+            }
+            if(ApproveMarkElement!==null){
+                b=[100];
+            }else{
+               b=[];
+            }
+            console.log();
+            return instance.addCourseInfo(
+                parseInt(ApproveCourseId),
+                ApproveCourseName,
+                a,
+                parseInt(ApproveTerm),
+                parseInt(ApproveCredit),
+                b,
+                {from: self.state.yourAccount, gas: 1800000}
+                );
+        }).then(function(r){
+            console.log("调用合约函数后的返回值："+r);
+            if(r!==null){
+                console.log(self.state.courseId);
+                admin.approveTeacherApply(url, param).then((response) => {
+                    console.log("response:"+response);
+                    console.log("message:"+response.meta.message);
+                    if(response.meta.message=="ok"){
+                        alert("后台接收数据成功")
+                    }else{
+                        alert("后台接收数据失败")
+                    }
 
-        admin.approveTeacherApply(url, param).then((response) => {
-            console.log(response);
-            console.log(response.meta.message);
-
-
+                });
+            }else{
+                alert("提交失败")
+            }
+        }).catch(function (e) {
+            console.log(e);
         });
     }
 
     render() {
         return (
-            <div style={{background: '#ffffff', height: window.innerHeight}}>
+            <div style={{background: '#ffffff', paddingBottom:40}}>
                 <Header/>
-                <div className="row">
-                    <div className="col-xs-4 col-md-2 col-lg-2">
+                <div className="row" >
+                    <div className="col-xs-3 col-md-2 col-lg-2" >
                         <div>
                             <NavSide/>
                         </div>
                     </div>
-                    <div className="col-xs-8 col-md-8 col-lg-8  ">
+                    <div className="col-xs-9 col-md-8 col-lg-8  ">
                         <div style={{
                             padding: '10px 0',
                             width: "100%",
@@ -177,8 +257,7 @@ export default class AdTeacherInfoCourseApply extends Component {
                                         key={course.course_id}
                                         // key是react里的，相同key的项目只会在界面上显示一个，一般给key赋值id就行了
                                         handleClick1={() => {
-                                            alert('同意申请');
-                                            let tempCourses = this.state.courses;
+                                            let tempCourses = courses_arr;
                                             tempCourses[index].status = "2";
                                             this.setState({courses: tempCourses,
                                                 // ApproveNewCourse: course.new,
@@ -190,6 +269,11 @@ export default class AdTeacherInfoCourseApply extends Component {
                                              ApproveCourseId = course.course_id;
                                              ApproveTeacherId =course.teacher_id;
                                              ApproveStatus =tempCourses[index].status;
+                                             ApproveCourseName=course.course_name;
+                                             ApproveCourseProperty=course.course_property;//是否为必修 true/false
+                                             ApproveTerm=course.time;
+                                             ApproveCredit=course.credit;
+                                             ApproveMarkElement=[course.mark_element];//成绩组成
                                             // console.log([
                                             //     this.state.ApproveNewCourse,
                                             //     this.state.ApproveCourseId,
@@ -201,8 +285,7 @@ export default class AdTeacherInfoCourseApply extends Component {
 
                                         }}
                                         handleClick2={() => {
-                                            alert('拒绝申请');
-                                            let tempCourses = this.state.courses;
+                                            let tempCourses = courses_arr;
                                             tempCourses[index].status = " 3";
                                             this.setState({
                                                 courses: tempCourses,
@@ -215,6 +298,11 @@ export default class AdTeacherInfoCourseApply extends Component {
                                             ApproveCourseId = course.course_id;
                                             ApproveTeacherId =course.teacher_id;
                                             ApproveStatus =tempCourses[index].status;
+                                            ApproveCourseName=course.course_name;
+                                            ApproveCourseProperty=course.course_property;//是否为必修 true/false
+                                            ApproveTerm=course.time;
+                                            ApproveCredit=course.credit;
+                                            ApproveMarkElement=[course.mark_element];//成绩组成
                                             this.approve()
                                         }}
                                         course_name={course.course_name}
@@ -235,7 +323,7 @@ export default class AdTeacherInfoCourseApply extends Component {
                             <ul className="pagination">
                                 <li onClick={() => {
                                     this.setState({
-                                        courseIndex: this.state.courseIndex - 1 >= 0 ? this.state.courseIndex - 1 : 0
+                                        courseIndex: this.state.courseIndex - 1 >= 1 ? this.state.courseIndex - 1 : 1
                                     }, () => {
                                         this.query(this.state.courseIndex)
                                         // this.get(this.state.courseIndex)
@@ -252,16 +340,16 @@ export default class AdTeacherInfoCourseApply extends Component {
                                 {
                                     this.state.pagesArr.map((page, index) => {
                                         return (
-                                            // 索引是从0开始的
+                                            // 索引index是从0开始的
                                             <li
-                                                key={index}
-                                                className={this.state.courseIndex == index ? "active" : ''}
+                                                key={index+1}
+                                                className={this.state.courseIndex == index+1 ? "active" : ''}
                                                 onClick={() => {
                                                     this.setState({
                                                         // courses: courses[index],
-                                                        courseIndex: index
+                                                        courseIndex: index+1
                                                     }, () => {
-                                                        this.query(index)
+                                                        this.query(index+1)
                                                     }/*() => {
                                                         this.get(index)
                                                     }*/)
@@ -272,7 +360,7 @@ export default class AdTeacherInfoCourseApply extends Component {
 
                                 <li onClick={() => {
                                     this.setState({
-                                        courseIndex: this.state.courseIndex + 1 <= this.state.pages-1? this.state.courseIndex + 1 : this.state.pages-1
+                                        courseIndex: this.state.courseIndex + 1 <= this.state.pages? this.state.courseIndex + 1 : this.state.pages
                                     }, () => {
                                         this.query(this.state.courseIndex)
                                         // this.get(this.state.courseIndex);

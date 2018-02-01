@@ -1,4 +1,4 @@
-.footer{
+.adFooter{
     position: fixed;
     /*下移一整个页面高度，到了最下边，但是超出了你能看到的页面*/
     /*top 属性规定元素的顶部边缘。该属性定义了一个定位元素的上外边距边界与其包含块上边界之间的偏移*/
@@ -11,6 +11,7 @@
     font-size: 18px;
     background-color: #20b18a;
     /*clear:both;*/
+
     text-align:center;
     /*justify-content: center;*/
     /*height: 50px;*/

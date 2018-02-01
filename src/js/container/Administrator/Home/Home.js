@@ -7,29 +7,33 @@ import Footer from '../../../components/AdFooter/Footer'
 import NavSide from '../../../components/AdNavSide/NavSide'
 
 export default class AdHome extends Component{
+    constructor(){
+        super();
+        this.state={
+            admin_name:localStorage.name,
+        }
+    }
+    click(){
+        alert("尚未开发，敬请期待")
+    }
 
     render() {
         return (
-            <div style={{background:'#eeeeee',height:window.innerHeight}}>
-                {/*上面这个样式有什么用？获取窗口的高度 有什么意义*/}
-
+            <div style={{background:'#eeeeee',paddingBottom:40}}>
                     <Header/>
-
-
                     <div className="row">
-                        <div className="col-md-2 ">
+                        <div className="col-xs-3 col-md-2 ">
                             <div >
-                                {/*内联样式style={{}}和className=''不能写在一个div中*/}
                                 <NavSide/>
                             </div>
                         </div>
 
-                        <div className="col-md-10  ">
+                        <div className="col-xs-9 col-md-10  ">
                             <Jumbotron  >
                                 {/*Jumbotron默认颜色为eeeeee*/}
-                                <h1>欢迎你，王鹏!</h1>
-                                <p>This is a simple hero unit, a simple jumbotron-style component for calling extra attention to featured content or information.</p>
-                                <p><Button bsStyle="primary">了解更多</Button></p>
+                                <h1>欢迎你，{this.state.admin_name}!</h1>
+                                <p>管理员资讯</p>
+                                <p><Button bsStyle="primary" onClick={()=>this.click()}>了解更多</Button></p>
                             </Jumbotron>
                         </div>
                 </div>

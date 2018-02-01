@@ -17,6 +17,7 @@ export default class AdTeacherInfoModify extends Component {
             teacher_address: '',
             teacher_password_log: '',
             teacher_password_unlock: '',
+            tip:'',
         }
     }
 
@@ -73,7 +74,7 @@ export default class AdTeacherInfoModify extends Component {
     button1_change() {
         let self=this;
         let admin = new Admin();
-        let url = 'http://10.112.149.122:8082/admin/teacher/info/query/';//接口的地址
+        let url = 'http://120.79.198.95:8082/admin/teacher/info/query/';//接口的地址
 
         let param = {
             teacher: {
@@ -98,9 +99,9 @@ export default class AdTeacherInfoModify extends Component {
 
     // 修改提交
     button2_change() {
-        // let self=this;
+        let self=this;
         let admin = new Admin();
-        let url = 'http://10.112.149.122:8082/admin/teacher/info/modify/';//接口的地址
+        let url = 'http://120.79.198.95:8082/admin/teacher/info/modify/';//接口的地址
 
         let param = {
             teacher: {
@@ -115,21 +116,30 @@ export default class AdTeacherInfoModify extends Component {
 
         admin.modifyTeacher(url, param).then((response) => {
             console.log(response);
+            if(response.meta.message=="ok"){
+                self.setState({
+                    tip:"该教师信息修改成功"
+                })
+            }else{
+                self.setState({
+                    tip:"该教师信息修改失败"
+                })
+            }
         });
     }
 
     render() {
         return (
-            <div style={{background: '#ffffff', height: window.innerHeight}}>
+            <div style={{background: '#ffffff', paddingBottom:40}}>
                 <Header/>
                 <div className="row">
-                    <div className="col-xs-4 col-md-2 col-lg-2">
+                    <div className="col-xs-3 col-md-2 col-lg-2">
                         <div >
                             {/*内联样式style={{}}和className=''不能写在一个div中*/}
                             <NavSide/>
                         </div>
                     </div>
-                    <div className="col-xs-8 col-md-10 col-lg-10 ">
+                    <div className="col-xs-9 col-md-10 col-lg-10 ">
                         <h3>教师信息查询与修改</h3>
                         <div className="te_mod_1">
                             <AdInput
@@ -184,6 +194,7 @@ export default class AdTeacherInfoModify extends Component {
 
                             <Button bsStyle="success" bsSize="large" className="width_50 margin-top_50px"
                                     onClick={() => this.button2_change()} >提交</Button>
+                            <label><h4>{this.state.tip}</h4></label>
                         </div>
                     </div>
                 </div>

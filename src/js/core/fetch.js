@@ -35,6 +35,7 @@ export default class Fetch{
                         } else if(data.meta.code==400&&data.meta.message=='NotAuthorized'){
                             // alert("请先登录");
                             window.location.href=location.hostname+"/login"
+                            //如果报错了，就在location前加个window，小黄师兄说全局变量不加window也可以取到
                         } else if(data.meta.code==500){
                             alert("服务器错误，正在处理中")
                         }

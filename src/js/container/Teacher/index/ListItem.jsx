@@ -2,7 +2,7 @@ import React from 'react';
 
 const ListItem = ({props,handleClick,icon,title,abstract})=>{
 	return(
-		<div className="flexCenter body-item">
+		<div className="flexCenter courselist">
 			<div
 				onClick={handleClick}
 				className="icon-container">

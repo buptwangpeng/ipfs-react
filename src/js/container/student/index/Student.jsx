@@ -12,7 +12,7 @@ class Index extends React.Component{
 	constructor(props){
 		super(props);
 		this.state = {
-			name : '黄锦雨'
+			name : localStorage.name
 		}
 	}
 	componentDidMount(){
@@ -33,7 +33,7 @@ class Index extends React.Component{
 				    }}>
 					    <div
 						    onClick={()=>{jumpPage('student')}}
-						    className="col-xs-6 col-lg-6">
+						    className="col-xs-6 col-lg-6 nav2">
 						    <p style={{marginLeft:60,fontSize:60,color:'#fff'}}>LOGO</p>
 					    </div>
 				    </div>
@@ -50,6 +50,7 @@ class Index extends React.Component{
 								<div className="flexCenter"
 								     style={{flexDirection:'column', width:'100%', height:'100%'}}>
 									<ListItem
+										className=""
 										icon="&#xe618;"
 										title="选课"
 										abstract="点击查看可选课程"

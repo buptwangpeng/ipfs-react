@@ -78,7 +78,7 @@ export default class AdAdministratorInfoModify extends Component {
     button1_change() {
         let self=this;
         let admin = new Admin();
-        let url = 'http://10.112.149.122:8082/admin/administrator/info/query/';//接口的地址
+        let url = 'http://120.79.198.95:8082/admin/administrator/info/query/';//接口的地址
 
         let param = {
             administrator: {
@@ -105,7 +105,7 @@ export default class AdAdministratorInfoModify extends Component {
     button2_change() {
         let self=this;
         let admin = new Admin();
-        let url = 'http://10.112.149.122:8082/admin/administrator/info/modify/';//接口的地址
+        let url = 'http://120.79.198.95:8082/admin/administrator/info/modify/';//接口的地址
 
         let param = {
             administrator: {
@@ -137,18 +137,18 @@ export default class AdAdministratorInfoModify extends Component {
 
     render() {
         return (
-            <div style={{background: '#ffffff', height: window.innerHeight}}>
+            <div style={{background: '#ffffff',paddingBottom:40}}>
                 {/*innerheight	返回窗口的文档显示区的高度*/}
                 <Header/>
                 <div className="row">
-                    <div className="col-md-2 col-lg-2">
+                    <div className="col-xs-3 col-md-2 col-lg-2">
                         <div >
                             {/*内联样式style={{}}和className=''不能写在一个div中*/}
                             {/*width:'50%'是指在col-lg-4中占一半*/}
                             <NavSide/>
                         </div>
                     </div>
-                    <div className="col-md-10 col-lg-10 ">
+                    <div className="col-xs-9 col-md-10 col-lg-10 ">
 
                         <h3>管理员信息查询与修改</h3>
                         <div className="ad_mod_1">

@@ -27,13 +27,14 @@ const ListItem = ({props,courseName,courseId,time,score,object,type,status,handl
 					<button
 						disabled={status!=1?'disabled':''}
 						onClick={handleClick}
-						style={{background:status==1?"#20b18a":'#aeaeae',color:'#fff',width:"60%",border:'none'}}>
-						{status==1 ?'选课':(status==2?'已选':'已满')}
+						style={{background:status==1?"#20b18a":'#aeaeae',color:'#fff',width:"80%",border:'none'}}>
+						{status==1 ?'申请':(status==2?'正在申请':'申请通过')}
 					</button>
 					:
 					""
 				}
 			</div>
+			
 		</div>
 	)
 }

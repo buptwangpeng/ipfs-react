@@ -50,14 +50,14 @@ export default class CourseDetail extends React.Component{
 								<div style={{display:'flex',flexDirection:'column',width:'80%'}}>
 									<div style={{display:'flex'}}>
 										<div className="course-detail-progress-title">资料下载</div>
-										<div style={{marginLeft:10,color:'#808080',fontSize:10}}>下载资料预习后方可进行下面步奏</div>
+										<div style={{marginLeft:10,color:'#808080',fontSize:10}}>下载资料预习后方可进行下面步骤</div>
 									</div>
 									<div style={{display:'flex',justifyContent:'center',alignItems:'center',width:'100%',height:190}}>
 										<div style={{display:'flex',flexDirection:'column'}}>
 											<div style={{display:'flex',alignItems:'center'}}>
 												<div className="dot"></div>
 												<a
-													onClick={()=>{window.open('http://localhost:8080/doc.docx')}}
+													onClick={()=>{window.open('http://localhost:8080/通信原理实验指导.doc')}}
 													style={{textDecoration:"underline",marginLeft:5}}>
 													{courses[this.state.courseId].files[0]}
 												</a>
@@ -65,7 +65,7 @@ export default class CourseDetail extends React.Component{
 											<div style={{display:'flex',alignItems:'center'}}>
 												<div className="dot"></div>
 												<a
-													onClick={()=>{window.open('http://localhost:8080/doc.docx')}}
+													onClick={()=>{window.open('http://localhost:8080/通信原理实验指导.doc')}}
 													style={{textDecoration:"underline",marginLeft:5}}>
 													{courses[this.state.courseId].files[1]}
 												</a>

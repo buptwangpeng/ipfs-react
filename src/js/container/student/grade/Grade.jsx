@@ -7,7 +7,15 @@ import Header from '../../../components/header/Header.jsx'
 import jumpPage from '../../../core/jumpPage.js'
 import Footer from '../../../components/footer/Footer.jsx'
 import ListItem from './listItem/ListItem.jsx';
+import Student from '../../../core/student.js'
+import {default as Web3} from 'web3'
+import {default as contract} from 'truffle-contract'
+import study_artifacts from '../../../../../build/contracts/studyData.json'
 
+let Study = contract(study_artifacts);
+let StudyProvider = new Web3.providers.HttpProvider("http://localhost:8545");
+Study.setProvider(StudyProvider);
+let web3 = new Web3(StudyProvider)
 let course1 = [
 	{courseName:"通原实验",courseType:"必修",courseId:"123451",teacher:"陈萍",time:"2016-2017/2", score:"3学分",grade:98},
 	{courseName:"通原实验",courseType:"必修",courseId:"123453",teacher:"陈萍",time:"2016-2017/2", score:"3学分",grade:98},
@@ -50,7 +58,12 @@ export default class Grade extends React.Component{
 		super(props);
 		this.state = {
 			courses : courses[0],
-			courseIndex:0
+			courseIndex:0,
+			courseId:'',
+			studentId:'',
+			address:'',
+			unlockpassword:'',
+			grade:''
 		}
 	}
 	handleSearch = (e)=>{
@@ -59,6 +72,42 @@ export default class Grade extends React.Component{
 			alert('未搜索到课程')
 		}
 	}
+    getcourseid(event){
+     this.setState({
+            courseId: event.target.value
+        });
+    }
+
+    serchgrade(){
+    let self=this;
+    console.log(self.state.courseId)
+    Study.deployed().then((instance)=>{
+    return instance.getStuMarksByCourse.call(parseInt(self.state.courseId),parseInt(self.state.studentId),{from: self.state.address})
+    }).then((r)=>{
+     self.setState({grade:r.toNumber()})
+    }).catch((e)=>{
+      console.log(e)
+    })  
+     }
+
+
+    componentWillMount(){
+    	let url1='http://120.79.198.95:8082/user/info/query/';
+    	let url2='http://120.79.198.95:8082/user/addressunlock_password/query/';
+    	let student=new Student();     
+        let param={};
+        let self=this;
+        student.getstudentid(url1,param).then(
+         (response)=>{self.setState({studentId:response.data.id})}
+      	)
+      	student.getaccount(url2,param).then(
+         (response)=>{
+         self.setState({address:response.data.address,unlockpassword:response.data.unlock_password},()=>{let a =web3.personal.unlockAccount(self.state.address,self.state.unlockpassword, 3600*1000);console.log(a)})
+       }
+       ) 
+    }
+
+
 	render(){
 		return(
 			<div style={{background:'#eee',height:window.innerHeight,paddingBottom:52}}>
@@ -103,6 +152,12 @@ export default class Grade extends React.Component{
 							/>
 						)
 					})}
+					<div style={{margin:'20px'}}>
+					  <span>请输入课程号</span>
+					  <input type="text" onChange={this.getcourseid.bind(this)}/>
+					</div>
+					<button onClick={this.serchgrade.bind(this)} style={{background:"#20b18a",color:'#fff',width:"8%",border:'none',marginLeft:'20px'}}>查询</button>
+                    <span>成绩：{this.state.grade}</span>                 
 				</div>
 				<nav aria-label="Page navigation" style={{float:'right',marginRight:'17%'}}>
 					<ul className="pagination">

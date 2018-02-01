@@ -3,7 +3,7 @@
  */
 import React from 'react';
 import './ListItem.css'
-const ListItem = ({props,courseName,courseId,courseType,teacher,time,score,status,handleClick})=>{
+const ListItem = ({props,courseName,courseId,courseType,teacherName,teacherTel,teacherEmail,time,credit, mark_element,abstract,status,handleClick})=>{
 	return(
 		<div className="choose-course-list">
 			<div className="choose-course-item">
@@ -16,22 +16,34 @@ const ListItem = ({props,courseName,courseId,courseType,teacher,time,score,statu
 				{courseType}
 			</div>
 			<div className="choose-course-item">
-				{teacher}
+                {mark_element}
+			</div>
+			<div className="choose-course-item">
+				{teacherName}
+			</div>
+			<div className="choose-course-item">
+                {teacherTel}
+			</div>
+			<div className="choose-course-item">
+                {teacherEmail}
 			</div>
 			<div className="choose-course-item">
 				{time}
 			</div>
 			<div className="choose-course-item">
-				{score}
+				{credit}
+			</div>
+			<div className="choose-course-item">
+                {abstract}
 			</div>
 			<div className="choose-course-item"
-			     style={{width:"60%"}} >
-				{status?
+			     style={{width:"70%"}} >
+				{status==0||status==1?
 					<button
-						disabled={status!=1?'disabled':''}
+						disabled={status!=0?'disabled':''}
 						onClick={handleClick}
-						style={{background:status==1?"#20b18a":'#aeaeae',color:'#fff',width:"60%",border:'none'}}>
-						{status==1 ?'选课':(status==2?'已选':'已满')}
+						style={{background:status==0?"#20b18a":'#aeaeae',color:'#fff',width:"60%",border:'none'}}>
+						{status==0?'选课':(status==1?'已选':'已满')}
 					</button>
 					:
 					""

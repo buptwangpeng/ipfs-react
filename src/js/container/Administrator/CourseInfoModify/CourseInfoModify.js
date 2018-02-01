@@ -108,49 +108,49 @@ export default class AdCourseInfoModify extends Component {
         else if (length > 0) return 'error';
     }
 
-    //测试用例
-    get() {
-        let loginUrl = 'http://localhost:3005/course';
-        let self = this;//一定要加上这个，因为在promise里this的作用域变了
-        this.serverRequest = fetch(loginUrl /*+ '?user=' + self.state.user + '&password=' + self.state.password*/, {
-            //?和&都要加上
-            // "http://localhost:3004/list?user=${self.state.user}&password=${self.state.password}"
-            method: "get",
-            headers: {
-                // 'Content-Type': 'application/json'
-                'Content-Type': 'application/x-www-form-urlencoded'
-            }
-        }).then(function (response) {
-            console.log(response);
-            response.json().then(function (response) {
-                console.log(response[1]);
-                // length = getJsonLength(response[1].teacher_name);
-                self.setState({
-                    former_teacher_names: response[1].teacher_name,//申请教师
-                    former_teacher_ids: response[1].teacher_id,
-                    course_id: response[1].course_id,//课程号
-                    course_name: response[1].course_name,//课程名称
-                    academy: response[1].academy,//面向院系
-                    grade: response[1].grade,//面向年级
-                    course_time: response[1].course_time,//开课时间
-                    credit: response[1].credit,//学分
-                    mark_element: response[1].mark_element,//成绩组成
-                    course_property: response[1].course_property,//课程属性
-                })
-
-
-            })
-
-        }, function (e) {
-            console.log('出错：', e)
-        })
-    }
+    // //测试用例
+    // get() {
+    //     let loginUrl = 'http://localhost:3005/course';
+    //     let self = this;//一定要加上这个，因为在promise里this的作用域变了
+    //     this.serverRequest = fetch(loginUrl /*+ '?user=' + self.state.user + '&password=' + self.state.password*/, {
+    //         //?和&都要加上
+    //         // "http://localhost:3004/list?user=${self.state.user}&password=${self.state.password}"
+    //         method: "get",
+    //         headers: {
+    //             // 'Content-Type': 'application/json'
+    //             'Content-Type': 'application/x-www-form-urlencoded'
+    //         }
+    //     }).then(function (response) {
+    //         console.log(response);
+    //         response.json().then(function (response) {
+    //             console.log(response[1]);
+    //             // length = getJsonLength(response[1].teacher_name);
+    //             self.setState({
+    //                 former_teacher_names: response[1].teacher_name,//申请教师
+    //                 former_teacher_ids: response[1].teacher_id,
+    //                 course_id: response[1].course_id,//课程号
+    //                 course_name: response[1].course_name,//课程名称
+    //                 academy: response[1].academy,//面向院系
+    //                 grade: response[1].grade,//面向年级
+    //                 course_time: response[1].course_time,//开课时间
+    //                 credit: response[1].credit,//学分
+    //                 mark_element: response[1].mark_element,//成绩组成
+    //                 course_property: response[1].course_property,//课程属性
+    //             })
+    //
+    //
+    //         })
+    //
+    //     }, function (e) {
+    //         console.log('出错：', e)
+    //     })
+    // }
 
     //查询
     button1_change() {
         let self = this;
         let admin = new Admin();
-        let url = 'http://10.112.149.122:8082/admin/course/info/query/';//接口的地址
+        let url = 'http://120.79.198.95:8082/admin/course/info/query/';//接口的地址
 
         let param = {
             course: {
@@ -186,7 +186,7 @@ export default class AdCourseInfoModify extends Component {
     button2_change() {
         let self = this;
         let admin = new Admin();
-        let url = 'http://10.112.149.122:8082/admin/course/info/modify/';//接口的地址
+        let url = 'http://120.79.198.95:8082/admin/course/info/modify/';//接口的地址
 
         //用于提取下拉框中的值
         let myselect = document.getElementById("test");
@@ -274,17 +274,17 @@ export default class AdCourseInfoModify extends Component {
 
     render() {
         return (
-            <div style={{background: '#ffffff', height: window.innerHeight}}>
+            <div style={{background: '#ffffff',paddingBottom:40}}>
                 <Header/>
                 <div className="row">
-                    <div className="col-md-2 col-lg-2">
+                    <div className="col-xs-3 col-md-2 col-lg-2">
                         <div>
                             {/*内联样式style={{}}和className=''不能写在一个div中*/}
                             {/*width:'50%'是指在col-lg-4中占一半*/}
                             <NavSide/>
                         </div>
                     </div>
-                    <div className="col-md-10 col-lg-10">
+                    <div className="col-xs-9 col-md-10 col-lg-10">
 
                         <h3>课程信息查询与修改</h3>
                         <div className=" c_mod_1">
@@ -388,7 +388,7 @@ export default class AdCourseInfoModify extends Component {
                             </div>
 
 
-                            <Button bsStyle="success" bsSize="large" className="width_50 margin-top_50px"
+                            <Button bsStyle="success" bsSize="large" className="width_50 margin-top_20px"
                                     onClick={() => this.button2_change()}>提交</Button>
                             <Form inline>
                                 <FormGroup bsSize="large" className="">

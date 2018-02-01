@@ -107,7 +107,7 @@ export default class AdStudentInfoModify extends Component {
     button1_change() {
         let self=this;
         let admin = new Admin();
-        let url = 'http://10.112.149.122:8082/admin/student/info/query/';//接口的地址
+        let url = 'http://120.79.198.95:8082/admin/student/info/query/';//接口的地址
 
         let param = {
             student: {
@@ -136,7 +136,7 @@ export default class AdStudentInfoModify extends Component {
     button2_change() {
         let self=this;
         let admin = new Admin();
-        let url = 'http://10.112.149.122:8082/admin/student/info/modify/';//接口的地址
+        let url = 'http://120.79.198.95:8082/admin/student/info/modify/';//接口的地址
 
         let param = {
             student: {
@@ -169,16 +169,16 @@ export default class AdStudentInfoModify extends Component {
 
     render() {
         return (
-            <div style={{background: '#ffffff', height: window.innerHeight}}>
+            <div style={{background: '#ffffff', /*height: window.innerHeight*/paddingBottom:40}}>
                 <Header/>
                 <div className="row ">
-                    <div className="col-md-2 col-lg-2">
+                    <div className="col-xs-3 col-md-2 col-lg-2">
                         <div >
                             {/*内联样式style={{}}和className=''不能写在一个div中*/}
                             <NavSide/>
                         </div>
                     </div>
-                    <div className="col-md-10 col-lg-10  ">
+                    <div className="col-xs-9 col-md-10 col-lg-10  ">
                         <div className="row ">
                             <div className="">
                         <div className="">

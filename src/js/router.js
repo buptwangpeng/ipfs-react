@@ -27,7 +27,7 @@ import AdministratorInfoModify from './container/Administrator/AdministratorInfo
 
 
 //老师
-import Teacher from './container/Teacher/index/Teacher.jsx';
+import TeacherIdex from './container/Teacher/index/Teacher.jsx';
 import Apply from './container/Teacher/apply/Apply.jsx';
 import Newclass from './container/Teacher/newClass/newclass.jsx';
 import ClassDetail from './container/Teacher/classDetail/ClassDetail.jsx';
@@ -35,7 +35,6 @@ import AchiManage from './container/Teacher/achiManage/achimanage.jsx';
 import TimeTable from './container/Teacher/timeTable/TimeTable.jsx';
 import PersonalCen from './container/Teacher/personalCen/PersonalCen.jsx';
 import ClassList from './container/Teacher/classlist/ClassList.jsx';
-import GradeList from './container/Teacher/gradelist/gradeList.jsx';
 
 //学生
 import Student from './container/student/index/Student.jsx';
@@ -84,15 +83,14 @@ ReactDOM.render(
 				</Route>
 			</Route>
 
-	        {/*教师*/}
+            {/*教师*/}
 			<Route path="/teacher">
-				<IndexRoute component={Teacher}/>
+				<IndexRoute component={TeacherIdex}/>
 				<Route path="apply" component={Apply}/>
 				<Route path="newclass"  component={Newclass}/>
 				<Route path="timetable" component={TimeTable}/>
 				<Route path="personalcen" component={PersonalCen}/>
 				<Route path="classlist" component={ClassList}/>
-				<Route path="gradelist" component={GradeList}/>
 				<Route path="classdetail">
 					<IndexRoute component={ClassDetail}/>
 					<Route path="manage"  component={AchiManage}/>

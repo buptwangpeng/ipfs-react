@@ -1,10 +1,10 @@
 // 管理员界面接口及顶层公共代码
 /**
- * Created by HuangJinYu on 2017/3/12.
+ * Created by wp on 2018/1/19.
  */
 import Fetch from './fetch';
 
-export default class user extends Fetch {
+export default class admin extends Fetch {
     constructor() {
         super();
     }
@@ -13,10 +13,13 @@ export default class user extends Fetch {
         jsondata.timestamp = new Date().getTime();
         jsondata.token= localStorage.token;
         jsondata.uid = localStorage.uid;
-        console.log(localStorage.uid);
         return jsondata;
     }
 
+
+    queryAddressPassword(urlpath, param) {
+        return super.globalFetch(urlpath,this.dataInit(param));
+    }
     addStudent(urlpath, param) {
         return super.globalFetch(urlpath,this.dataInit(param));
     }

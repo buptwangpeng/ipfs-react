@@ -3,12 +3,19 @@ import Header from '../header/Header.jsx'
 import Footer from '../footer/Footer.jsx'
 import jumpPage from '../../../core/jumpPage';
 import ListItem from './ListItem.jsx';
+import Teacher from '../../../core/teacher.js'
 
-let data=[{id:'1',title:"通信原理"},{id:'2',title:"信号与系统"},
-          {id:'3',title:"移动通信原理"},{id:'4',title:"信息论基础"}]
 export default class ClassList extends React.Component{
 	constructor(props){
 		super(props);
+		this.state = {
+			courses:[]     /*[{id:'123451',name:"通信原理实验",number:'20',time:'2016-2017/2',object:"信通院/大二"},
+                          {id:'123452',name:"移动通信原理",number:'20',time:'2016-2017/2',object:"信通院/大二"},
+                          {id:'123453',name:"信号与系统",number:'20',time:'2016-2017/2',object:"信通院/大二"},
+                          {id:'123454',name:"信息论基础",number:'20',time:'2016-2017/2',object:"信通院/大二"} 
+                           ] */
+
+		}
 	}
 
 	handleSearch = (e)=>{
@@ -16,6 +23,30 @@ export default class ClassList extends React.Component{
 			//检测到回车开始搜索
 			alert('未搜索到课程')
 		}
+	}
+
+
+   componentWillMount(){
+
+   }
+
+
+	componentDidMount(){
+	 let teacher=new Teacher();
+     let url='http://120.79.198.95:8082/teacher/course/query/';
+     let param={};
+     teacher.coursequery(url,param).then(
+         (response)=>{ 
+          let jsonLength = 0;
+          for(let item in response.data){jsonLength++};
+          console.log(jsonLength);
+          let datarestore=[];
+          for(let i=0;i<jsonLength;i++){datarestore.push(response.data[i])}
+          console.log(datarestore)	
+          this.setState({courses:datarestore})       
+         }
+    )   
+
 	}
 
 	render(){
@@ -38,12 +69,12 @@ export default class ClassList extends React.Component{
 					flexWrap:'wrap'
 				}}>
 					{
-						data.map((data)=>{
+					this.state.courses.map((course,index)=>{
 							return(
 								<ListItem
-									handleClick={()=>jumpPage('teacher/classdetail')}
-									key={data.id}
-									title={data.title}
+									handleClick={()=>jumpPage('teacher/classdetail?courseid='+course.courseId)}
+									key={course.courseId}
+									title={course.name}
 								/>
 							)
 						})

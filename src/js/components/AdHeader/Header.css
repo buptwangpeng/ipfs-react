@@ -9,6 +9,14 @@
     color:#fff;
     font-size:20px;
 }
+.nav1:hover{
+    /*background-color: #636363;!*背景颜色变黑*!*/
+    color: blue;/*当背景变色时，字体变白*/
+    cursor: pointer;
+ }
+.nav2:hover{
+    cursor: pointer;
+}
 .header-background{
     /*Flex是Flexible Box的缩写，意为”弹性布局”，用来为盒状模型提供最大的灵活性*/
     display:flex;

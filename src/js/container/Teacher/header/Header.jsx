@@ -14,22 +14,18 @@ export default class Header extends React.Component{
                 <div className="col-xs-12 col-md-6 header-nav">
                     <div
                         onClick={()=>{jumpPage('teacher/classlist')}}
-                        className="header-nav width12">
+                        className="header-nav width12 headdetail">
                         课程详情
                     </div>
-                    <div
-                        onClick={()=>{jumpPage('teacher/gradelist')}}
-                        className="header-nav width25">
-                        成绩管理
-                    </div>
+                    
                     <div
                         onClick={()=>{jumpPage('teacher/apply')}}
-                        className="header-nav width25">
+                        className="header-nav width25 headnew">
                         申请新课
                     </div>
                     <div
                         onClick={()=>{jumpPage('teacher/personalcen')}}
-                        className="header-nav width25">
+                        className="header-nav width25 headpersonal">
                         个人中心
                     </div>
                     <div

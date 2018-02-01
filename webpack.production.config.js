@@ -9,7 +9,7 @@ var webpack = require('webpack');
 module.exports = {
     entry: {
         bundle: path.resolve(__dirname, './src/js/router.js'),
-        common: ['react','react-dom','react-router','./src/css/bootstrap.css','./src/js/core/config.js'] //分离第三方库
+        common: ['react','react-dom','react-router','./src/css/bootstrap.css'] //分离第三方库
     },
     output: {
         path: path.join(__dirname, 'assets'),

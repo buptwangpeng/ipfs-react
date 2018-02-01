@@ -4,31 +4,32 @@ import Footer from '../footer/Footer.jsx'
 import jumpPage from '../../../core/jumpPage';
 import './Apply.css'
 import ListItem from './ListItem.jsx'
+import Teacher from '../../../core/teacher.js'
 let course1 = [
   {courseName:"通原实验",courseId:"1234561",time:'2016-2017/2',score:"3",object:"信通院/大二 ", type:"必修",status:1},
-  {courseName:"通原实验",courseId:"1234562",time:'2016-2017/2',score:"3",object:"信通院/大二 ", type:"必修",status:3},
-  {courseName:"通原实验",courseId:"1234563",time:'2016-2017/2',score:"3",object:"信通院/大二 ", type:"必修",status:1},
+  {courseName:"通原实验",courseId:"1234562",time:'2016-2017/2',score:"3",object:"信通院/大二 ", type:"必修",status:1},
+  {courseName:"通原实验",courseId:"1234563",time:'2016-2017/2',score:"3",object:"信通院/大二 ", type:"必修",status:2},
   {courseName:"通原实验",courseId:"1234564",time:'2016-2017/2',score:"3",object:"信通院/大二 ", type:"必修",status:1},
-  {courseName:"通原实验",courseId:"1234565",time:'2016-2017/2',score:"3",object:"信通院/大二 ", type:"必修",status:1},
+  {courseName:"通原实验",courseId:"1234565",time:'2016-2017/2',score:"3",object:"信通院/大二 ", type:"必修",status:3},
   {courseName:"通原实验",courseId:"1234566",time:'2016-2017/2',score:"3",object:"信通院/大二 ", type:"必修",status:2},
-  {courseName:"通原实验",courseId:"1234567",time:'2016-2017/2',score:"3",object:"信通院/大二 ", type:"必修",status:1},
-  {courseName:"通原实验",courseId:"1234568",time:'2016-2017/2',score:"3",object:"信通院/大二 ", type:"必修",status:1},
+  {courseName:"通原实验",courseId:"1234567",time:'2016-2017/2',score:"3",object:"信通院/大二 ", type:"必修",status:3},
+  {courseName:"通原实验",courseId:"1234568",time:'2016-2017/2',score:"3",object:"信通院/大二 ", type:"必修",status:3},
   
 ];
 let course2 = [
   {courseName:"信号与系统",courseId:"6543211",time:'2016-2017/2',score:"3",object:"信通院/大二", type:"必修",status:1},
-  {courseName:"信号与系统",courseId:"6543212",time:'2016-2017/2',score:"3",object:"信通院/大二", type:"必修",status:3},
-  {courseName:"信号与系统",courseId:"6543213",time:'2016-2017/2',score:"3",object:"信通院/大二", type:"必修",status:1},
+  {courseName:"信号与系统",courseId:"6543212",time:'2016-2017/2',score:"3",object:"信通院/大二", type:"必修",status:1},
+  {courseName:"信号与系统",courseId:"6543213",time:'2016-2017/2',score:"3",object:"信通院/大二", type:"必修",status:2},
   {courseName:"信号与系统",courseId:"6543214",time:'2016-2017/2',score:"3",object:"信通院/大二", type:"必修",status:1},
-  {courseName:"信号与系统",courseId:"6543215",time:'2016-2017/2',score:"3",object:"信通院/大二", type:"必修",status:1},
-  {courseName:"信号与系统",courseId:"6543216",time:'2016-2017/2',score:"3",object:"信通院/大二", type:"必修",status:2},
-  {courseName:"信号与系统",courseId:"6543217",time:'2016-2017/2',score:"3",object:"信通院/大二", type:"必修",status:1},
+  {courseName:"信号与系统",courseId:"6543215",time:'2016-2017/2',score:"3",object:"信通院/大二", type:"必修",status:3},
+  {courseName:"信号与系统",courseId:"6543216",time:'2016-2017/2',score:"3",object:"信通院/大二", type:"必修",status:1},
+  {courseName:"信号与系统",courseId:"6543217",time:'2016-2017/2',score:"3",object:"信通院/大二", type:"必修",status:3},
   {courseName:"信号与系统",courseId:"6543218",time:'2016-2017/2',score:"3",object:"信通院/大二", type:"必修",status:1},
   
 ];
 let course3 = [
   {courseName:"数据库",courseId:"2234561",time:'2016-2017/2',score:"1",object:"信通院/大二", type:"选修",status:1},
-  {courseName:"数据库",courseId:"2234562",time:'2016-2017/2',score:"1",object:"信通院/大二", type:"选修",status:3},
+  {courseName:"数据库",courseId:"2234562",time:'2016-2017/2',score:"1",object:"信通院/大二", type:"选修",status:1},
   {courseName:"数据库",courseId:"2234563",time:'2016-2017/2',score:"1",object:"信通院/大二", type:"选修",status:1},
   {courseName:"数据库",courseId:"2234564",time:'2016-2017/2',score:"1",object:"信通院/大二", type:"选修",status:1},
   {courseName:"数据库",courseId:"2234565",time:'2016-2017/2',score:"1",object:"信通院/大二", type:"选修",status:1},
@@ -39,12 +40,15 @@ let course3 = [
 ];
 
 let courses = [course1,course2,course3];
-export default class ChooseCourse extends React.Component{
+export default class Apply extends React.Component{
   constructor(props){
     super(props);
     this.state = {
-      courses : courses[0],
-      courseIndex:0
+      courses : [],
+      courseIndex:0,
+      courseId:'1',
+      items:[1,2],
+      pages:'2'
     }
   }
 
@@ -54,6 +58,81 @@ export default class ChooseCourse extends React.Component{
       alert('未搜索到课程')
     }
   }
+
+
+  getapplylist(){                                   //获取可申请名单
+      let teacher=new Teacher();
+       let url='http://120.79.198.95:8082/teacher/courseapply/query/';
+       let param={page:this.state.courseIndex+1,
+                  number:8
+              };console.log(param.page);  
+     teacher.courseapplyquery(url,param).then(
+         (response)=>{
+          let jsonLength = 0;
+          for(let item in response.data.content){jsonLength++}
+          console.log(jsonLength);
+          let datarestore=[];
+          for(let i=0;i<jsonLength;i++){datarestore.push(response.data.content[i])}
+          this.setState({courses:datarestore,
+                         pages:response.data.pages},()=>{let a=[];
+                          for(let i=1;i<=parseInt(this.state.pages);i++){a.push(i)};
+                             this.setState({items:a},()=>{console.log(a)})}
+          )
+      }
+     
+      )
+  }
+
+  applysubmit(){                                //提交申请
+     let teacher=new Teacher();
+     let url='http://120.79.198.95:8082/teacher/courseapply/submit/';
+     console.log(this.state.courseId);
+     let param={courseId:this.state.courseId};
+     teacher.courseapplysubmit(url,param).then(
+       (response)=>{
+        alert('恭喜提交成功')
+       }
+
+      )
+   
+  }
+   componentWillMount(){
+     // this.setState({pages:'4'})  
+
+       let teacher=new Teacher();
+       let url='http://120.79.198.95:8082/teacher/courseapply/query/';
+       let param={page:this.state.courseIndex+1,
+                  number:8
+              };console.log(param.page);  
+     teacher.courseapplyquery(url,param).then(
+         (response)=>{
+          let jsonLength = 0;
+          for(let item in response.data.content){jsonLength++}
+          console.log(jsonLength);
+          let datarestore=[];
+          for(let i=0;i<jsonLength;i++){datarestore.push(response.data.content[i])}
+          this.setState({courses:datarestore,
+                         pages:response.data.pages},()=>{let a=[];
+                          for(let i=1;i<=parseInt(this.state.pages);i++){a.push(i)};
+                             this.setState({items:a},()=>{console.log(a)})}
+          )
+      }
+     
+      )
+
+
+   
+
+   }
+
+
+
+  componentDidMount(){
+                /*     let a=[];
+                     console.log('现在的页数'+this.state.pages)
+                     for(let i=1;i<=parseInt(this.state.pages);i++){a.push(i)};
+                    this.setState({items:a},()=>{console.log(a)})  */
+ }
 
 
     render() {
@@ -87,12 +166,19 @@ export default class ChooseCourse extends React.Component{
               <ListItem
                 key={course.courseId}
                 handleClick={()=>{
-                  alert('选课成功');
+                  alert('申请成功');
                   let tempCourses = this.state.courses;
-                  tempCourses[index].status = 2;
-                  this.setState({courses : tempCourses})
-                }}
-                courseName={course.courseName}
+                  tempCourses[index].status =2;
+                  this.setState({
+                    courses : tempCourses,
+                    courseId:tempCourses[index].courseId
+                  },()=>{this.applysubmit()}
+                  )
+                  //console.log(this.state.courseId)
+                  
+                }
+              }
+                courseName={course.name}
                 courseId={course.courseId}
                 time={course.time}
                 score={course.score}
@@ -111,7 +197,7 @@ export default class ChooseCourse extends React.Component{
               },()=>{
                 this.setState({
                   courses:courses[this.state.courseIndex]
-                })
+                },()=>{this.getapplylist()})
               })
 
             }}>
@@ -120,7 +206,7 @@ export default class ChooseCourse extends React.Component{
               </a>
             </li>
             {
-              [1,2,3].map((course,index)=>{
+              this.state.items.map((course,index)=>{
                 return (
                   <li
                     key={index}
@@ -129,7 +215,7 @@ export default class ChooseCourse extends React.Component{
                     this.setState({
                       courses : courses[index],
                       courseIndex:index
-                    })
+                    },()=>{this.getapplylist()})
                   }}><a>{course}</a></li>
                 )
               })
@@ -137,11 +223,11 @@ export default class ChooseCourse extends React.Component{
 
             <li onClick={()=>{
               this.setState({
-                courseIndex : this.state.courseIndex+1<=2?this.state.courseIndex+1:2
+                courseIndex : this.state.courseIndex+1<=this.state.pages-1?this.state.courseIndex+1:this.state.pages-1
               },()=>{
                 this.setState({
                   courses:courses[this.state.courseIndex]
-                })
+                },()=>{this.getapplylist()})
               })
             }}>
               <a  aria-label="Next">

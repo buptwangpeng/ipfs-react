@@ -98,7 +98,7 @@ export default class AdCourseInfoAdd extends Component {
     button1_change() {
         let self=this;
         let admin = new Admin();
-        let url = 'http://10.112.149.122:8082/admin/course/info/add/';//接口的地址
+        let url = 'http://120.79.198.95:8082/admin/course/info/add/';//接口的地址
 
         let param = {
             course: {
@@ -125,22 +125,21 @@ export default class AdCourseInfoAdd extends Component {
                     tip:"该课程信息添加失败"
                 })
             }
-
         });
     }
 
     render() {
         return (
-            <div style={{background: '#ffffff', height: window.innerHeight}}>
+            <div style={{background: '#ffffff',paddingBottom:40}}>
                 <Header/>
                 <div className="row">
-                    <div className="col-md-2 col-lg-2">
+                    <div className="col-xs-3 col-md-2 col-lg-2">
                         <div >
                             {/*内联样式style={{}}和className=''不能写在一个div中*/}
                             <NavSide/>
                         </div>
                     </div>
-                    <div className="col-md-10 col-lg-10">
+                    <div className="col-xs-9 col-md-10 col-lg-10">
                         <div className="row">
                             <div className="col-md-2 col-lg-2">
                                 <h3>添加课程</h3>
@@ -155,7 +154,7 @@ export default class AdCourseInfoAdd extends Component {
                                 <Modal.Title>批量添加界面</Modal.Title>
                             </Modal.Header>
                             <Modal.Body>
-                                <h4>批量添加课程</h4>
+                                <h4>目前尚未开发，敬请期待</h4>
 
 
                             </Modal.Body>

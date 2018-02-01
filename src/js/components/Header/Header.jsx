@@ -14,28 +14,28 @@ export default class Header extends React.Component{
 			<div className="row header-background">
 				<div
 					onClick={()=>{jumpPage('student')}}
-					className="col-xs-6 col-md-4 col-lg-6">
+					className="col-xs-6 col-md-4 col-lg-6 nav2">
 					<p style={{marginLeft:60,fontSize:60,color:'#fff'}}>LOGO</p>
 				</div>
 				<div className="col-xs-12 col-md-8  col-lg-6 header-nav">
 					<div
 						onClick={()=>{jumpPage('student/chooseCourse')}}
-						className="header-nav width12">
+						className="header-nav width12 nav1">
 						选课
 					</div>
 					<div
 						onClick={()=>{jumpPage('student/selectedCourse')}}
-						className="header-nav width25">
+						className="header-nav width25 nav1">
 						已选课程
 					</div>
 					<div
 						onClick={()=>{jumpPage('student/grade')}}
-						className="header-nav width25">
+						className="header-nav width25 nav1">
 						成绩查询
 					</div>
 					<div
 						onClick={()=>{jumpPage('student/me')}}
-						className="header-nav width25">
+						className="header-nav width25 nav1">
 						个人中心
 					</div>
 					<div
@@ -44,7 +44,7 @@ export default class Header extends React.Component{
 								jumpPage('/')
 							}
 						}}
-						className="header-nav width25">
+						className="header-nav width25 nav1">
 						退出
 					</div>
 				</div>

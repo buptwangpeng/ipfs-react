@@ -8,7 +8,7 @@ import './ListItem.css';
 const ListItem = ({props,handleClick,title,progress,teacher,time})=>{
 	return(
 		<div className="selected-item">
-			<div onClick={handleClick} className="item-logo">
+			<div onClick={handleClick} className="item-logo nav2}">
 				<icon className="iconfont" style={{fontSize:100,color:'#b3c0d1'}}>&#xe640;</icon>
 				<div className="progress" style={{width:'60%',margin:'0 auto',height:18}}>
 					<div

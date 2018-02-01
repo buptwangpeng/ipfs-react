@@ -20,12 +20,14 @@
     font-size: 15px;
     color: #00cd00;
     margin-left: 30px;
+    cursor: pointer;
 }
 
 #newclass{
     float: right;
     font-size: 15px;
     color: #00cd00;
+    cursor: pointer;
 }
 
 
@@ -36,4 +38,10 @@
     flex-direction: row;
     color:#fff;
     font-size:20px;
+}
+
+.courselist{
+    width: 30%;
+    float: left;
+    margin: 50px;
 }

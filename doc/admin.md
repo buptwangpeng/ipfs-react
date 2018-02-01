@@ -32,6 +32,46 @@ response:
 }
 //当用户名或密码错误时返回 'meta':{'code':'400','message':'Account or password is error'}
 ```
+-向后台发送用户区块链账户地址和解锁密码（还没有和后台讨论）
+```
+url:/user/addressunlock_password/sent
+request jsondata:
+{
+    'timestamp':'',
+    'uid':'',
+    'token':''
+    'block_chain':{
+                 'address':'',
+                 'password_unlock':''
+             }
+}
+response:
+{
+     'meta':{'code':'200','message':'ok'}
+     "data":{
+         'type':'', // student/teacher/administrator
+     }
+}
+```
+
+- 从后台获取用户区块链账户地址和解锁密码
+```
+url:/user/addressunlock_password/query
+request jsondata:
+{
+    'timestamp':'',
+    'uid':'',
+    'token':''
+}
+response:
+{
+     'meta':{'code':'200','message':'ok'}
+     "data":{
+             "address":"",
+             "unlock_password":""
+          }
+}
+```
 
 - 添加学生
 ```

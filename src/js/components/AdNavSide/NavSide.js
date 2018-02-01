@@ -10,7 +10,7 @@ export default class NavSide extends Component {
     render() {
         return (
             <div>
-                <div style={{background: '#dcdcdc', width: '100%', height: window.innerHeight-100, margin: '0', padding: '0'}}>
+                <div style={{background: '#dcdcdc', width: '100%', height: window.innerHeight-50, margin: '0', padding: '0'}}>
 
                     <h2 style={{margin:'0',}} className="NavSide_h2">学生信息</h2>
                     <div

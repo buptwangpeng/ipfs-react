@@ -12,6 +12,7 @@
 #managelink{
     float: right;
     font-size: 15px;
+    cursor: pointer;
 }
 
 .information,.data,.studentList{
@@ -51,4 +52,8 @@ border-bottom-style: solid;
 border-bottom-width: 1px;
 border-bottom-color: #20b18a;
 height:35px;
+}
+
+#datasubmit{
+    display: inline;
 }
