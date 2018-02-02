@@ -99,7 +99,7 @@ export default class ClassDetail extends React.Component {
 
   deletedocument(){                                  //删除文件
     console.log(this.state.documentId)
-    let url='http://120.79.198.95:8082/teacher/document/delete/';
+    let url='http://120.79.198.95:8000/teacher/document/delete/';
     let teacher=new Teacher();
     let param={
           courseId:this.state.courseId,
@@ -117,7 +117,7 @@ export default class ClassDetail extends React.Component {
 
 
  componentWillMount(){
- /*   let url='http://10.112.149.122:8082/teacher/document/obtain/';                        //获取课程资料信息
+ /*   let url='http://10.112.149.122:8000/teacher/document/obtain/';                        //获取课程资料信息
     let teacher=new Teacher();
     let param={
       courseId:this.state.courseId,
@@ -137,7 +137,7 @@ export default class ClassDetail extends React.Component {
       )                
     
   */
-   let url='http://120.79.198.95:8082/teacher/studentlist/query/';
+   let url='http://120.79.198.95:8000/teacher/studentlist/query/';
    let teacher=new Teacher();
     let param={
             page:this.state.studentlistIndex+1,
@@ -175,7 +175,7 @@ export default class ClassDetail extends React.Component {
         this.setState({items:a},()=>{console.log(a)});
         console.log(this.state.courseId);
         let teacher=new Teacher();                 //获取课程详情
-        let url='http://120.79.198.95:8082/admin/course/info/query/';
+        let url='http://120.79.198.95:8000/admin/course/info/query/';
         let param={
           course:{course_id:this.state.courseId}        
                   };

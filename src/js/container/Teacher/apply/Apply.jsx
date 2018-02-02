@@ -62,7 +62,7 @@ export default class Apply extends React.Component{
 
   getapplylist(){                                   //获取可申请名单
       let teacher=new Teacher();
-       let url='http://120.79.198.95:8082/teacher/courseapply/query/';
+       let url='http://120.79.198.95:8000/teacher/courseapply/query/';
        let param={page:this.state.courseIndex+1,
                   number:8
               };console.log(param.page);  
@@ -85,7 +85,7 @@ export default class Apply extends React.Component{
 
   applysubmit(){                                //提交申请
      let teacher=new Teacher();
-     let url='http://120.79.198.95:8082/teacher/courseapply/submit/';
+     let url='http://120.79.198.95:8000/teacher/courseapply/submit/';
      console.log(this.state.courseId);
      let param={courseId:this.state.courseId};
      teacher.courseapplysubmit(url,param).then(
@@ -100,7 +100,7 @@ export default class Apply extends React.Component{
      // this.setState({pages:'4'})  
 
        let teacher=new Teacher();
-       let url='http://120.79.198.95:8082/teacher/courseapply/query/';
+       let url='http://120.79.198.95:8000/teacher/courseapply/query/';
        let param={page:this.state.courseIndex+1,
                   number:8
               };console.log(param.page);  

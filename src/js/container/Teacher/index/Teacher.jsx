@@ -59,12 +59,10 @@ export default class TeacherIndex extends React.Component {
     */
    }
 
-
-    
     componentDidMount(){
        let teacher=new Teacher();
-       let url1='http://120.79.198.95:8082/teacher/info/query/';
-       let url2='http://120.79.198.95:8082/teacher/course/query/';
+       let url1='http://120.79.198.95:8000/teacher/info/query/';
+       let url2='http://120.79.198.95:8000/teacher/course/query/';
        let self=this;
        let param={};
        teacher.infoquery(url1,param).then(

@@ -50,8 +50,8 @@ export default class ChooseCourse extends React.Component{
     componentWillMount(){
     	this.query(1);
     	let self=this;
-        let url1='http://120.79.198.95:8082/user/info/query/';
-        let url2='http://120.79.198.95:8082/user/addressunlock_password/query/';
+        let url1='http://120.79.198.95:8000/user/info/query/';
+        let url2='http://120.79.198.95:8000/user/addressunlock_password/query/';
         let student=new Student();
         let param={};
         student.getstudentid(url1,param).then(
@@ -75,7 +75,7 @@ export default class ChooseCourse extends React.Component{
 	//选课
     applyCourse(){
         let self=this;
-        let url='http://120.79.198.95:8082/student/course/select/';
+        let url='http://120.79.198.95:8000/student/course/select/';
         let student=new Student();
         let param={
             courseId:this.state.courseId,
@@ -102,7 +102,7 @@ export default class ChooseCourse extends React.Component{
     //从后台获取课程数据
     query(a) {
         let student = new Student();
-        let url = 'http://120.79.198.95:8082/student/course/select/list/query/';//接口的地址
+        let url = 'http://120.79.198.95:8000/student/course/select/list/query/';//接口的地址
         let self = this;
         let param = {
             page: a,//第a页的数据

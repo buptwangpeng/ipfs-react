@@ -33,7 +33,7 @@ export default class ClassList extends React.Component{
 
 	componentDidMount(){
 	 let teacher=new Teacher();
-     let url='http://120.79.198.95:8082/teacher/course/query/';
+     let url='http://120.79.198.95:8000/teacher/course/query/';
      let param={};
      teacher.coursequery(url,param).then(
          (response)=>{ 

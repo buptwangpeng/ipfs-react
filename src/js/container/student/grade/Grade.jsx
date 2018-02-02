@@ -92,8 +92,8 @@ export default class Grade extends React.Component{
 
 
     componentWillMount(){
-    	let url1='http://120.79.198.95:8082/user/info/query/';
-    	let url2='http://120.79.198.95:8082/user/addressunlock_password/query/';
+    	let url1='http://120.79.198.95:8000/user/info/query/';
+    	let url2='http://120.79.198.95:8000/user/addressunlock_password/query/';
     	let student=new Student();     
         let param={};
         let self=this;

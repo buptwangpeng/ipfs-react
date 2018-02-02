@@ -88,7 +88,7 @@ export default class Newclass extends React.Component {
    addcourse(){
        console.log(this.state.name)
        let teacher=new Teacher();
-       let url='http://120.79.198.95:8082/teacher/course/add/';
+       let url='http://120.79.198.95:8000/teacher/course/add/';
        let param={
         newCourseInfo:{
         name:this.state.name,

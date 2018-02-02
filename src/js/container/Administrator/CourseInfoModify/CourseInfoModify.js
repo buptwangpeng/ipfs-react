@@ -150,7 +150,7 @@ export default class AdCourseInfoModify extends Component {
     button1_change() {
         let self = this;
         let admin = new Admin();
-        let url = 'http://120.79.198.95:8082/admin/course/info/query/';//接口的地址
+        let url = 'http://120.79.198.95:8000/admin/course/info/query/';//接口的地址
 
         let param = {
             course: {
@@ -186,7 +186,7 @@ export default class AdCourseInfoModify extends Component {
     button2_change() {
         let self = this;
         let admin = new Admin();
-        let url = 'http://120.79.198.95:8082/admin/course/info/modify/';//接口的地址
+        let url = 'http://120.79.198.95:8000/admin/course/info/modify/';//接口的地址
 
         //用于提取下拉框中的值
         let myselect = document.getElementById("test");

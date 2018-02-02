@@ -110,8 +110,8 @@ handletotal(event){
 
    let self=this;
    let teacher=new Teacher();
-   let url1='http://120.79.198.95:8082/user/addressunlock_password/query/'
-   let url2='http://120.79.198.95:8082/teacher/info/query/'
+   let url1='http://120.79.198.95:8000/user/addressunlock_password/query/'
+   let url2='http://120.79.198.95:8000/teacher/info/query/'
    let param={};
    teacher.getaccount(url1,param).then(
     (response)=>{
@@ -131,7 +131,7 @@ handletotal(event){
 
   componentDidMount(){
         let teacher=new Teacher();                 //获取课程详情
-        let url='http://120.79.198.95:8082/admin/course/info/query/';
+        let url='http://120.79.198.95:8000/admin/course/info/query/';
         let param={
           course:{course_id:this.state.courseId}        
                   };

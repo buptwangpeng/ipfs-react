@@ -74,7 +74,7 @@ export default class AdTeacherInfoModify extends Component {
     button1_change() {
         let self=this;
         let admin = new Admin();
-        let url = 'http://120.79.198.95:8082/admin/teacher/info/query/';//接口的地址
+        let url = 'http://120.79.198.95:8000/admin/teacher/info/query/';//接口的地址
 
         let param = {
             teacher: {
@@ -101,7 +101,7 @@ export default class AdTeacherInfoModify extends Component {
     button2_change() {
         let self=this;
         let admin = new Admin();
-        let url = 'http://120.79.198.95:8082/admin/teacher/info/modify/';//接口的地址
+        let url = 'http://120.79.198.95:8000/admin/teacher/info/modify/';//接口的地址
 
         let param = {
             teacher: {

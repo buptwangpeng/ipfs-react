@@ -1,18 +1,23 @@
 pragma solidity ^0.4.18;
 
+import './StudyLog.sol';
+
 contract StudyData {
 
 /* Codes about Authority and Controller */
     address public Controller;
     address public Owner;
+    address public LogContract;
+    
+    StudyLog log = StudyLog(LogContract);
 
     struct Manager {
     uint ManagerID;
     address ManagerAddr;
     }
-    mapping (uint => Manager) managers;                 //ManagerID => Manager
-    mapping (address => bool) managerTag;
-    uint[] ManagerList;                                 //storage ManagerID
+    mapping (uint => Manager) private managers;                 //ManagerID => Manager
+    mapping (address => bool) private managerTag;
+    uint[] private ManagerList;                                 //storage ManagerID
 
 /* Things about Data Structure */
     struct Course {
@@ -25,8 +30,8 @@ contract StudyData {
         uint[] cStuIDs;  //CourseID => StudentID[], 已选该课程的学生号集合
     }
     /* Indexs */
-    mapping (uint => Course) public courses;  //CourseID => Course
-    uint[] CourseList;
+    mapping (uint => Course) private courses;  //CourseID => Course
+    uint[] private CourseList;
 
     enum LearningProgress {
         NotStart, Start, PreviewStart, PreviewEnd, Test, NotPass, Pass
@@ -45,16 +50,16 @@ contract StudyData {
         uint StudentClass;
         address StudentAddr;
         uint[] sCourseIDs;    //StudentID => CourseID[], index of "courses that student takes"
-        uint[] sTCourseIDs;  //学生某学期选中的所有课程的的集合
+        uint[] sTermCourseIDs;  //学生某学期选中的所有课程的的集合
         mapping (uint => Stu_Course) stu_courses;  //CourseID => Course, Coureses that student takes.
     }
 
     /* Indexs */
-    mapping (uint => Student) public students;  //StudentID => Student
-    mapping (address => bool) public studentTag;
-    uint[] StudentList;
+    mapping (uint => Student) private students;  //StudentID => Student
+    mapping (address => bool) private studentTag;
+    uint[] private StudentList;
 
-    mapping (uint => uint[]) class_stu;  //StudentClass => StudentID[]
+    mapping (uint => uint[]) private class_stu;  //StudentClass => StudentID[]
 
     struct Tch_Course {
         uint CourseID;
@@ -68,9 +73,9 @@ contract StudyData {
         uint[] tCourseIDs;
         mapping (uint => Tch_Course) tch_courses;
     }
-    mapping (uint => Teacher) teachers;
-    mapping (address => bool) teacherTag;
-    uint[] TeacherList;
+    mapping (uint => Teacher) private teachers;
+    mapping (address => bool) private teacherTag;
+    uint[] private TeacherList;
 
 
 /* Function Codes */
@@ -142,20 +147,146 @@ contract StudyData {
         }
     }*/
 
+
+/* Functions for debug */
+    function get_StudentList() public view returns (uint[]) {
+        uint[] memory list = StudentList;
+        return list;
+    }
+    
+    function get_TeacherList() public view returns (uint[]) {
+        uint[] memory list = TeacherList;
+        return list;
+    }
+    
+    function get_ManagerList() public view returns (uint[]) {
+        uint[] memory list = ManagerList;
+        return list;
+    }
+
+    function get_CourseList() public view returns (uint[]) {
+        uint[] memory list = CourseList;
+        return list;
+    }
+    
+    function get_ClassStuIDs(uint _ClassID) public view returns (uint[]) {
+        uint[] memory list = class_stu[_ClassID];
+        return list;
+    }
+    
+    function get_Student(uint _StudentID) public view
+    returns (uint StudentID, string StudentName, uint StudentClass, address StudentAddr, uint[] sCourseIDs, uint[] sTermCourseIDs) {
+        Student storage si = students[_StudentID];
+        uint[] memory a = si.sCourseIDs;
+        uint[] memory b = si.sTermCourseIDs;
+        StudentID = si.StudentID;
+        StudentName = si.StudentName;
+        StudentClass = si.StudentClass;
+        StudentAddr = si.StudentAddr;
+        sCourseIDs = a;
+        sTermCourseIDs = b;
+    }
+    
+    function get_SC(uint _StudentID, uint _CourseID) public
+    view returns(uint CourseID, uint[] TestGrade, uint CourseGrade, LearningProgress Lp) {
+        Stu_Course storage sci = students[_StudentID].stu_courses[_CourseID];
+        uint[] memory result = sci.TestGrade;
+        CourseID = sci.CourseID;
+        TestGrade = result;
+        CourseGrade = sci.CourseGrade;
+        Lp = sci.Lp;
+    }
+    
+    function get_Course(uint _CourseID) public
+    view returns(uint CourseID, string CourseName, bool Compulsory, uint Term, uint Credit, uint[] Percentage, uint[] cStuIDs) {
+        Course storage ci = courses[_CourseID];
+        uint[] memory a = ci.Percentage;
+        uint[] memory b = ci.cStuIDs;
+        CourseID = ci.CourseID;
+        CourseName = ci.CourseName;
+        Compulsory = ci.Compulsory;
+        Term = ci.Term;
+        Credit = ci.Credit;
+        Percentage = a;
+        cStuIDs = b;
+    }
+    
+    function get_Teacher(uint _TeacherID) public
+    view returns(uint TeacherID, string TeacherName, address TeacherAddr, uint[] tCourseIDs) {
+        Teacher storage ti = teachers[_TeacherID];
+        uint[] memory a = ti.tCourseIDs;
+        TeacherID = ti.TeacherID;
+        TeacherName = ti.TeacherName;
+        TeacherAddr = ti.TeacherAddr;
+        tCourseIDs = a;
+    }
+    
+    function get_Manager(uint _ManagerID) public
+    view returns(uint ManagerID, address ManagerAddr) {
+        Manager storage mi = managers[_ManagerID];
+        ManagerID = mi.ManagerID;
+        ManagerAddr = mi.ManagerAddr;
+    }
+
+
+/* currently not used debug function */
+/*
+    function get_cStuIDs(uint _CourseID) public view returns(uint[]) {
+        uint[] memory result = courses[_CourseID].cStuIDs;
+        return result;
+    }
+    
+    function get_cPercentage(uint _CourseID) public view returns(uint[]) {
+        uint[] memory result = courses[_CourseID].Percentage;
+        return result;
+    }
+    
+    function get_scTestGrade(uint _StudentID, uint _CourseID) public view returns(uint[]) {
+        uint[] memory result = students[_StudentID].stu_courses[_CourseID].TestGrade;
+        return result;
+    }
+
+    function get_sCourseIDs(uint _StudentID) public view returns(uint[]) {
+        uint[] memory result = students[_StudentID].sCourseIDs;
+        return result;
+    }
+*/
+
+
+
+
     // set the address of controller contract
+    
+    event SetController(address newController);
+    
     function setController (address _Controller) onlyOwner public returns(bool) {
         Controller = _Controller;
+        SetController(_Controller);
         return true;
     }
+    
+    event TransferOwnerShip(address newOwner);
     
     function transferOwnerShip(address _newOwner) onlyOwner public returns(bool) {
         Owner = _newOwner;
+        TransferOwnerShip(_newOwner);
         return true;
     }
     
+    event SetOwner(address newOwner);
     
     function setOwner(address _newOwner) onlyController public returns(bool) {
         Owner = _newOwner;
+        SetOwner(_newOwner);
+        return true;
+    }
+    
+    event SetLogAddress(address newLogContract);
+    
+    function setLogAddress(address _LogContract) onlyOwner public returns(bool) {
+        LogContract = _LogContract;
+        log = StudyLog(_LogContract);
+        SetLogAddress(_LogContract);
         return true;
     }
 
@@ -242,28 +373,6 @@ contract StudyData {
         _;
     }
 
-
-
-    function getStudentList() public view returns (uint[]) {
-        uint[] memory list = StudentList;
-        return list;
-    }
-    
-    function getTeacherList() public view returns (uint[]) {
-        uint[] memory list = TeacherList;
-        return list;
-    }
-    
-    function getManagerList() public view returns (uint[]) {
-        uint[] memory list = ManagerList;
-        return list;
-    }
-
-    function getCourseList() public view returns (uint[]) {
-        uint[] memory list = CourseList;
-        return list;
-    }
-
 /* Functions */
 
     // check whether the manager address or the managerID is exist or not
@@ -336,14 +445,16 @@ contract StudyData {
             stu_tmp.StudentName = _StudentName;
             stu_tmp.StudentClass = _StudentClass;
             students[_StudentID] = stu_tmp;
+            class_stu[_StudentClass].push(_StudentID);
             StudentList.push(_StudentID);
             AddStuInfo(true);
+            log.addStuInfo(true, _StudentID, _StudentName, _StudentClass, msg.sender);
             return;
         }
         //Fail, already exists.
         revert();
     }
-    Student private stu_tmp;
+    Student public stu_tmp;
     
     //set teacher ID and other info, push teacher ID into TeacherList
     
@@ -356,6 +467,7 @@ contract StudyData {
             teachers[_TeacherID] = tch_tmp;
             TeacherList.push(_TeacherID);
             AddTeacherInfo(true);
+            log.addTeacherInfo(true, _TeacherID, _TeacherName, msg.sender);
             return;
         }
         //Fail, already exists.
@@ -379,12 +491,13 @@ contract StudyData {
             courses[_CourseID] = course_tmp;
             CourseList.push(_CourseID);
             AddCourseInfo(true);
+            log.addCourseInfo(true, _CourseID, _CourseName, _Compulsory, _Term, _Credit, _Percentage, msg.sender);
             return;
         }
         //Fail, already exists.
         revert();
     }
-    Course private course_tmp;
+    Course public course_tmp;
     
     //set manager ID and other info, push manager ID into ManagerList
     
@@ -396,12 +509,13 @@ contract StudyData {
             managers[_ManagerID] = manager_tmp;
             ManagerList.push(_ManagerID);
             AddManagerInfo(true);
+            log.addManagerInfo(true, _ManagerID, msg.sender);
             return;
         }
         //Fail, already exists.
         revert();
     }
-    Manager private manager_tmp;
+    Manager public manager_tmp;
     
     
     
@@ -458,6 +572,7 @@ contract StudyData {
             revert();
         }
         AddAccount(true);
+        log.addAccount(true, _Identity, _ID, _Addr, msg.sender);
     }
 
 
@@ -488,11 +603,13 @@ contract StudyData {
                 students[_StudentID].stu_courses[_CourseID].TestGrade = _Marks;
                 uint mark = CalcMark(_CourseID, _StudentID);
                 SetStuMark(true);
+                log.setStuMark(true, _TeacherID, _CourseID, _StudentID, _Marks, msg.sender);
                 return mark;
             }
         }
         //Fail. Stu doesn't take this course.
         SetStuMark(false);
+        log.setStuMark(false, _TeacherID, _CourseID, _StudentID, _Marks, msg.sender);
     }
 
 
@@ -516,13 +633,17 @@ contract StudyData {
         for (uint i = 0; i < courses[_CourseID].cStuIDs.length; i++) {
             if (_StudentID == courses[_CourseID].cStuIDs[i]) {
                 StuChooseCourse(true);
+                log.stuChooseCourse(true, _CourseID, _StudentID, msg.sender);
                 return;
             }
         }
         courses[_CourseID].cStuIDs.push(_StudentID);
         students[_StudentID].sCourseIDs.push(_CourseID);
+        students[_StudentID].stu_courses[_CourseID].CourseID = _CourseID;
         students[_StudentID].stu_courses[_CourseID].Lp = LearningProgress.Start;
         StuChooseCourse(true);
+        log.stuChooseCourse(true, _CourseID, _StudentID, msg.sender);
+        return;
     }
     
     // return one course Mark of a student.

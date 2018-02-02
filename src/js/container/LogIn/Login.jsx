@@ -88,7 +88,7 @@ export default class LogIn extends Component {
 
             //将账户和解锁密码传回后台并进行跳转
             let user = new User();
-            let url = 'http://120.79.198.95:8082/user/addressunlock_password/sent/';//接口的地址
+            let url = 'http://120.79.198.95:8000/user/addressunlock_password/sent/';//接口的地址
             let param = {
                 block_chain: {address: self.state.address, password_unlock: self.state.unlockPassword}
             };
@@ -116,7 +116,7 @@ export default class LogIn extends Component {
     logIn1() {
         let self=this;
         let user = new User();
-        let url = 'http://120.79.198.95:8082/user/login/';//接口的地址
+        let url = 'http://120.79.198.95:8000/user/login/';//接口的地址
         let param = {
             user: {account: this.state.account, password: this.state.password}
             };

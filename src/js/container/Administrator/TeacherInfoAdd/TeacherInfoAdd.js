@@ -66,7 +66,7 @@ export default class AdTeacherInfoAdd extends Component{
 
         //从后台获取区块链账户和地址
         let admin = new Admin();
-        let url = 'http://120.79.198.95:8082/user/addressunlock_password/query/';//接口的地址
+        let url = 'http://120.79.198.95:8000/user/addressunlock_password/query/';//接口的地址
         let param = {};
 
         admin.queryAddressPassword(url, param).then((response) => {
@@ -94,7 +94,7 @@ export default class AdTeacherInfoAdd extends Component{
 
         let self=this;
         let admin = new Admin();
-        let url = 'http://120.79.198.95:8082/admin/teacher/info/add/';//接口的地址
+        let url = 'http://120.79.198.95:8000/admin/teacher/info/add/';//接口的地址
 
         let param = {
             teacher: {
