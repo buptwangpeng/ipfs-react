@@ -326,10 +326,6 @@ export default class AdTeacherInfoCourseApply extends Component {
                                         courseIndex: this.state.courseIndex - 1 >= 1 ? this.state.courseIndex - 1 : 1
                                     }, () => {
                                         this.query(this.state.courseIndex)
-                                        // this.get(this.state.courseIndex)
-                                        // this.setState({
-                                        //     courses: courses[this.state.courseIndex]
-                                        // })
                                     })
 
                                 }}>
@@ -346,13 +342,10 @@ export default class AdTeacherInfoCourseApply extends Component {
                                                 className={this.state.courseIndex == index+1 ? "active" : ''}
                                                 onClick={() => {
                                                     this.setState({
-                                                        // courses: courses[index],
                                                         courseIndex: index+1
                                                     }, () => {
                                                         this.query(index+1)
-                                                    }/*() => {
-                                                        this.get(index)
-                                                    }*/)
+                                                    })
                                                 }}><a>{page}</a></li>
                                         )
                                     })
@@ -363,10 +356,6 @@ export default class AdTeacherInfoCourseApply extends Component {
                                         courseIndex: this.state.courseIndex + 1 <= this.state.pages? this.state.courseIndex + 1 : this.state.pages
                                     }, () => {
                                         this.query(this.state.courseIndex)
-                                        // this.get(this.state.courseIndex);
-                                        // this.setState({
-                                        //     courses: courses[this.state.courseIndex]
-                                        // })
                                     })
                                 }}>
                                     <a aria-label="Next">

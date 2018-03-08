@@ -31,3 +31,22 @@
 18:18:55.376717 table@compaction committed F~ S-780KiB Ke·0 D·24086 T·551.5084ms
 18:18:55.377718 table@remove removed @5
 18:18:55.378719 table@remove removed @2
+=============== Feb 2, 2018 (CST) ===============
+19:03:49.013119 log@legend F·NumFile S·FileSize N·Entry C·BadEntry B·BadBlock Ke·KeyError D·DroppedEntry L·Level Q·SeqNum T·TimeElapsed
+19:03:49.014120 version@stat F·[0 2] S·3MiB[0B 3MiB] Sc·[0.00 0.03]
+19:03:49.014120 db@open opening
+19:03:49.014120 journal@recovery F·1
+19:03:49.046136 journal@recovery recovering @6
+19:03:49.231471 memdb@flush created L0@10 N·27736 S·1MiB "\x00&\x04..\"\x89:,v93330":"\xff܂..\x87\xb5|,v99371"
+19:03:49.235423 version@stat F·[1 2] S·5MiB[1MiB 3MiB] Sc·[0.25 0.03]
+19:03:49.285507 db@janitor F·5 G·0
+19:03:49.285507 db@open done T·271.3866ms
+19:05:01.711809 table@compaction L0·1 -> L1·2 S·5MiB Q·102194
+19:05:01.861839 table@build created L1@13 N·32566 S·2MiB "\x00\x04\xbd..h\xf6\xe9,v38623":"h\x00\x00..\x1f\xa0-,v28785"
+19:05:02.033836 table@build created L1@14 N·30425 S·2MiB "h\x00\x00..\xa0-t,v28782":"\xaa\ft..\xcd\x1c\v,v97962"
+19:05:02.104224 table@build created L1@15 N·5748 S·678KiB "\xaa\f\xec..\xc6˩,v83979":"\xff\xfc\xeb..\xf3\xb3\x8b,v72215"
+19:05:02.104224 version@stat F·[0 3] S·4MiB[0B 4MiB] Sc·[0.00 0.05]
+19:05:02.129475 table@compaction committed F~ S-181KiB Ke·0 D·9195 T·417.6651ms
+19:05:02.132249 table@remove removed @10
+19:05:02.134250 table@remove removed @8
+19:05:02.136252 table@remove removed @9
