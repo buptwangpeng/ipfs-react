@@ -19,8 +19,8 @@
 .header-background{
     /*Flex是Flexible Box的缩写，意为”弹性布局”，用来为盒状模型提供最大的灵活性*/
     display:flex;
-    height:100px;
-    background:#20b18a;
+    height:110px;
+    background:#1abc9c;
     align-items:center;
 /*align-items 属性定义flex子项在flex容器的当前行的侧轴（纵轴）方向上的对齐方式。center 居中*/
 }
@@ -52,7 +52,7 @@
     color:#808080;
 }
 .color-block{
-    background:#20b18a;
+    background:#1abc9c;
     width: 60px;
     height: 60px;
 }

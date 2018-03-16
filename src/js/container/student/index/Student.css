@@ -16,7 +16,7 @@
 }
 .icon-container{
     color:#fff;
-    background: #20b18a;
+    background: #1abc9c;
     height: 80px;
     width: 80px;
     align-items: center;
@@ -28,7 +28,7 @@
 }
 .sub-title>p:first-child{
     font-size: 25px;
-    color:#20b18a;
+    color:#1abc9c;
 }
 .sub-title>p:last-child{
     color:#808080;

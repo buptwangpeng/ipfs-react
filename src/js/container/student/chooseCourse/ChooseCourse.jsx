@@ -138,6 +138,7 @@ export default class ChooseCourse extends React.Component{
     render(){
 		return(
 			<div style={{background:'#eee',height:window.innerHeight}}>
+
 				<Header title="选课">
 					<div className="flex-center course-search">
 						<div className="flex-center search-addon">

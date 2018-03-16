@@ -15,11 +15,18 @@ export default class Header  extends Component{
     render() {
         return (
             <div style={{width:'100%',padding:'0'}}>
+                <div className="nav2 ">
+                    {/*<Image src="../../../image/2.png" responsive />*/}
+
+                    <div style={{width:'0',height:'0'}}>
+                        <img src="../../../../image/2.png" className="" alt="Responsive image"/>
+                    </div>
+
+                </div>
                 <div className="row header-background">
                     <div
-                        // onClick={()=>{jumpPage('admin')}}
                         className="col-xs-6  col-md-5">
-                        <p style={{marginLeft:60,fontSize:60,color:'#fff'}}>LOGO</p>
+                        {/*<p style={{marginLeft:60,fontSize:60,color:'#fff'}}>LOGO</p>*/}
                     </div>
                     <div className="col-xs-12 col-md-7  header-nav">
                         <div

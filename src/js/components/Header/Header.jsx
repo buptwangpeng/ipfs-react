@@ -11,11 +11,22 @@ export default class Header extends React.Component{
 	render(){
 		return (
 		<div style={{width:'100%',padding:'0 15px'}}>
+			<div  onClick={() => {
+                jumpPage('student')
+            }}
+				  className="nav2 ">
+                {/*<Image src="../../../image/2.png" responsive />*/}
+
+				<div style={{width:'0',height:'0'}}>
+					<img src="../../../../image/2.png" className="" alt="Responsive image"/>
+				</div>
+
+			</div>
 			<div className="row header-background">
 				<div
 					onClick={()=>{jumpPage('student')}}
 					className="col-xs-6 col-md-4 col-lg-6 nav2">
-					<p style={{marginLeft:60,fontSize:60,color:'#fff'}}>LOGO</p>
+					{/*<p style={{marginLeft:60,fontSize:60,color:'#fff'}}>LOGO</p>*/}
 				</div>
 				<div className="col-xs-12 col-md-8  col-lg-6 header-nav">
 					<div

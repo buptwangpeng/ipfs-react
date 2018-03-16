@@ -139,7 +139,6 @@ export default class AdStudentInfoScore extends Component {
         }).catch ( function (e) {
             console.log(e);
         });
-
         this.MarkQuery(1);
     }
 //全部成绩查询按钮

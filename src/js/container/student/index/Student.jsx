@@ -25,16 +25,27 @@ class Index extends React.Component{
 		return(
 			<div>
 				<div style={{width:'100%',padding:'0 15px'}}>
+					<div  onClick={() => {
+                        jumpPage('student')
+                    }}
+						  className="nav2 ">
+                        {/*<Image src="../../../image/2.png" responsive />*/}
+
+						<div style={{width:'0',height:'0'}}>
+							<img src="../../../../image/2.png" className="" alt="Responsive image"/>
+						</div>
+
+					</div>
 				    <div className="row" style={{
-				        height:'100px',
-					    background:'#20b18a',
+				        height:'110px',
+					    background:'#1abc9c',
 					    display:"flex",
 					    alignItems:'center'
 				    }}>
 					    <div
 						    onClick={()=>{jumpPage('student')}}
 						    className="col-xs-6 col-lg-6 nav2">
-						    <p style={{marginLeft:60,fontSize:60,color:'#fff'}}>LOGO</p>
+						    {/*<p style={{marginLeft:60,fontSize:60,color:'#fff'}}>LOGO</p>*/}
 					    </div>
 				    </div>
 					<div className="flexCenter row">

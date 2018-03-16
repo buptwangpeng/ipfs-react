@@ -91,11 +91,20 @@ export default class TeacherIndex extends React.Component {
           <div>
 
             <div className="teacher">
+                <div onClick={()=>{jumpPage('teacher')}}
+                    className="nav2 ">
+                    {/*<Image src="../../../image/2.png" responsive />*/}
+
+                    <div style={{width:'0',height:'0'}}>
+                        <img src="../../../../image/2.png" className="" alt="Responsive image"/>
+                    </div>
+
+                </div>
               <div className="top">
                 <div
                    onClick={()=>{jumpPage('teacher')}}
                    className="col-xs-6 col-lg-6">
-                   <p id="logo">LOGO</p>
+                   {/*<p id="logo">LOGO</p>*/}
                 </div>
                 <div className="col-xs-12 col-md-6 header-nav">
                     <div
